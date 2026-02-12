@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily & Weekly Rental Plans - CarRentalPro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Fix number input arrows */
+  *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+    height: auto;
+  }
+
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #151320;
+      color: #ddd;
+    }
+
+    /* Header */
+    header {
+      background: #1c1830;
+      border-bottom: 1px solid #2a2545;
+      color: #fff;
+      padding: 18px 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    
+
+    }
+    nav a{
+      color:#ddd;
+      text-decoration:none;
+      margin-left:22px;
+      font-weight:500;
+      font-size:15px;
+      transition:0.2s;
+    }
+    nav a:hover{
+      color:#9b7cff;
+    }
+
+
+    /* Hero Section */
+    .page-title {
+      text-align:center;
+      color:white;
+      font-size:36px;
+      margin:45px 0 10px;
+      letter-spacing:0.5px;
+      font-weight:600;
+    }
+
+    .page-subtitle {
+      text-align:center;
+      color:#cfcfcf;
+      font-size:16px;
+      margin-bottom:35px;
+    }
+
+
+    /* Container */
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #1c1830;
+      padding: 30px;
+      border-radius: 16px;
+      border: 1px solid #2a2545;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+
+    h3 {
+      color: white;
+      margin-top: 30px;
+      font-size: 22px;
+      color: #9b7cff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    ul, ol {
+      margin-left: 20px;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    /* Price Calculator */
+    .calculator {
+      margin-top: 30px;
+      padding: 20px;
+      background: #151320;
+      border-radius: 10px;
+      border: 1px solid #2a2545;
+    }
+    .calculator label {
+      display: block;
+      margin-top: 10px;
+      font-weight: 500;
+    }
+    .calculator input, .calculator select {
+      width: 100%;
+      padding: 12px;
+      margin-top: 5px;
+      border-radius: 8px;
+      border: 1px solid #2a2545;
+      background: #1c1830;
+      color: white;font-size: 14px;
+    }
+    .calculator input:focus, .calculator select:focus {
+      outline: none;
+      border-color: #9b7cff;
+    }
+
+    .result-box {
+      margin-top: 20px;
+      padding: 15px;
+      background: #1c1830;
+      border-radius: 8px;
+      border: 1px solid #2a2545;
+      font-size: 16px;
+      font-weight: 500;
+      color: #9b7cff;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      background: #9b7cff;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #7f63ff;
+      transform: translateY(-2px);
+    }
+
+
+    /* Footer */
+    footer{
+  background:#1c1830;
+  color:#aaa;
+  text-align:center;
+  padding:16px;
+  font-size:14px;
+  border-top:1px solid #2a2545;
+}
+
+footer a{
+  color:#9b7cff;
+  text-decoration:none;
+  margin:0 5px;
+}
+
+footer a:hover{
+  text-decoration:underline;
+}
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 30px auto 10px;
+      max-width: 1100px;
+    }
+
+    .trust-badges div {
+      background: #1c1830;
+      color: #ddd;
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1px solid #2a2545;
+      font-size: 14px;
+    }
+
+    .trust-badges i {
+      color: #9b7cff;
+      margin-right: 6px;
+    }
+    .popular-plan {
+      background: linear-gradient(135deg, #2b2344, #3b2f63);
+      padding: 18px;
+      border-radius: 10px;
+      color: white;
+      margin-bottom: 25px;
+      text-align: center;
+      border: 1px solid #9b7cff
+    }
+    .popular-plan h3 {
+      margin: 0 0 8px;
+      color: white;
+    }
+
+
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CarRentalPro</h1>
+    <nav>
+      <a href="../home/home.html">Home</a>
+      <a href="../book_car/book_car.html">Book a Car</a>
+      <a href="../service/services.html">Services</a>
+      <a href="../service/rental_info.html">Rental Plans</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <h2 class="page-title">Daily & Weekly Rental Plans</h2>
+  <p class="page-subtitle">Flexible options tailored to your travel needs with transparent pricing.</p>
+
+
+
+  <div class="container">
+    <div class="popular-plan">
+      <h3><i class="fas fa-fire"></i> Most Popular Choice</h3>
+      <p><strong>7-Day Saver Plan:</strong> Save up to 10% + free basic insurance + priority support.</p>
+    </div>
+
+
+    
+
+    <h3><i class="fas fa-receipt"></i> Pricing Transparency</h3>
+    <ul>
+      <li>No hidden service charges</li>
+      <li>Fuel charges based on actual usage</li>
+      <li>Late return fee only after 1-hour grace period</li>
+      <li>GST included in final bill</li>
+    </ul>
+    <h3><i class="fas fa-box"></i> What’s Included</h3>
+    <ul>
+      <li>Basic insurance coverage</li>
+      <li>Emergency roadside assistance</li>
+      <li>24/7 customer support</li>
+    </ul>
+
+    <h3><i class="fas fa-calculator"></i> Rental Price Calculator</h3>
+    <div class="calculator">
+      <label for="carType">Select Car Type:</label>
+      <select id="carType">
+        <option value="1000">Hatchback - ₹1000/day</option>
+        <option value="1500">Sedan - ₹1500/day</option>
+        <option value="2500">SUV - ₹2500/day</option>
+        <option value="3500">Luxury - ₹3500/day</option>
+      </select>
+
+      <label for="days">Number of Days:</label>
+      <input type="number" id="days" min="1" step="1" value="1">
+
+
+      <label for="km">Estimated Kilometers to Travel:</label>
+      <input type="number" id="km" min="0" step="1" value="0">
+
+
+      <button class="btn" onclick="calculatePrice()">Calculate Price</button>
+      <div class="result-box" id="priceResult">Total Price: ₹0</div>
+    </div>
+
+    <h3><i class="fas fa-info-circle"></i> Rental Instructions</h3>
+    <ul>
+      <li>Minimum booking: 1 day</li>
+      <li>Weekly discount: 10% off for 5+ days</li>
+      <li>Valid license and ID proof required</li>
+      <li>Advance payment of 25% to confirm booking</li>
+    </ul>
+
+    <h3><i class="fas fa-clipboard-list"></i> Booking Process</h3>
+    <ol>
+      <li>Search and select your preferred car.</li>
+      <li>Provide license and identity details.</li>
+      <li>Pay 25% booking advance.</li>
+      <li>Pickup or opt for doorstep delivery.</li>
+    </ol>
+
+    <h3><i class="fas fa-ban"></i> Cancellation Policy</h3>
+    <ul>
+      <li>Full refund on cancellation 24h before pickup.</li>
+      <li>Advance is non-refundable after that.</li>
+    </ul>
+
+    <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+    <ul>
+      <li><strong>Can I extend my rental period?</strong> Yes, extensions are allowed based on availability.</li>
+      <li><strong>Is fuel included?</strong> No, fuel cost depends on usage.</li>
+      <li><strong>What if the car breaks down?</strong> Roadside assistance is available 24/7.</li>
+      <li><strong>Is there a security deposit?</strong> Yes, refundable deposit applies based on car type.</li>
+    </ul>
+
+  </div>
+
+  <footer>
+  &copy; 2025 CarRentalPro. All Rights Reserved. |
+  <a href="privacy.html">Privacy Policy</a> |
+  <a href="terms.html">Terms & Conditions</a>
+</footer>
+
+
+  <script>
+    function calculatePrice() {
+      const carRate = parseInt(document.getElementById('carType').value);
+      const days = parseInt(document.getElementById('days').value);
+      const km = parseInt(document.getElementById('km').value);
+      const perKmRate = 21;
+
+      let baseCost = carRate * days;
+      if (days >= 5) {
+        baseCost = baseCost * 0.9; // 10% discount
+      }
+
+      const kmCost = km * perKmRate;
+      const total = baseCost + kmCost;
+
+      document.getElementById('priceResult').innerText = `Total Price: ₹${total}`;
+    }
+  </script>
+</body>
+</html>

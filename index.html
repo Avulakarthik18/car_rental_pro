@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CarRentalPro - Welcome</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      background:#151320;
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      text-align:center;
+      padding:20px;
+    }
+
+    .container{
+      background:#1c1830;
+      padding:45px 35px;
+      border-radius:18px;
+      box-shadow:0 25px 60px rgba(0,0,0,0.6);
+      max-width:450px;
+      width:100%;
+      border:1px solid #2a2545;
+    }
+
+    h1{
+      color:white;
+      margin-bottom:15px;
+      font-size:28px;
+      font-weight:600;
+    }
+
+    p{
+      font-size:15px;
+      color:#cfcfcf;
+      margin-bottom:30px;
+      line-height:1.6;
+    }
+
+    button{
+      width:100%;
+      padding:14px 20px;
+      font-size:16px;
+      color:#fff;
+      background:linear-gradient(135deg, #7f5cff, #9b7cff);
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      transition:0.3s;
+      box-shadow:0 12px 28px rgba(0,0,0,0.4);
+    }
+
+    button:hover{
+      transform:scale(1.04);
+      opacity:0.95;
+    }
+
+    .small-text{
+      margin-top:18px;
+      font-size:13px;
+      color:#aaa;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Welcome to CarRentalPro</h1>
+    <p>Your trusted partner for professional car rentals. Book, buy or sell cars with ease 🚗</p>
+
+    <button onclick="redirectToLogin()">Get Started</button>
+
+    <div class="small-text">
+      Secure login • Fast booking • Best deals
+    </div>
+  </div>
+
+  <script>
+    function redirectToLogin() {
+      window.location.href = "login/login.html";
+    }
+  </script>
+</body>
+</html>

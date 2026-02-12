@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Support | CarRentalPro</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      background:#151320;
+      color:white;
+    }
+
+    /* HEADER */
+    header{
+      background:#1c1830;
+      padding:18px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #2a2545;
+    }
+
+    header h1{
+      font-size:24px;
+      font-weight:600;
+    }
+
+    nav a{
+      color:#ddd;
+      text-decoration:none;
+      margin-left:22px;
+      font-weight:500;
+    }
+
+    nav a:hover{
+      color:#9b7cff;
+    }
+
+    /* PAGE HEADER */
+    .page-header{
+      position:relative;
+      text-align:center;
+      padding:80px 20px;
+      background:linear-gradient(135deg,#1c1830,#151320);
+    }
+
+    .page-header h2{
+      font-size:38px;
+      margin-bottom:15px;
+    }
+
+    .page-header p{
+      max-width:760px;
+      margin:auto;
+      color:#cfcfcf;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    /* BACK BUTTON */
+    .back-btn{
+      position:absolute;
+      top:25px;
+      right:30px;
+      background:#1c1830;
+      color:#ddd;
+      padding:7px 18px;
+      border-radius:18px;
+      text-decoration:none;
+      font-size:14px;
+      border:1px solid #2a2545;
+      transition:0.3s;
+    }
+
+    .back-btn:hover{
+      background:#9b7cff;
+      color:#151320;
+    }
+
+    /* CONTENT */
+    .content{
+      max-width:900px;
+      margin:60px auto;
+      padding:0 20px;
+    }
+
+    .email-box{
+      background:#1c1830;
+      padding:35px;
+      border-radius:18px;
+      border:1px solid #2a2545;
+      box-shadow:0 18px 40px rgba(0,0,0,0.4);
+      text-align:center;
+    }
+
+    .email-box i{
+      font-size:46px;
+      color:#9b7cff;
+      margin-bottom:15px;
+    }
+
+    .email-id{
+      font-size:22px;
+      font-weight:600;
+      color:#9b7cff;
+      margin:14px 0 22px;
+      text-decoration:none;
+      display:inline-block;
+    }
+
+    .email-id:hover{
+      text-decoration:underline;
+    }
+
+    .email-box p{
+      color:#cfcfcf;
+      font-size:15px;
+      line-height:1.7;
+    }
+
+    /* SAMPLE EMAIL */
+    .sample-mail{
+      margin-top:40px;
+      background:#151320;
+      padding:25px;
+      border-radius:14px;
+      border:1px solid #2a2545;
+      color:#cfcfcf;
+      font-size:14.5px;
+      line-height:1.7;
+    }
+
+    .sample-mail strong{
+      color:#9b7cff;
+    }
+
+    /* FOOTER */
+    footer{
+      background:#1c1830;
+      text-align:center;
+      padding:16px;
+      font-size:14px;
+      color:#aaa;
+      border-top:1px solid #2a2545;
+      margin-top:80px;
+    }
+
+    @media(max-width:768px){
+      .back-btn{
+        top:15px;
+        right:15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <h1>CarRentalPro</h1>
+  <nav>
+    <a href="../home.html">Home</a>
+    <a href="../book_car.html">Book a Car</a>
+    <a href="../services.html">Services</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <a href="customer-support.html" class="back-btn">← Back</a>
+  <h2>Email Support</h2>
+  <p>
+    Contact our support team via email for detailed queries,
+    complaints, feedback, or non-urgent issues.
+  </p>
+</section>
+
+<!-- CONTENT -->
+<section class="content">
+
+  <div class="email-box">
+    <i class="fas fa-envelope"></i>
+    <h3>Official Support Email</h3>
+
+    <!-- GMAIL LINK -->
+    <a class="email-id"
+href="https://mail.google.com/mail/?view=cm&fs=1&to=carrentalpro01@gmail.com&su=CarRentalPro%20Support%20Request&body=Hello%20CarRentalPro%20Support%20Team,%0A%0AI%20need%20assistance%20regarding%20my%20car%20booking.%0ABooking%20ID:%20CRP1023%0AIssue:%0A%0AThank%20you,%0ACustomer%20Name"
+target="_blank">
+carrentalpro01@gmail.com
+</a>
+
+
+    <p>
+      Please use this email for booking issues, payment clarification,
+      refund requests, and general inquiries.
+      <br><br>
+      <strong>Response Time:</strong> Within 24 hours.
+    </p>
+  </div>
+
+  <!-- SAMPLE EMAIL -->
+  <div class="sample-mail">
+    <strong>Sample Email Format:</strong><br><br>
+
+    <strong>To:</strong> carrentalpro01@gmail.com<br>
+    <strong>Subject:</strong> CarRentalPro Support Request<br><br>
+
+    Hello Support Team,<br><br>
+
+    I am writing to report an issue regarding my recent car booking.
+    The booking ID is <strong>CRP1023</strong>. I would like clarification
+    regarding the payment and booking confirmation.<br><br>
+
+    Kindly assist me at the earliest.<br><br>
+
+    Thank you,<br>
+    <strong>Customer Name</strong><br>
+    Registered Mobile Number
+  </div>
+
+</section>
+
+<footer>
+  &copy; 2025 CarRentalPro. All Rights Reserved.
+</footer>
+
+</body>
+</html>

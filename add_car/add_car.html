@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Car Options</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    body{
+      height:100vh;
+      background:#151320;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+      padding:20px;
+    }
+
+    .box{
+      width:520px;
+      max-width:95%;
+      background:#1c1830;
+      padding:35px;
+      border-radius:18px;
+      border:1px solid #2a2545;
+      box-shadow:0 30px 70px rgba(0,0,0,0.6);
+      text-align:center;
+    }
+
+    h2{
+      font-size:26px;
+      margin-bottom:10px;
+    }
+
+    p{
+      font-size:14px;
+      color:#aaa;
+      margin-bottom:22px;
+      line-height:1.6;
+    }
+
+    .btn{
+      width:100%;
+      padding:14px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:600;
+      margin-bottom:14px;
+      transition:0.25s;
+    }
+
+    .btn:hover{
+      transform:scale(1.03);
+      opacity:0.95;
+    }
+
+    .primary{
+      background:linear-gradient(135deg,#7f5cff,#9b7cff);
+      color:white;
+    }
+
+    .secondary{
+      background:transparent;
+      border:1px solid #3a3558;
+      color:white;
+    }
+
+    .secondary:hover{
+      background:#2a2545;
+    }
+
+    .back{
+      margin-top:18px;
+      font-size:14px;
+    }
+
+    .back a{
+      color:#9b7cff;
+      text-decoration:none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h2>Add Your Car 🚗</h2>
+    <p>Select how you want to list your car on our platform.</p>
+
+    <!-- ✅ Car for Rental Only -->
+    <button class="btn primary" onclick="goRentalOnly()">
+      Car for Rental (Company Driver)
+    </button>
+
+    <!-- ✅ With Driver -->
+    <button class="btn secondary" onclick="goWithDriver()">
+      Self Rent (Car + I will Drive)
+    </button>
+
+    <div class="back">
+      Back to <a href="../home.html">Home</a>
+    </div>
+  </div>
+
+  <script>
+    function goRentalOnly(){
+      window.location.href = "add_car_rental_only.html";
+    }
+
+    function goWithDriver(){
+      window.location.href = "add_car_with_driver.html";
+    }
+  </script>
+
+</body>
+</html>

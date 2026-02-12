@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Assistance | CarRentalPro</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      background:#151320;
+      color:white;
+    }
+
+    /* MAIN HEADER */
+    header{
+      background:#1c1830;
+      padding:18px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #2a2545;
+    }
+
+    header h1{
+      font-size:24px;
+      font-weight:600;
+    }
+
+    nav a{
+      color:#ddd;
+      text-decoration:none;
+      margin-left:22px;
+      font-weight:500;
+    }
+
+    nav a:hover{
+      color:#9b7cff;
+    }
+
+    /* PAGE HEADER */
+    .page-header{
+      position:relative;
+      text-align:center;
+      padding:80px 20px;
+      background:linear-gradient(135deg,#1c1830,#151320);
+    }
+
+    .page-header h2{
+      font-size:38px;
+      margin-bottom:15px;
+    }
+
+    .page-header p{
+      max-width:760px;
+      margin:auto;
+      color:#cfcfcf;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    /* BACK BUTTON */
+    .back-btn{
+      position:absolute;
+      top:25px;
+      right:30px;
+      background:#1c1830;
+      color:#ddd;
+      padding:7px 18px;
+      border-radius:18px;
+      text-decoration:none;
+      font-size:14px;
+      border:1px solid #2a2545;
+      transition:0.3s;
+    }
+
+    .back-btn:hover{
+      background:#9b7cff;
+      color:#151320;
+    }
+
+    /* CONTENT */
+    .content{
+      max-width:1000px;
+      margin:60px auto;
+      padding:0 20px;
+    }
+
+    .assist-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .assist-card{
+      background:#1c1830;
+      padding:30px;
+      border-radius:18px;
+      border:1px solid #2a2545;
+      text-align:center;
+      box-shadow:0 18px 40px rgba(0,0,0,0.4);
+      transition:0.3s;
+    }
+
+    .assist-card:hover{
+      transform:translateY(-8px);
+      border-color:#9b7cff;
+      box-shadow:0 28px 60px rgba(155,124,255,0.25);
+    }
+
+    .assist-card i{
+      font-size:42px;
+      color:#9b7cff;
+      margin-bottom:15px;
+    }
+
+    .assist-card h4{
+      font-size:20px;
+      margin-bottom:10px;
+    }
+
+    .assist-card p{
+      color:#cfcfcf;
+      font-size:14.5px;
+      line-height:1.6;
+    }
+
+    /* STEPS */
+    .steps{
+      margin-top:60px;
+      background:#1c1830;
+      padding:35px;
+      border-radius:18px;
+      border:1px solid #2a2545;
+      box-shadow:0 18px 40px rgba(0,0,0,0.4);
+    }
+
+    .steps h3{
+      color:#9b7cff;
+      margin-bottom:20px;
+      text-align:center;
+    }
+
+    .steps ol{
+      color:#cfcfcf;
+      font-size:15px;
+      line-height:1.8;
+      padding-left:20px;
+    }
+
+    /* FOOTER */
+    footer{
+      background:#1c1830;
+      text-align:center;
+      padding:16px;
+      font-size:14px;
+      color:#aaa;
+      border-top:1px solid #2a2545;
+      margin-top:80px;
+    }
+
+    @media(max-width:768px){
+      .back-btn{
+        top:15px;
+        right:15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- MAIN HEADER -->
+<header>
+  <h1>CarRentalPro</h1>
+  <nav>
+    <a href="../home.html">Home</a>
+    <a href="../book_car.html">Book a Car</a>
+    <a href="../services.html">Services</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <a href="customer-support.html" class="back-btn">← Back</a>
+
+  <h2>Booking Assistance</h2>
+  <p>
+    Our booking assistance service helps users select the right vehicle,
+    choose suitable rental plans, and complete bookings without confusion.
+  </p>
+</section>
+
+<!-- CONTENT -->
+<section class="content">
+
+  <div class="assist-grid">
+
+    <div class="assist-card">
+      <i class="fas fa-car"></i>
+      <h4>Vehicle Selection Help</h4>
+      <p>
+        Guidance to choose the right car based on travel purpose,
+        number of passengers, and budget.
+      </p>
+    </div>
+
+    <div class="assist-card">
+      <i class="fas fa-calendar-check"></i>
+      <h4>Rental Plan Guidance</h4>
+      <p>
+        Assistance in selecting daily, weekly, or long-term
+        rental plans as per customer needs.
+      </p>
+    </div>
+
+    <div class="assist-card">
+      <i class="fas fa-clipboard-list"></i>
+      <h4>Booking Process Support</h4>
+      <p>
+        Step-by-step guidance to complete the booking process
+        smoothly and avoid errors.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- STEPS -->
+  <div class="steps">
+    <h3>How Booking Assistance Works</h3>
+    <ol>
+      <li>User contacts support through call or email.</li>
+      <li>Support team understands travel requirements.</li>
+      <li>Recommended vehicle and rental plan are suggested.</li>
+      <li>Booking is completed successfully with confirmation.</li>
+    </ol>
+  </div>
+
+</section>
+
+<footer>
+  &copy; 2025 CarRentalPro. All Rights Reserved.
+</footer>
+
+</body>
+</html>

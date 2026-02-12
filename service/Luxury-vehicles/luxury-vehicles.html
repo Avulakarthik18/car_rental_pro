@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Vehicles | CarRentalPro</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#151320;
+  color:white;
+}
+
+/* HEADER */
+header{
+  background:#1c1830;
+  padding:18px 50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #2a2545;
+}
+
+header h1{font-size:24px;font-weight:600;}
+nav a{color:#ddd;text-decoration:none;margin-left:22px;}
+nav a:hover{color:#9b7cff;}
+
+/* PAGE HEADER */
+.luxury-header{
+  position:relative;
+  text-align:center;
+  padding:80px 20px;
+  background:linear-gradient(135deg,#1c1830,#151320);
+}
+
+.back-btn{
+  position:absolute;
+  top:25px;
+  right:30px;
+  background:#1c1830;
+  color:#ddd;
+  padding:7px 18px;
+  border-radius:18px;
+  text-decoration:none;
+  border:1px solid #2a2545;
+}
+
+.back-btn:hover{
+  background:#9b7cff;
+  color:#151320;
+}
+
+.luxury-header h2{
+  font-size:38px;
+  margin-bottom:16px;
+}
+
+.luxury-header p{
+  max-width:750px;
+  margin:auto;
+  color:#cfcfcf;
+}
+
+/* SECTION */
+.section{
+  max-width:1100px;
+  margin:60px auto;
+  padding:0 20px;
+}
+
+.section h3{
+  text-align:center;
+  font-size:28px;
+  margin-bottom:30px;
+  color:#9b7cff;
+}
+
+/* CAR GRID */
+.cars-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+.car-card{
+  position:relative;
+  background:#1c1830;
+  padding:35px 25px;
+  border-radius:18px;
+  border:2px solid #2a2545;
+  text-align:center;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.car-card:hover{
+  transform:translateY(-8px);
+  border-color:#9b7cff;
+}
+
+/* SELECTED */
+.car-card.selected{
+  border-color:#9b7cff;
+  box-shadow:0 0 25px rgba(155,124,255,0.6);
+}
+
+/* TICK ICON */
+.tick{
+  position:absolute;
+  top:18px;
+  left:18px;
+  font-size:22px;
+  color:#9b7cff;
+  display:none;
+}
+
+.car-card.selected .tick{
+  display:block;
+}
+
+.car-icon{
+  font-size:46px;
+  color:#9b7cff;
+  margin-bottom:18px;
+}
+
+.car-card h4{margin-bottom:12px;}
+.car-card p{color:#cfcfcf;font-size:14.8px;}
+
+/* CTA */
+.cta{
+  text-align:center;
+  margin:80px 0;
+}
+
+.cta button{
+  background:#9b7cff;
+  color:#151320;
+  padding:14px 38px;
+  border-radius:30px;
+  border:none;
+  font-weight:600;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.cta button:hover{
+  background:#b59cff;
+}
+
+/* FOOTER */
+footer{
+  background:#1c1830;
+  text-align:center;
+  padding:16px;
+  font-size:14px;
+  color:#aaa;
+  border-top:1px solid #2a2545;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>CarRentalPro</h1>
+  <nav>
+    <a href="../../home/home.html">Home</a>
+    <a href="../book_car/book_car.html">Book a Car</a>
+    <a href="../services.html">Services</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="luxury-header">
+  <a href="../services.html" class="back-btn">← Back</a>
+  <h2>Luxury Vehicles</h2>
+  <p>Select a premium vehicle type based on your travel needs.</p>
+</section>
+
+<section class="section">
+  <h3>Select Your Luxury Vehicle Type</h3>
+
+  <div class="cars-grid">
+
+    <div class="car-card" data-type="Luxury Sedans">
+      <i class="fas fa-check-circle tick"></i>
+      <i class="fas fa-car car-icon"></i>
+      <h4>Luxury Sedans</h4>
+      <p>Ideal for business travel and premium comfort.</p>
+    </div>
+
+    <div class="car-card" data-type="Luxury SUVs">
+      <i class="fas fa-check-circle tick"></i>
+      <i class="fas fa-truck-monster car-icon"></i>
+      <h4>Luxury SUVs</h4>
+      <p>Perfect for family trips and long journeys.</p>
+    </div>
+
+    <div class="car-card" data-type="Premium Electric Cars">
+      <i class="fas fa-check-circle tick"></i>
+      <i class="fas fa-bolt car-icon"></i>
+      <h4>Premium Electric Cars</h4>
+      <p>Eco-friendly luxury with advanced technology.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="cta">
+  <button onclick="goNext()">Book Your Luxury Vehicle</button>
+</div>
+
+<footer>
+  &copy; 2025 CarRentalPro. All Rights Reserved.
+</footer>
+
+<script>
+let selectedType = "";
+
+document.querySelectorAll(".car-card").forEach(card => {
+  card.addEventListener("click", () => {
+    document.querySelectorAll(".car-card")
+      .forEach(c => c.classList.remove("selected"));
+
+    card.classList.add("selected");
+    selectedType = card.getAttribute("data-type");
+
+    // store selection for next pages
+    localStorage.setItem("luxuryType", selectedType);
+  });
+});
+
+function goNext(){
+  if(!selectedType){
+    alert("Please select a luxury vehicle type");
+    return;
+  }
+
+  // Redirect based on selection
+  if(selectedType === "Luxury Sedans"){
+    window.location.href = "luxury-sedans.html";
+  }
+  else if(selectedType === "Luxury SUVs"){
+    window.location.href = "luxury-suvs.html";
+  }
+  else if(selectedType === "Premium Electric Cars"){
+    window.location.href = "luxury-electric.html";
+  }
+}
+</script>
+
+</body>
+</html>

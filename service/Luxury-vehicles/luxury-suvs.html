@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury SUVs | CarRentalPro</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#151320;
+  color:white;
+}
+
+/* HEADER */
+header{
+  background:#1c1830;
+  padding:18px 50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #2a2545;
+}
+
+nav a{
+  color:#ddd;
+  text-decoration:none;
+  margin-left:22px;
+  font-weight:500;
+}
+nav a:hover{color:#9b7cff}
+
+/* PAGE HEADER */
+.page-header{
+  position:relative;
+  text-align:center;
+  padding:80px 20px;
+  background:linear-gradient(135deg,#1c1830,#151320);
+}
+
+.back-btn{
+  position:absolute;
+  top:25px;
+  right:30px;
+  background:#1c1830;
+  border:1px solid #2a2545;
+  padding:7px 18px;
+  border-radius:18px;
+  color:#ddd;
+  text-decoration:none;
+}
+.back-btn:hover{
+  background:#9b7cff;
+  color:#151320;
+}
+
+.page-header h2{
+  font-size:38px;
+  margin-bottom:12px;
+}
+.page-header p{
+  max-width:720px;
+  margin:auto;
+  color:#cfcfcf;
+}
+
+/* SECTION */
+.section{
+  max-width:1200px;
+  margin:70px auto;
+  padding:0 20px;
+}
+
+.section h3{
+  text-align:center;
+  font-size:28px;
+  color:#9b7cff;
+  margin-bottom:40px;
+}
+
+/* GRID */
+.cars-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:35px;
+}
+
+.car-card{
+  position:relative;
+  background:#1c1830;
+  border:2px solid #2a2545;
+  border-radius:20px;
+  padding:26px;
+  cursor:pointer;
+  transition:.35s;
+}
+
+.car-card:hover{
+  transform:translateY(-10px);
+  border-color:#9b7cff;
+}
+
+.car-card.selected{
+  border-color:#9b7cff;
+  box-shadow:0 0 30px rgba(155,124,255,.5);
+}
+
+/* TICK */
+.tick{
+  position:absolute;
+  top:18px;
+  left:18px;
+  color:#9b7cff;
+  font-size:22px;
+  display:none;
+}
+.car-card.selected .tick{display:block}
+
+.car-img{
+  width:100%;
+  height:190px;
+  object-fit:cover;
+  border-radius:14px;
+  margin-bottom:18px;
+  border:1px solid #2a2545;
+}
+
+.car-card h4{
+  font-size:20px;
+  margin-bottom:12px;
+}
+
+.specs{
+  list-style:none;
+  color:#cfcfcf;
+  font-size:14.5px;
+}
+.specs li{
+  margin-bottom:6px;
+}
+
+/* CTA */
+.cta{
+  text-align:center;
+  margin:70px 0;
+}
+
+.cta button{
+  background:#9b7cff;
+  color:#151320;
+  padding:14px 44px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+}
+.cta button:hover{
+  background:#b59cff;
+}
+
+/* FOOTER */
+footer{
+  background:#1c1830;
+  text-align:center;
+  padding:16px;
+  color:#aaa;
+  border-top:1px solid #2a2545;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>CarRentalPro</h1>
+  <nav>
+    <a href="../home.html">Home</a>
+    <a href="../services.html">Services</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="page-header">
+  <a href="luxury-vehicles.html" class="back-btn">← Back</a>
+  <h2>Luxury SUVs</h2>
+  <p>
+    Luxury SUVs offer premium comfort, spacious interiors,
+    and powerful performance—ideal for family trips and long journeys.
+  </p>
+</section>
+
+<section class="section">
+  <h3>Select Your Luxury SUV</h3>
+
+  <div class="cars-grid">
+
+    <!-- TOYOTA FORTUNER -->
+    <div class="car-card" data-car="Toyota Fortuner Legender" data-price="₹6500/day">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Toyota Fortuner Legender.avif" class="car-img">
+      <h4>Toyota Fortuner Legender</h4>
+      <ul class="specs">
+        <li>Seating: 7</li>
+        <li>Fuel: Diesel</li>
+        <li>Transmission: Automatic</li>
+        <li>Best for: Family Trips</li>
+        <li><strong>₹6500 / day</strong></li>
+      </ul>
+    </div>
+
+    <!-- BMW X5 -->
+    <div class="car-card" data-car="BMW X5" data-price="₹9200/day">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/BMW X5.avif" class="car-img">
+      <h4>BMW X5</h4>
+      <ul class="specs">
+        <li>Seating: 5</li>
+        <li>Fuel: Petrol / Diesel</li>
+        <li>Transmission: Automatic</li>
+        <li>Luxury Level: Premium Sport</li>
+        <li><strong>₹9200 / day</strong></li>
+      </ul>
+    </div>
+
+    <!-- AUDI Q7 -->
+    <div class="car-card" data-car="Audi Q7" data-price="₹8800/day">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Audi Q7.avif" class="car-img">
+      <h4>Audi Q7</h4>
+      <ul class="specs">
+        <li>Seating: 7</li>
+        <li>Fuel: Petrol / Diesel</li>
+        <li>Transmission: Automatic</li>
+        <li>Luxury Level: Executive</li>
+        <li><strong>₹8800 / day</strong></li>
+      </ul>
+    </div>
+
+    <!-- MERCEDES GLE -->
+    <div class="car-card" data-car="Mercedes-Benz GLE" data-price="₹9000/day">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Mercedes-Benz_GLE_.avif" class="car-img">
+      <h4>Mercedes-Benz GLE</h4>
+      <ul class="specs">
+        <li>Seating: 5</li>
+        <li>Fuel: Petrol / Diesel</li>
+        <li>Transmission: Automatic</li>
+        <li>Luxury Level: Business Class</li>
+        <li><strong>₹9000 / day</strong></li>
+      </ul>
+    </div>
+
+    <!-- RANGE ROVER VOGUE -->
+    <div class="car-card" data-car="Range Rover Vogue" data-price="₹12000/day">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Range Rover.jpg" class="car-img">
+      <h4>Range Rover Vogue</h4>
+      <ul class="specs">
+        <li>Seating: 5</li>
+        <li>Fuel: Diesel</li>
+        <li>Transmission: Automatic</li>
+        <li>Luxury Level: Ultra Luxury</li>
+        <li><strong>₹12000 / day</strong></li>
+      </ul>
+    </div>
+
+    <!-- JEEP GRAND CHEROKEE -->
+    <div class="car-card" data-car="Jeep Grand Cherokee" data-price="₹7800/day">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Jeep Grand Cherokee.jpg" class="car-img">
+      <h4>Jeep Grand Cherokee</h4>
+      <ul class="specs">
+        <li>Seating: 5</li>
+        <li>Fuel: Petrol</li>
+        <li>Transmission: Automatic</li>
+        <li>Usage: Premium SUV</li>
+        <li><strong>₹7800 / day</strong></li>
+      </ul>
+    </div>
+
+    <!-- JEEP WRANGLER -->
+    <div class="car-card" data-car="Jeep Wrangler" data-price="₹8200/day">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Jeep Wrangler.avif" class="car-img">
+      <h4>Jeep Wrangler</h4>
+      <ul class="specs">
+        <li>Seating: 5</li>
+        <li>Fuel: Petrol</li>
+        <li>Transmission: Automatic</li>
+        <li>Usage: Luxury Off-road</li>
+        <li><strong>₹8200 / day</strong></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<div class="cta">
+  <button onclick="proceedBooking()">Proceed to Booking</button>
+</div>
+
+<footer>
+  &copy; 2025 CarRentalPro. All Rights Reserved.
+</footer>
+
+<script>
+let selectedCar = "";
+let selectedPrice = "";
+
+document.querySelectorAll(".car-card").forEach(card => {
+  card.addEventListener("click", () => {
+    document.querySelectorAll(".car-card")
+      .forEach(c => c.classList.remove("selected"));
+
+    card.classList.add("selected");
+
+    selectedCar = card.dataset.car;
+    selectedPrice = card.dataset.price;
+  });
+});
+
+function proceedBooking(){
+  if(!selectedCar){
+    alert("Please select a Luxury SUV to continue");
+    return;
+  }
+
+  window.location.href =
+    `../booking.html?car=${encodeURIComponent(selectedCar)}&price=${encodeURIComponent(selectedPrice)}`;
+}
+</script>
+
+</body>
+</html>

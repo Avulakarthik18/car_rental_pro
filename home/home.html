@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CarRentalPro - Home</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #151320;
+      color: white;
+    }
+
+    header {
+      background: #1c1830;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2a2545;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 600;
+      color: #9b7cff;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: 0.2s;
+    }
+
+    nav a:hover {
+      background: #2a2545;
+    }
+
+    /* ✅ Dropdown Select Style */
+    .nav-select {
+      background: #2a2545;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 12px;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+      outline: none;
+      transition: 0.2s;
+    }
+
+    .nav-select:hover {
+      background: #3a3558;
+    }
+
+    /* Hero */
+    .hero {
+      height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(127,92,255,0.35), rgba(0,0,0,0.85));
+    }
+
+    .hero-content {
+      max-width: 720px;
+    }
+
+    .hero h1 {
+      font-size: 45px;
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      font-size: 15px;
+      color: #cfcfcf;
+      margin-bottom: 24px;
+    }
+
+    .hero button {
+      padding: 14px 24px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      background: linear-gradient(135deg, #7f5cff, #9b7cff);
+      color: white;
+      transition: 0.2s;
+    }
+
+    .hero button:hover {
+      transform: scale(1.05);
+      opacity: 0.95;
+    }
+
+    /* ✅ Notification Banner */
+    .notice-wrap {
+      max-width: 1100px;
+      margin: -40px auto 0;
+      padding: 0 18px;
+    }
+
+    .notice {
+      background: #1c1830;
+      border: 1px solid #2a2545;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+      padding: 16px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .notice p {
+      font-size: 14px;
+      color: #cfcfcf;
+      line-height: 1.5;
+    }
+
+    .notice strong {
+      color: #9b7cff;
+      font-weight: 600;
+    }
+
+    .notice .btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mini-btn {
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #3a3558;
+      background: transparent;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .mini-btn:hover {
+      background: #2a2545;
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 40px;
+      background: #1c1830;
+      border-top: 1px solid #2a2545;
+      padding: 15px;
+      text-align: center;
+      color: #aaa;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">CarRentalPro</div>
+
+    <nav>
+      <!-- ✅ 1) Book Cars -->
+      <a href="../book_car/book_choice.html">Book Cars</a>
+
+      <!-- ✅ 2) AddCar dropdown -->
+      <select id="addCarSelect" class="nav-select" onchange="handleAddCarRedirect()">
+        <option value="">AddCar</option>
+        <option value="../add_car/add_car_rental_only.html">Car For Rental Only</option>
+        <option value="../add_car/add_car_with_driver.html">With Driver</option>
+      </select>
+
+      <!-- ✅ 3) Sell/Buy dropdown -->
+      <select id="sellBuySelect" class="nav-select" onchange="handleSellBuyRedirect()">
+        <option value="">Sell/Buy</option>
+        <option value="../sell_buy/sell_car.html">Sell</option>
+        <option value="../sell_buy/buy_car.html">Buy</option>
+      </select>
+
+      <!-- ✅ 4) Car Status -->
+      <!-- ✅ Car Status dropdown -->
+<select id="carStatusSelect"
+        class="nav-select"
+        onchange="handleCarStatusRedirect()">
+
+  <option value="">Car Status</option>
+
+  <option value="../add_car/my_car_status.html">
+    Rental Status
+  </option>
+
+  <option value="../sell_buy/my_sell_status.html">
+    Selling Status
+  </option>
+
+</select>
+
+      <a href="driver_register.html">Career</a>
+
+      <!-- ✅ 5) Services -->
+      <a href="../service/services.html">Services</a>
+
+      <!-- ✅ 6) Contact -->
+      <a href="../service/contact.html">Contact</a>
+
+      <!-- ✅ 7) Logout -->
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Find Your Perfect Ride 🚗</h1>
+      <p>Affordable. Reliable. Convenient. Book cars easily and list your car for rentals or selling.</p>
+      <button onclick="window.location.href='../book_car/book_choice.html'">Book Now</button>
+    </div>
+  </section>
+
+  <!-- ✅ Notification section -->
+  <div class="notice-wrap">
+    <div class="notice" id="noticeBox">
+      <p id="noticeText">
+        Checking your car approval status...
+      </p>
+
+      <div class="btns">
+        <button class="mini-btn" onclick="openStatus()">View Status</button>
+        <button class="mini-btn" onclick="refreshStatus()">Refresh</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 CarRentalPro. All Rights Reserved.
+  </footer>
+
+<script>
+
+const API_BASE = "http://127.0.0.1:3000";
+
+
+// ✅ LOGIN CHECK (Improved)
+const user = JSON.parse(localStorage.getItem("car_rental_user"));
+
+if (!user || !user.email) {
+  alert("Please login first ❌");
+  window.location.href = "../login/login.html";
+}
+
+
+
+// ✅ LOGOUT
+function logout() {
+  localStorage.removeItem("car_rental_user");
+  window.location.href = "../login/login.html";
+}
+
+
+
+// ✅ Rental Status Page
+function openStatus() {
+  window.location.href = "../add_car/my_car_status.html";
+}
+
+
+
+// ✅ AddCar dropdown redirect
+function handleAddCarRedirect() {
+
+  const select = document.getElementById("addCarSelect");
+  const path = select.value;
+
+  if (path) {
+    window.location.href = path;
+  }
+
+  select.value = "";
+}
+
+
+
+// ✅ Sell/Buy dropdown redirect
+function handleSellBuyRedirect() {
+
+  const select = document.getElementById("sellBuySelect");
+  const path = select.value;
+
+  if (path) {
+    window.location.href = path;
+  }
+
+  select.value = "";
+}
+
+
+
+// ⭐ NEW — Car Status Dropdown
+function handleCarStatusRedirect(){
+
+  const select = document.getElementById("carStatusSelect");
+  const path = select.value;
+
+  if(path){
+    window.location.href = path;
+  }
+
+  select.value="";
+}
+
+
+
+// 🔥 LOAD BOTH RENTAL + SELLING STATUS
+async function loadApprovalStatus() {
+
+  const noticeText = document.getElementById("noticeText");
+
+  try {
+
+    const [rentalRes, sellingRes] = await Promise.all([
+
+      fetch(`${API_BASE}/my-car-status/${user.email}`),
+      fetch(`${API_BASE}/my-selling-status/${user.email}`)
+
+    ]);
+
+    const rentalData = await rentalRes.json();
+    const sellingData = await sellingRes.json();
+
+
+    const rentalCars = rentalData.cars || [];
+    const sellingCars = sellingData.cars || [];
+
+
+    const pendingRental =
+      rentalCars.filter(c => c.status === "Pending").length;
+
+    const approvedRental =
+      rentalCars.filter(c => c.status === "Approved").length;
+
+    const pendingSelling =
+      sellingCars.filter(c => c.status === "Pending").length;
+
+    const approvedSelling =
+      sellingCars.filter(c => c.status === "Approved").length;
+
+    const rejectedSelling =
+      sellingCars.filter(c => c.status === "Rejected").length;
+
+
+    // ⭐ NOTHING SUBMITTED
+    if (rentalCars.length === 0 && sellingCars.length === 0) {
+
+      noticeText.innerHTML =
+        `You haven't submitted any cars yet 🚗 <strong>Try AddCar or Sell Car</strong>`;
+      return;
+    }
+
+
+    // ⭐ PENDING ALERT
+    if (pendingRental > 0 || pendingSelling > 0) {
+
+      noticeText.innerHTML =
+        `⏳ You have <strong>${pendingRental + pendingSelling}</strong> listing(s) waiting for approval.`;
+      return;
+    }
+
+
+    // ⭐ APPROVED ALERT
+    if (approvedRental > 0 || approvedSelling > 0) {
+
+      noticeText.innerHTML =
+        `✅ Awesome! You have <strong>${approvedRental + approvedSelling}</strong> approved listing(s) live on the platform!`;
+      return;
+    }
+
+
+    // ⭐ REJECTED ALERT
+    if (rejectedSelling > 0) {
+
+      noticeText.innerHTML =
+        `❌ Some listings were rejected. Please update and resubmit.`;
+      return;
+    }
+
+
+    noticeText.innerHTML =
+      `Your listings are being processed ✅`;
+
+  }
+  catch(err){
+
+    console.error(err);
+
+    if(err instanceof TypeError){
+      noticeText.innerHTML =
+        "Server unreachable ❌ Is Flask running?";
+    }
+    else{
+      noticeText.innerHTML =
+        "Something failed ❌ Check console";
+    }
+
+  }
+
+}
+
+
+
+loadApprovalStatus();
+
+</script>
+
+
+</body>
+</html>

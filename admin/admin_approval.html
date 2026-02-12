@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin - Car Approval</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+    body{
+      background:#151320;
+      color:white;
+      min-height:100vh;
+      padding:30px 18px;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      background:#1c1830;
+      border:1px solid #2a2545;
+      border-radius:18px;
+      box-shadow:0 30px 70px rgba(0,0,0,0.6);
+      padding:22px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:14px;
+      border-bottom:1px solid #2a2545;
+      padding-bottom:16px;
+      margin-bottom:18px;
+    }
+
+    h2{
+      font-size:24px;
+      font-weight:600;
+      color:#9b7cff;
+    }
+
+    .sub{
+      color:#aaa;
+      font-size:13px;
+      margin-top:6px;
+    }
+
+    .btn{
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid #3a3558;
+      background:transparent;
+      color:white;
+      cursor:pointer;
+      transition:0.2s;
+      font-size:14px;
+      font-weight:500;
+    }
+
+    .btn:hover{
+      background:#2a2545;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(290px, 1fr));
+      gap:16px;
+      margin-top:14px;
+    }
+
+    .card{
+      background:#17132a;
+      border:1px solid #2a2545;
+      border-radius:16px;
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      box-shadow:0 10px 25px rgba(0,0,0,0.3);
+    }
+
+    .card strong{
+      font-size:16px;
+      font-weight:600;
+      color:white;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:6px 10px;
+      font-size:12px;
+      border-radius:999px;
+      background:rgba(241, 196, 15, 0.12);
+      border:1px solid rgba(241, 196, 15, 0.35);
+      color:#ffeaa7;
+      width:max-content;
+    }
+
+    .info{
+      font-size:13px;
+      color:#cfcfcf;
+      line-height:1.6;
+    }
+
+    .info b{
+      color:white;
+      font-weight:500;
+    }
+
+    .img-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .img-row img{
+      width:85px;
+      height:62px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid #2a2545;
+    }
+
+    .actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:8px;
+    }
+
+    .approve{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+      background:rgba(46, 204, 113, 0.2);
+      border:1px solid rgba(46, 204, 113, 0.45);
+      color:#7CFFB0;
+      transition:0.2s;
+    }
+
+    .approve:hover{
+      transform:scale(1.02);
+      background:rgba(46, 204, 113, 0.28);
+    }
+
+    .reject{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+      background:rgba(231, 76, 60, 0.18);
+      border:1px solid rgba(231, 76, 60, 0.45);
+      color:#ffb3b3;
+      transition:0.2s;
+    }
+
+    .reject:hover{
+      transform:scale(1.02);
+      background:rgba(231, 76, 60, 0.25);
+    }
+
+    .empty{
+      margin-top:14px;
+      padding:18px;
+      background:#17132a;
+      border:1px dashed #3a3558;
+      border-radius:16px;
+      text-align:center;
+      color:#aaa;
+      font-size:14px;
+      display:none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="topbar">
+      <div>
+        <h2>Admin Approval Panel ✅</h2>
+        <div class="sub">Pending car requests will appear here for approval.</div>
+      </div>
+
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn" onclick="window.location.href='../home/home.html'">← Back Home</button>
+        <button class="btn" onclick="fetchPendingCars()">🔄 Refresh</button>
+      </div>
+    </div>
+
+    <div id="cardsGrid" class="grid"></div>
+    <div id="emptyBox" class="empty">✅ No Pending Cars Found</div>
+
+  </div>
+
+<script>
+
+const API_BASE = "http://127.0.0.1:3000";
+
+// ✅ Must be admin
+const user = JSON.parse(localStorage.getItem("car_rental_user"));
+
+if(!user || !user.loggedIn){
+  alert("Please login first ❌");
+  window.location.href = "../login/login.html";
+}
+
+if(user.role !== "admin"){
+  alert("Access Denied ❌ Admins only");
+  window.location.href = "../home/home.html";
+}
+
+
+// ✅ Safely parse images
+function safeImages(imagesStr){
+  try{
+    return JSON.parse(imagesStr || "[]");
+  }catch(e){
+    return [];
+  }
+}
+
+
+// ✅ FETCH PENDING CARS
+async function fetchPendingCars(){
+
+  const grid = document.getElementById("cardsGrid");
+  const emptyBox = document.getElementById("emptyBox");
+
+  grid.innerHTML = "";
+
+  try{
+
+    const res = await fetch(`${API_BASE}/admin/pending-cars`);
+
+    // 🔥 NEW: check API success
+    if(!res.ok){
+      throw new Error("API failed");
+    }
+
+    const data = await res.json();
+
+    const cars = data.cars || [];
+
+    if(cars.length === 0){
+      emptyBox.style.display = "block";
+      emptyBox.innerText = "✅ No Pending Cars Found";
+      return;
+    }
+
+    emptyBox.style.display = "none";
+
+    cars.forEach(car => {
+
+      const images = safeImages(car.images);
+
+      const card = document.createElement("div");
+      card.className = "card";
+
+      card.innerHTML = `
+        <strong>${car.company} ${car.model}</strong>
+        <span class="badge">Pending ⏳</span>
+
+        <div class="info">
+          <div><b>ID:</b> ${car.id}</div>
+          <div><b>Owner:</b> ${car.owner_email}</div>
+          <div><b>Reg No:</b> ${car.reg_number}</div>
+          <div><b>Type:</b> ${car.listing_type}</div>
+          <div><b>Location:</b> ${car.location}</div>
+          <div><b>Price:</b> ₹${car.price_month} / month</div>
+        </div>
+
+        ${
+          images.length > 0
+          ? `<div class="img-row">
+              ${images.slice(0,4).map(img => `<img src="${img}" alt="car">`).join("")}
+            </div>`
+          : `<div class="info" style="color:#aaa;">No images uploaded</div>`
+        }
+
+        <div class="actions">
+          <button class="approve" onclick="approveCar(${car.id})">
+            Approve ✅
+          </button>
+
+          <button class="reject" onclick="rejectCar(${car.id})">
+            Reject ❌
+          </button>
+
+          <button onclick="blockCar(${car.id})"
+            style="flex:1;padding:12px;border:none;border-radius:12px;
+            background:#444;color:white;font-weight:600;cursor:pointer;">
+            Block 🚫
+          </button>
+        </div>
+      `;
+
+      grid.appendChild(card);
+    });
+
+  }catch(err){
+
+    console.error("FETCH ERROR:", err);
+
+    emptyBox.style.display = "block";
+    emptyBox.innerText = "API Error ❌ Check console";
+
+  }
+}
+
+
+
+// ✅ APPROVE CAR
+async function approveCar(carId){
+
+  if(!confirm("Approve this car? ✅")) return;
+
+  try{
+
+    const res = await fetch(`${API_BASE}/admin/update-car-status`, {
+
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+
+      body: JSON.stringify({
+        car_id: carId,
+        status: "Approved"
+      })
+
+    });
+
+    if(!res.ok){
+      throw new Error("Approval failed");
+    }
+
+    const data = await res.json();
+
+    alert(data.message || "Car Approved ✅");
+
+    fetchPendingCars();
+
+  }catch(err){
+    console.error(err);
+    alert("Approval failed ❌");
+  }
+}
+
+
+
+// ✅ REJECT CAR
+async function rejectCar(carId){
+
+  if(!confirm("Reject this car? ❌")) return;
+
+  try{
+
+    const res = await fetch(`${API_BASE}/admin/update-car-status`, {
+
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+
+      body: JSON.stringify({
+        car_id: carId,
+        status: "Rejected"
+      })
+
+    });
+
+    if(!res.ok){
+      throw new Error("Rejection failed");
+    }
+
+    const data = await res.json();
+
+    alert(data.message || "Car Rejected ❌");
+
+    fetchPendingCars();
+
+  }catch(err){
+    console.error(err);
+    alert("Rejection failed ❌");
+  }
+}
+
+
+
+// 🔥 NEW — BLOCK CAR (VERY IMPORTANT FEATURE)
+async function blockCar(carId){
+
+  if(!confirm("Block this car? 🚫")) return;
+
+  try{
+
+    const res = await fetch(`${API_BASE}/admin/block-car`,{
+      method:"POST",
+      headers:{ "Content-Type":"application/json"},
+      body: JSON.stringify({car_id:carId})
+    });
+
+    if(!res.ok){
+      throw new Error("Block failed");
+    }
+
+    const data = await res.json();
+
+    alert(data.message || "Car blocked 🚫");
+
+    fetchPendingCars();
+
+  }catch(err){
+    console.error(err);
+    alert("Block failed ❌");
+  }
+}
+
+
+// 🔥 Load immediately
+fetchPendingCars();
+
+</script>
+
+
+</body>
+</html>

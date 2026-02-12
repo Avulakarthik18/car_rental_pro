@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Choose Delivery Location | CarRentalPro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#151320;
+  color:#fff;
+}
+
+/* HEADER */
+header{
+  background:#1c1830;
+  padding:18px 50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #2a2545;
+}
+
+nav a{
+  color:#ddd;
+  text-decoration:none;
+  margin-left:22px;
+}
+nav a:hover{color:#9b7cff}
+
+/* PAGE HEADER */
+.page-header{
+  position:relative;
+  text-align:center;
+  padding:60px 20px;
+  background:linear-gradient(135deg,#1c1830,#151320);
+}
+
+.back-btn{
+  position:absolute;
+  right:30px;
+  top:25px;
+  background:#1c1830;
+  padding:7px 18px;
+  border-radius:18px;
+  color:#ddd;
+  text-decoration:none;
+  border:1px solid #2a2545;
+}
+.back-btn:hover{
+  background:#9b7cff;
+  color:#151320;
+}
+
+.page-header h2{
+  font-size:34px;
+}
+
+/* MAIN */
+.container{
+  max-width:1200px;
+  margin:50px auto;
+  padding:0 20px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+
+/* LEFT */
+.box{
+  background:#1c1830;
+  padding:30px;
+  border-radius:18px;
+  border:1px solid #2a2545;
+}
+
+.selected-car{
+  background:#151320;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #2a2545;
+  margin-bottom:20px;
+}
+
+.selected-car span{
+  color:#9b7cff;
+  font-weight:600;
+}
+
+label{
+  font-size:14px;
+  color:#cfcfcf;
+  display:block;
+  margin-top:15px;
+}
+
+input{
+  width:100%;
+  margin-top:8px;
+  padding:14px;
+  border-radius:12px;
+  border:1px solid #2a2545;
+  background:#151320;
+  color:white;
+}
+
+.current-btn{
+  margin-top:10px;
+  background:none;
+  border:none;
+  color:#9b7cff;
+  cursor:pointer;
+  font-size:14px;
+}
+
+.summary{
+  margin-top:20px;
+  background:#151320;
+  padding:15px;
+  border-radius:12px;
+  border:1px solid #2a2545;
+  font-size:14px;
+  line-height:1.8;
+}
+
+button{
+  margin-top:25px;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:#9b7cff;
+  color:#151320;
+  font-weight:600;
+  font-size:16px;
+  cursor:pointer;
+}
+button:hover{
+  background:#b59cff;
+}
+
+/* MAP */
+.map-box{
+  background:#1c1830;
+  padding:15px;
+  border-radius:18px;
+  border:1px solid #2a2545;
+}
+
+#map{
+  width:100%;
+  height:450px;
+  border-radius:14px;
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.popup-box{
+  background:#1c1830;
+  padding:30px;
+  border-radius:18px;
+  border:1px solid #2a2545;
+  text-align:center;
+  width:90%;
+  max-width:400px;
+}
+
+.popup-box h3{
+  color:#9b7cff;
+  margin-bottom:10px;
+}
+
+.popup-box p{
+  color:#cfcfcf;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.popup-box button{
+  margin-top:20px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>CarRentalPro</h1>
+  <nav>
+    <a href="home.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="page-header">
+  <a href="doorstep-delivery.html" class="back-btn">← Back</a>
+  <h2>Choose Delivery Location</h2>
+</section>
+
+<section class="container">
+  <div class="grid">
+
+    <!-- LEFT -->
+    <div class="box">
+
+      <div class="selected-car">
+        Selected Car:
+        <span id="carName">
+          Auto-filled
+        </span>
+      </div>
+
+      <label>From (Pickup Location)</label>
+      <input id="fromLocation" placeholder="Enter pickup location">
+      <button class="current-btn" onclick="useCurrentLocation()">📍 Use my current location</button>
+
+      <label>To (Drop Location)</label>
+      <input id="toLocation" placeholder="Enter drop location">
+
+      <div class="summary">
+        <div>📏 Distance: <span id="distance">—</span></div>
+        <div>⏱ Estimated Time: <span id="duration">—</span></div>
+        <div>💰 Delivery Cost: <span id="price">—</span></div>
+      </div>
+
+      <button onclick="confirmAddress()">Confirm Address</button>
+
+    </div>
+
+    <!-- MAP -->
+    <div class="map-box">
+      <div id="map"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <div class="popup-box">
+    <h3>Address Confirmed</h3>
+    <p>Your delivery location has been successfully confirmed.<br>
+    Driver assignment will begin shortly.</p>
+    <button onclick="goTracking()">Proceed to Tracking</button>
+  </div>
+</div>
+
+<footer style="text-align:center;margin:40px;color:#aaa;font-size:14px">
+  © 2025 CarRentalPro. All Rights Reserved.
+</footer>
+
+<!-- GOOGLE MAPS API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg&callback=initMap"></script>
+
+<script>
+let map, directionsService, directionsRenderer;
+let fromAutocomplete, toAutocomplete;
+
+function init(){
+  map = new google.maps.Map(document.getElementById("map"), {
+    center:{lat:20.5937,lng:78.9629},
+    zoom:5
+  });
+
+  directionsService = new google.maps.DirectionsService();
+  directionsRenderer = new google.maps.DirectionsRenderer({map});
+
+  fromAutocomplete = new google.maps.places.Autocomplete(
+    document.getElementById("fromLocation")
+  );
+  toAutocomplete = new google.maps.places.Autocomplete(
+    document.getElementById("toLocation")
+  );
+
+  fromAutocomplete.addListener("place_changed", calculateRoute);
+  toAutocomplete.addListener("place_changed", calculateRoute);
+
+  document.getElementById("carName").textContent =
+    localStorage.getItem("selectedCar") || "Not selected";
+}
+
+function calculateRoute(){
+  const from = document.getElementById("fromLocation").value;
+  const to = document.getElementById("toLocation").value;
+
+  if(!from || !to) return;
+
+  directionsService.route({
+    origin: from,
+    destination: to,
+    travelMode: "DRIVING"
+  }, (result, status)=>{
+    if(status==="OK"){
+      directionsRenderer.setDirections(result);
+
+      const leg = result.routes[0].legs[0];
+      document.getElementById("distance").textContent = leg.distance.text;
+      document.getElementById("duration").textContent = leg.duration.text;
+
+      const km = leg.distance.value / 1000;
+      document.getElementById("price").textContent =
+        "₹" + Math.round(200 + km * 20);
+    }
+  });
+}
+
+function useCurrentLocation(){
+  navigator.geolocation.getCurrentPosition(pos=>{
+    const latlng = {
+      lat: pos.coords.latitude,
+      lng: pos.coords.longitude
+    };
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({location:latlng}, (res)=>{
+      document.getElementById("fromLocation").value =
+        res[0].formatted_address;
+    });
+  });
+}
+
+function confirmAddress(){
+  if(!document.getElementById("distance").textContent.includes("km")){
+    alert("Please select both locations");
+    return;
+  }
+  document.getElementById("popup").style.display="flex";
+}
+
+function goTracking(){
+  window.location.href="delivery-tracking.html";
+}
+
+window.onload = init;
+</script>
+
+</body>
+</html>

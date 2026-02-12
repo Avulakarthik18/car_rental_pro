@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Services</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      background:#151320;
+      color:white;
+    }
+
+    /* Header */
+    header{
+      background:#1c1830;
+      color:#fff;
+      padding:18px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #2a2545;
+      box-shadow:0 15px 30px rgba(0,0,0,0.35);
+    }
+
+    header h1{
+      font-size:24px;
+      margin:0;
+      font-weight:600;
+      letter-spacing:0.5px;
+    }
+
+    nav a{
+      color:#ddd;
+      text-decoration:none;
+      margin-left:22px;
+      font-weight:500;
+      font-size:15px;
+      transition:0.2s;
+    }
+
+    nav a:hover{
+      color:#9b7cff;
+    }
+
+    /* Services Section */
+    h2{
+      text-align:center;
+      color:white;
+      font-size:36px;
+      margin:45px 0 25px;
+      letter-spacing:0.5px;
+      font-weight:600;
+    }
+
+    .services-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      gap:25px;
+      padding:0 20px 55px;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    .service-card{
+      background:#1c1830;
+      padding:30px 25px;
+      border-radius:16px;
+      box-shadow:0 18px 40px rgba(0,0,0,0.45);
+      text-align:center;
+      transition:0.3s;
+      text-decoration:none;
+      color:inherit;
+      border:1px solid #2a2545;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .service-card:hover{
+      transform:translateY(-6px);
+      border-color:#9b7cff;
+    }
+
+    .service-icon{
+      font-size:44px;
+      color:#9b7cff;
+      margin-bottom:14px;
+    }
+
+    .service-card h3{
+      color:white;
+      margin-bottom:10px;
+      font-size:20px;
+      font-weight:600;
+    }
+
+    .service-card p{
+      color:#cfcfcf;
+      font-size:14.5px;
+      line-height:1.6;
+    }
+
+    /* Footer */
+    footer{
+      background:#1c1830;
+      color:#aaa;
+      text-align:center;
+      padding:16px;
+      font-size:14px;
+      border-top:1px solid #2a2545;
+    }
+
+    footer a{
+      color:#9b7cff;
+      text-decoration:none;
+      margin:0 5px;
+    }
+
+    footer a:hover{
+      text-decoration:underline;
+    }
+
+    /* Responsive */
+    @media(max-width:900px){
+      header{
+        flex-direction:column;
+        gap:12px;
+        padding:18px;
+      }
+      nav{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        gap:15px;
+      }
+      nav a{
+        margin-left:0;
+      }
+      h2{
+        font-size:28px;
+        margin-top:30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>CarRentalPro</h1>
+    <nav>
+      <a href="../home/home.html">Home</a>
+      <a href="../book_car/book_car.html">Book a Car</a>
+      <a href="../service/services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <h2>Our Services</h2>
+
+  <div class="services-grid">
+    <a href="rental_info.html" class="service-card">
+      <div class="service-icon"><i class="fas fa-calendar-alt"></i></div>
+      <h3>Daily & Weekly Rentals</h3>
+      <p>Flexible rental plans for short and long-term travel.</p>
+    </a>
+
+    
+      <a href="./Luxury-vehicles/luxury-vehicles.html" class="service-card">
+      <div class="service-icon"><i class="fas fa-car-side"></i></div>
+      <h3>Luxury Vehicles</h3>
+      <p>Choose from a wide range of premium cars.</p>
+      </a>
+    
+
+    <a href="./Customer support/customer-support.html" class="service-card">
+      <div class="service-icon"><i class="fas fa-headset"></i></div>
+      <h3>24/7 Customer Support</h3>
+      <p>We're always here to help. Click to contact us.</p>
+    </a>
+
+    <a href="insurance.html" class="service-card">
+      <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+      <h3>Insurance Protection</h3>
+      <p>Peace of mind included with every rental.</p>
+    </a>
+
+    <a href="cancellation.html" class="service-card">
+      <div class="service-icon"><i class="fas fa-times-circle"></i></div>
+      <h3>Easy Cancellations</h3>
+      <p>Cancel or modify bookings with flexibility.</p>
+    </a>
+
+    <a href="./Doorstep Delivery/doorstep-delivery.html" class="service-card">
+      <div class="service-icon"><i class="fas fa-truck-moving"></i></div>
+      <h3>Doorstep Delivery</h3>
+      <p>Get your vehicle delivered to your location.</p>
+    </a>
+  </div>
+
+  <footer>
+    &copy; 2025 CarRentalPro. All Rights Reserved. |
+    <a href="privacy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms & Conditions</a>
+  </footer>
+
+</body>
+</html>

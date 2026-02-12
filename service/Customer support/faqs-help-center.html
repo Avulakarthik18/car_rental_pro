@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQs & Help Center | CarRentalPro</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      background:#151320;
+      color:white;
+    }
+
+    /* HEADER */
+    header{
+      background:#1c1830;
+      padding:18px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #2a2545;
+    }
+
+    header h1{
+      font-size:24px;
+      font-weight:600;
+    }
+
+    nav a{
+      color:#ddd;
+      text-decoration:none;
+      margin-left:22px;
+      font-weight:500;
+    }
+
+    nav a:hover{
+      color:#9b7cff;
+    }
+
+    /* PAGE HEADER */
+    .page-header{
+      position:relative;
+      text-align:center;
+      padding:80px 20px;
+      background:linear-gradient(135deg,#1c1830,#151320);
+    }
+
+    .page-header h2{
+      font-size:38px;
+      margin-bottom:15px;
+    }
+
+    .page-header p{
+      max-width:800px;
+      margin:auto;
+      color:#cfcfcf;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    /* BACK BUTTON */
+    .back-btn{
+      position:absolute;
+      top:25px;
+      right:30px;
+      background:#1c1830;
+      color:#ddd;
+      padding:7px 18px;
+      border-radius:18px;
+      text-decoration:none;
+      font-size:14px;
+      border:1px solid #2a2545;
+      transition:0.3s;
+    }
+
+    .back-btn:hover{
+      background:#9b7cff;
+      color:#151320;
+    }
+
+    /* CONTENT */
+    .content{
+      max-width:900px;
+      margin:60px auto;
+      padding:0 20px;
+    }
+
+    /* FAQ CARD */
+    .faq{
+      background:#1c1830;
+      border-radius:16px;
+      border:1px solid #2a2545;
+      margin-bottom:18px;
+      padding:20px 25px;
+      box-shadow:0 15px 35px rgba(0,0,0,0.4);
+    }
+
+    .faq-question{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      cursor:pointer;
+    }
+
+    .faq-question h4{
+      font-size:18px;
+      color:#9b7cff;
+    }
+
+    .faq-question .icon{
+      font-size:22px;
+      transition:0.3s;
+    }
+
+    .faq-answer{
+      max-height:0;
+      overflow:hidden;
+      transition:max-height 0.4s ease;
+    }
+
+    .faq-answer p{
+      margin-top:12px;
+      color:#cfcfcf;
+      font-size:14.8px;
+      line-height:1.7;
+    }
+
+    .faq.active .faq-answer{
+      max-height:200px;
+    }
+
+    .faq.active .icon{
+      transform:rotate(45deg); /* + becomes × */
+    }
+
+    /* FOOTER */
+    footer{
+      background:#1c1830;
+      text-align:center;
+      padding:16px;
+      font-size:14px;
+      color:#aaa;
+      border-top:1px solid #2a2545;
+      margin-top:80px;
+    }
+
+    @media(max-width:768px){
+      .back-btn{
+        top:15px;
+        right:15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <h1>CarRentalPro</h1>
+  <nav>
+    <a href="../home.html">Home</a>
+    <a href="../book_car.html">Book a Car</a>
+    <a href="../services.html">Services</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <a href="customer-support.html" class="back-btn">← Back</a>
+
+  <h2>FAQs & Help Center</h2>
+  <p>
+    Find quick answers to commonly asked questions related to
+    bookings, payments, cancellations, and vehicle usage.
+  </p>
+</section>
+
+<!-- FAQ CONTENT -->
+<section class="content">
+
+  <div class="faq">
+    <div class="faq-question">
+      <h4>How do I book a car?</h4>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        You can book a car by selecting a vehicle, choosing a rental plan,
+        and completing the booking form with required details.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-question">
+      <h4>What documents are required for booking?</h4>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        A valid driving license and a government-issued ID proof
+        are required at the time of booking.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-question">
+      <h4>What payment methods are accepted?</h4>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        We accept debit cards, credit cards, and online payment methods.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-question">
+      <h4>How long does it take to receive a refund?</h4>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        Refunds are usually processed within 3–5 business days,
+        depending on the payment method used.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-question">
+      <h4>Can I cancel or modify my booking?</h4>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        Yes, bookings can be cancelled or modified as per the
+        cancellation policy. Charges may apply based on timing.
+      </p>
+    </div>
+  </div>
+
+  <div class="faq">
+    <div class="faq-question">
+      <h4>Is insurance included with the rental?</h4>
+      <span class="icon">+</span>
+    </div>
+    <div class="faq-answer">
+      <p>
+        Yes, basic insurance coverage is included with every rental.
+        Additional coverage options may be available.
+      </p>
+    </div>
+  </div>
+
+</section>
+
+<footer>
+  &copy; 2025 CarRentalPro. All Rights Reserved.
+</footer>
+
+<!-- JS FOR ACCORDION -->
+<script>
+  const faqs = document.querySelectorAll(".faq");
+
+  faqs.forEach(faq => {
+    faq.querySelector(".faq-question").addEventListener("click", () => {
+      faq.classList.toggle("active");
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luxury Sedans | CarRentalPro</title>
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
+}
+
+body{
+  background:#151320;
+  color:white;
+}
+
+/* HEADER */
+header{
+  background:#1c1830;
+  padding:18px 50px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid #2a2545;
+}
+
+header h1{font-size:24px;font-weight:600;}
+nav a{color:#ddd;text-decoration:none;margin-left:22px;}
+nav a:hover{color:#9b7cff;}
+
+/* PAGE HEADER */
+.page-header{
+  position:relative;
+  text-align:center;
+  padding:80px 20px;
+  background:linear-gradient(135deg,#1c1830,#151320);
+}
+
+.page-header h2{
+  font-size:38px;
+  margin-bottom:12px;
+}
+
+.page-header p{
+  max-width:750px;
+  margin:auto;
+  color:#cfcfcf;
+}
+
+/* BACK BUTTON */
+.back-btn{
+  position:absolute;
+  top:25px;
+  right:30px;
+  background:#1c1830;
+  color:#ddd;
+  padding:7px 18px;
+  border-radius:18px;
+  text-decoration:none;
+  border:1px solid #2a2545;
+}
+
+.back-btn:hover{
+  background:#9b7cff;
+  color:#151320;
+}
+
+/* SECTION */
+.section{
+  max-width:1200px;
+  margin:60px auto;
+  padding:0 20px;
+}
+
+.section h3{
+  text-align:center;
+  font-size:28px;
+  margin-bottom:35px;
+  color:#9b7cff;
+}
+
+/* CARS GRID */
+.cars-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+.car-card{
+  position:relative;
+  background:#1c1830;
+  padding:30px 25px;
+  border-radius:18px;
+  border:2px solid #2a2545;
+  transition:0.3s;
+  cursor:pointer;
+}
+
+.car-card:hover{
+  transform:translateY(-8px);
+  border-color:#9b7cff;
+}
+
+.car-card.selected{
+  border-color:#9b7cff;
+  box-shadow:0 0 25px rgba(155,124,255,0.6);
+}
+
+/* TICK */
+.tick{
+  position:absolute;
+  top:18px;
+  left:18px;
+  font-size:22px;
+  color:#9b7cff;
+  display:none;
+}
+
+.car-card.selected .tick{
+  display:block;
+}
+
+.car-img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:15px;
+  border:1px solid #2a2545;
+}
+
+.car-card h4{
+  font-size:20px;
+  margin-bottom:10px;
+}
+
+.car-card ul{
+  list-style:none;
+  color:#cfcfcf;
+  font-size:14.5px;
+}
+
+.car-card ul li{
+  margin-bottom:6px;
+}
+
+/* SELECTED INFO */
+.selected-info{
+  margin-top:40px;
+  text-align:center;
+  font-size:16px;
+  color:#cfcfcf;
+}
+
+.selected-info span{
+  color:#9b7cff;
+  font-weight:600;
+}
+
+/* CTA */
+.cta{
+  text-align:center;
+  margin:60px 0;
+}
+
+.cta button{
+  background:#9b7cff;
+  color:#151320;
+  padding:14px 38px;
+  border-radius:30px;
+  border:none;
+  font-weight:600;
+  font-size:16px;
+  cursor:pointer;
+}
+
+.cta button:hover{
+  background:#b59cff;
+}
+
+/* FOOTER */
+footer{
+  background:#1c1830;
+  text-align:center;
+  padding:16px;
+  font-size:14px;
+  color:#aaa;
+  border-top:1px solid #2a2545;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>CarRentalPro</h1>
+  <nav>
+    <a href="../home.html">Home</a>
+    <a href="../book_car.html">Book a Car</a>
+    <a href="../services.html">Services</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<section class="page-header">
+  <a href="luxury-vehicles.html" class="back-btn">← Back</a>
+  <h2>Luxury Sedans</h2>
+  <p>Luxury Sedans are ideal for business travel and premium comfort.</p>
+</section>
+
+<section class="section">
+  <h3>Select Your Luxury Sedan</h3>
+
+  <div class="cars-grid">
+
+    <div class="car-card" data-car="Range Rover" data-price="9000">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Range Rover.jpg" class="car-img">
+      <h4>Range Rover</h4>
+      <ul>
+        <li>Seating: 5</li>
+        <li>Fuel: Petrol / Diesel</li>
+        <li>Transmission: Automatic</li>
+        <li>Luxury: Ultra Premium</li>
+        <li>Price: ₹9000/day</li>
+      </ul>
+    </div>
+
+    <div class="car-card" data-car="Jeep Grand Cherokee" data-price="7500">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Jeep Grand Cherokee.jpg" class="car-img">
+      <h4>Jeep Grand Cherokee</h4>
+      <ul>
+        <li>Seating: 5</li>
+        <li>Fuel: Petrol</li>
+        <li>Transmission: Automatic</li>
+        <li>Luxury: Premium</li>
+        <li>Price: ₹7500/day</li>
+      </ul>
+    </div>
+
+    <div class="car-card" data-car="Jeep Wrangler" data-price="8000">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Jeep Wrangler.avif" class="car-img">
+      <h4>Jeep Wrangler</h4>
+      <ul>
+        <li>Seating: 5</li>
+        <li>Fuel: Petrol</li>
+        <li>Transmission: Automatic</li>
+        <li>Use: Off-road</li>
+        <li>Price: ₹8000/day</li>
+      </ul>
+    </div>
+
+    <div class="car-card" data-car="Land Rover Defender" data-price="8500">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/defender.jpg" class="car-img">
+      <h4>Land Rover Defender</h4>
+      <ul>
+        <li>Seating: 5</li>
+        <li>Fuel: Diesel</li>
+        <li>Transmission: Automatic</li>
+        <li>Luxury: Premium SUV</li>
+        <li>Price: ₹8500/day</li>
+      </ul>
+    </div>
+
+    <div class="car-card" data-car="Mercedes-Benz GLC" data-price="7000">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Mercedes-Benz GLC.avif" class="car-img">
+      <h4>Mercedes-Benz GLC</h4>
+      <ul>
+        <li>Seating: 5</li>
+        <li>Fuel: Petrol / Diesel</li>
+        <li>Transmission: Automatic</li>
+        <li>Luxury: Business Class</li>
+        <li>Price: ₹7000/day</li>
+      </ul>
+    </div>
+
+    <div class="car-card" data-car="Toyota Fortuner Legender" data-price="6500">
+      <i class="fas fa-check-circle tick"></i>
+      <img src="cars/Toyota Fortuner Legender.avif" class="car-img">
+      <h4>Toyota Fortuner Legender</h4>
+      <ul>
+        <li>Seating: 7</li>
+        <li>Fuel: Diesel</li>
+        <li>Transmission: Automatic</li>
+        <li>Use: Family Trips</li>
+        <li>Price: ₹6500/day</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="selected-info" id="selectedInfo">
+    Selected Car: <span>None</span>
+  </div>
+</section>
+
+<div class="cta">
+  <button onclick="proceedBooking()">Proceed to Booking</button>
+</div>
+
+<footer>
+  &copy; 2025 CarRentalPro. All Rights Reserved.
+</footer>
+
+<script src="luxury-sedans.js"></script>
+
+</body>
+</html>

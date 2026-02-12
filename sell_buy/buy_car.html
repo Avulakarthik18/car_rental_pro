@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buy Cars - CarRentalPro</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+    body{
+      background:#151320;
+      color:white;
+      padding:30px 18px;
+      min-height:100vh;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      background:#1c1830;
+      border:1px solid #2a2545;
+      border-radius:18px;
+      box-shadow:0 30px 70px rgba(0,0,0,0.6);
+      padding:22px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:14px;
+      border-bottom:1px solid #2a2545;
+      padding-bottom:16px;
+      margin-bottom:18px;
+    }
+
+    h2{
+      font-size:24px;
+      font-weight:600;
+      color:#9b7cff;
+    }
+
+    .sub{
+      color:#aaa;
+      font-size:13px;
+      margin-top:6px;
+    }
+
+    .btn{
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid #3a3558;
+      background:transparent;
+      color:white;
+      cursor:pointer;
+      transition:0.2s;
+      font-size:14px;
+      font-weight:500;
+    }
+
+    .btn:hover{background:#2a2545;}
+
+    .bar{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin:18px 0;
+    }
+
+    input[type="text"], select{
+      flex:1;
+      min-width:180px;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      background:#2a2545;
+      color:white;
+      outline:none;
+      font-size:14px;
+    }
+
+    input::placeholder{color:#aaa;}
+
+    .search-btn{
+      padding:12px 18px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      background:linear-gradient(135deg,#7f5cff,#9b7cff);
+      color:white;
+      font-weight:600;
+      transition:0.2s;
+    }
+
+    .search-btn:hover{
+      transform:scale(1.03);
+      opacity:0.95;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:16px;
+      margin-top:10px;
+    }
+
+    .car-card{
+      background:#17132a;
+      border:1px solid #2a2545;
+      border-radius:16px;
+      overflow:hidden;
+      box-shadow:0 10px 25px rgba(0,0,0,0.35);
+      transition:0.25s;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .car-card:hover{transform:translateY(-6px);}
+
+    .car-card img{
+      width:100%;
+      height:170px;
+      object-fit:cover;
+      background:#2a2545;
+    }
+
+    .card-body{
+      padding:14px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      flex:1;
+    }
+
+    .car-title{
+      font-size:16px;
+      font-weight:600;
+    }
+
+    .details{
+      font-size:13px;
+      color:#cfcfcf;
+      line-height:1.6;
+    }
+
+    .price{
+      font-weight:600;
+      color:#9b7cff;
+    }
+
+    .btn-row{
+      display:flex;
+      gap:10px;
+      margin-top:auto;
+    }
+
+    .buy-btn{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      background:linear-gradient(135deg,#7f5cff,#9b7cff);
+      color:white;
+      font-weight:600;
+      transition:0.2s;
+    }
+
+    .buy-btn:hover{transform:scale(1.02);opacity:0.95;}
+
+    .info-btn{
+      flex:1;
+      padding:12px;
+      border-radius:12px;
+      cursor:pointer;
+      background:transparent;
+      border:1px solid #3a3558;
+      color:white;
+      font-weight:600;
+      transition:0.2s;
+    }
+
+    .info-btn:hover{background:#2a2545;}
+
+    .no-results{
+      margin-top:18px;
+      padding:18px;
+      border-radius:14px;
+      border:1px dashed #3a3558;
+      background:#17132a;
+      color:#aaa;
+      text-align:center;
+      display:none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="topbar">
+      <div>
+        <h2>Buy Cars</h2>
+        <div class="sub">Browse verified cars available for sale ✅</div>
+      </div>
+      <button class="btn" onclick="window.location.href='../home/home.html'">← Back Home</button>
+    </div>
+
+    <div class="bar">
+      <input type="text" id="searchInput" placeholder="Search by company/model...">
+
+      <select id="fuelFilter">
+        <option value="">Fuel</option>
+        <option>Petrol</option>
+        <option>Diesel</option>
+        <option>Electric</option>
+        <option>CNG</option>
+      </select>
+
+      <select id="transmissionFilter">
+        <option value="">Transmission</option>
+        <option>Manual</option>
+        <option>Automatic</option>
+      </select>
+
+      <button class="search-btn" onclick="applyFilters()">Search</button>
+    </div>
+
+    <!-- Cards -->
+    <div id="results" class="grid"></div>
+    <div id="noResults" class="no-results">No cars found ❌</div>
+
+  </div>
+
+<script>
+
+const API_BASE = "http://127.0.0.1:3000";
+
+
+// 🔥 LOGIN PROTECTION
+const user = JSON.parse(localStorage.getItem("car_rental_user"));
+
+if(!user || !user.email){
+  alert("Please login first ❌");
+  window.location.href = "../login/login.html";
+}
+
+
+let cars = [];
+
+const resultContainer = document.getElementById("results");
+const noResult = document.getElementById("noResults");
+
+
+// ⭐ Escape HTML (VERY IMPORTANT — prevents XSS)
+function escapeHTML(str){
+  return String(str || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+
+
+// ✅ Safe image parser
+function getImage(imagesStr){
+  try{
+    const arr = JSON.parse(imagesStr || "[]");
+    return arr.length
+      ? arr[0]
+      : "https://via.placeholder.com/400x200?text=No+Image";
+  }catch{
+    return "https://via.placeholder.com/400x200?text=No+Image";
+  }
+}
+
+
+
+// 🔥 FETCH APPROVED SELLING CARS
+async function fetchSellingCars(){
+
+  resultContainer.innerHTML="";
+  noResult.style.display="none";
+
+  try{
+
+    const res = await fetch(
+      `${API_BASE}/approved-selling/${user.email}`
+    );
+
+    if(!res.ok){
+      throw new Error("API failed");
+    }
+
+    const data = await res.json();
+
+    if(!data.success){
+      throw new Error("Backend returned failure");
+    }
+
+    cars = data.cars || [];
+
+    displayCars(cars);
+
+  }catch(err){
+
+    console.error("FETCH ERROR:", err);
+
+    noResult.style.display = "block";
+    noResult.innerText = "Unable to load cars ❌";
+
+  }
+}
+
+
+
+// 🔥 DISPLAY CARS (SAFER VERSION)
+function displayCars(list){
+
+  resultContainer.innerHTML = "";
+
+  if(list.length === 0){
+    noResult.style.display = "block";
+    return;
+  }
+
+  noResult.style.display = "none";
+
+  list.forEach(car => {
+
+    const img = getImage(car.images);
+
+    const safeCompany = escapeHTML(car.company);
+    const safeModel = escapeHTML(car.model);
+    const safeDesc = escapeHTML(car.description || "No description");
+
+    resultContainer.innerHTML += `
+      <div class="car-card">
+
+        <img src="${img}" alt="${safeCompany}">
+
+        <div class="card-body">
+
+          <div class="car-title">
+            ${safeCompany} ${safeModel}
+          </div>
+
+          <div class="details">
+
+            <b>Year:</b> ${escapeHTML(car.year) || "-"}<br>
+
+            <b>KM:</b> ${escapeHTML(car.km) || "-"}<br>
+
+            <b>Fuel:</b> ${escapeHTML(car.fuel) || "-"}<br>
+
+            <b>Transmission:</b> ${escapeHTML(car.transmission) || "-"}<br>
+
+            <b>Owner Type:</b> ${escapeHTML(car.owner_type) || "-"}<br>
+
+            <b>Location:</b> ${escapeHTML(car.location) || "-"}<br>
+
+            <div class="price">
+              ₹${car.selling_price || 0}
+            </div>
+
+          </div>
+
+          <div class="btn-row">
+
+            <button class="buy-btn"
+              onclick="sendBuyRequest(${car.id})">
+              Buy
+            </button>
+
+            <button class="info-btn"
+              onclick="showDetails('${safeCompany}','${safeModel}','${safeDesc}')">
+              Details
+            </button>
+
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+
+
+// 🔥 BUY REQUEST (Next Feature)
+function sendBuyRequest(carId){
+  alert("✅ Buy request feature coming next!");
+}
+
+
+
+// SHOW DETAILS
+function showDetails(company,model,desc){
+
+  alert(`Car: ${company} ${model}\n\n${desc}`);
+}
+
+
+
+// FILTERS
+function applyFilters(){
+
+  const search =
+    document.getElementById("searchInput")
+    .value.toLowerCase();
+
+  const fuel =
+    document.getElementById("fuelFilter").value;
+
+  const trans =
+    document.getElementById("transmissionFilter").value;
+
+  const filtered = cars.filter(c => {
+
+    const match =
+      `${c.company} ${c.model}`
+      .toLowerCase()
+      .includes(search);
+
+    const fuelMatch =
+      fuel === "" || c.fuel === fuel;
+
+    const transMatch =
+      trans === "" || c.transmission === trans;
+
+    return match && fuelMatch && transMatch;
+  });
+
+  displayCars(filtered);
+}
+
+
+
+fetchSellingCars();
+
+</script>
+
+
+
+
+</body>
+</html>

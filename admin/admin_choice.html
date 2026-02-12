@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Approval Choice</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      min-height:100vh;
+      background:#151320;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      color:white;
+    }
+
+    .container{
+      width:90%;
+      max-width:520px;
+      background:#1c1830;
+      border-radius:18px;
+      padding:30px 26px;
+      box-shadow:0 30px 70px rgba(0,0,0,0.6);
+      border:1px solid #2a2545;
+      text-align:center;
+    }
+
+    h2{
+      font-size:26px;
+      font-weight:600;
+      margin-bottom:8px;
+      color:#9b7cff;
+    }
+
+    .sub{
+      font-size:14px;
+      color:#aaa;
+      margin-bottom:26px;
+    }
+
+    .card{
+      background:#17132a;
+      border:1px solid #2a2545;
+      border-radius:16px;
+      padding:22px;
+      margin-bottom:18px;
+      transition:0.25s;
+      cursor:pointer;
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 20px 40px rgba(0,0,0,0.45);
+      border-color:#7f5cff;
+    }
+
+    .icon{
+      font-size:38px;
+      margin-bottom:12px;
+    }
+
+    .title{
+      font-size:18px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    .desc{
+      font-size:13px;
+      color:#cfcfcf;
+      line-height:1.6;
+    }
+
+    .logout-btn{
+      margin-top:18px;
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:12px;
+      background:#b71c1c;
+      color:white;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    .logout-btn:hover{
+      opacity:0.9;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Admin Dashboard</h2>
+    <div class="sub">Choose what you want to approve</div>
+
+    <!-- Rental Approval -->
+    <div class="card" onclick="goRentalApproval()">
+      <div class="icon">🚗</div>
+      <div class="title">Rental Car Approvals</div>
+      <div class="desc">
+        Approve or reject cars listed for rental by owners.
+      </div>
+    </div>
+
+    <!-- Sell / Buy Approval -->
+    <div class="card" onclick="goSellBuyApproval()">
+      <div class="icon">💰</div>
+      <div class="title">Sell / Buy Car Approvals</div>
+      <div class="desc">
+        Review and approve cars listed for selling or buying.
+      </div>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </div>
+
+  <script>
+    function goRentalApproval(){
+      window.location.href = "../admin/admin_approval.html";
+    }
+
+    function goSellBuyApproval(){
+      window.location.href = "../admin/admin_sell_buy_approval.html";
+    }
+
+    function logout(){
+      localStorage.clear();
+      window.location.href = "../login/login.html";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{
+      min-height:100vh;
+      background:#151320;
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:20px;
+    }
+    .box{
+      width:520px;
+      max-width:95%;
+      background:#1c1830;
+      padding:35px;
+      border-radius:18px;
+      border:1px solid #2a2545;
+      box-shadow:0 30px 70px rgba(0,0,0,0.6);
+      text-align:center;
+    }
+    h2{font-size:26px;margin-bottom:10px;}
+    p{font-size:14px;color:#aaa;margin-bottom:22px;}
+    button{
+      width:100%;
+      padding:14px;
+      margin-bottom:14px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:600;
+      transition:0.25s;
+      background:linear-gradient(135deg,#7f5cff,#9b7cff);
+      color:white;
+    }
+    button:hover{transform:scale(1.03);opacity:0.95;}
+    .logout{
+      background:transparent;
+      border:1px solid #3a3558;
+    }
+    .logout:hover{background:#2a2545;}
+  </style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Admin Dashboard ✅</h2>
+  <p>Only company authorized admins can access this panel.</p>
+
+  <button onclick="window.location.href='admin_approval.html'">Approve Cars</button>
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<script>
+  const user = JSON.parse(localStorage.getItem("car_rental_user"));
+
+  if(!user || user.role !== "admin"){
+    alert("Access Denied ❌ Admins only");
+    window.location.href = "login.html";
+  }
+
+  function logout(){
+    localStorage.removeItem("car_rental_user");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

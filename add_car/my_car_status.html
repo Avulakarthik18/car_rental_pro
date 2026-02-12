@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Car Approval Status</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+
+    body{
+      background:#151320;
+      color:white;
+      min-height:100vh;
+      padding:28px 18px;
+    }
+
+    .container{
+      max-width:1200px;
+      margin:auto;
+      background:#1c1830;
+      border:1px solid #2a2545;
+      border-radius:18px;
+      box-shadow:0 30px 70px rgba(0,0,0,0.6);
+      padding:22px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:14px;
+      border-bottom:1px solid #2a2545;
+      padding-bottom:16px;
+      margin-bottom:18px;
+    }
+
+    h2{
+      font-size:24px;
+      font-weight:600;
+    }
+
+    .sub{
+      color:#aaa;
+      font-size:13px;
+      margin-top:5px;
+    }
+
+    .btn{
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid #3a3558;
+      background:transparent;
+      color:white;
+      cursor:pointer;
+      transition:0.2s;
+      font-size:14px;
+      font-weight:500;
+    }
+
+    .btn:hover{
+      background:#2a2545;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .stat-card{
+      background:#17132a;
+      border:1px solid #2a2545;
+      border-radius:16px;
+      padding:14px;
+    }
+
+    .stat-card p{
+      color:#aaa;
+      font-size:13px;
+      margin-bottom:6px;
+    }
+
+    .stat-card strong{
+      font-size:18px;
+      color:#9b7cff;
+    }
+
+    .section-title{
+      margin-top:22px;
+      font-size:16px;
+      color:#9b7cff;
+      font-weight:600;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:16px;
+      margin-top:14px;
+    }
+
+    .card{
+      background:#17132a;
+      border:1px solid #2a2545;
+      border-radius:16px;
+      padding:16px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .card strong{
+      font-size:16px;
+      font-weight:600;
+      color:white;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:6px 10px;
+      font-size:12px;
+      border-radius:999px;
+      background:#2a2545;
+      border:1px solid #3a3558;
+      color:#cfcfcf;
+      width:max-content;
+    }
+
+    .approved{
+      background:rgba(46, 204, 113, 0.12);
+      border:1px solid rgba(46, 204, 113, 0.35);
+      color:#7CFFB0;
+    }
+
+    .pending{
+      background:rgba(241, 196, 15, 0.12);
+      border:1px solid rgba(241, 196, 15, 0.35);
+      color:#ffeaa7;
+    }
+
+    .rejected{
+      background:rgba(231, 76, 60, 0.12);
+      border:1px solid rgba(231, 76, 60, 0.35);
+      color:#ffb3b3;
+    }
+
+    .info{
+      font-size:13px;
+      color:#cfcfcf;
+      line-height:1.6;
+    }
+
+    .info b{
+      color:white;
+      font-weight:500;
+    }
+
+    .img-row{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .img-row img{
+      width:85px;
+      height:62px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid #2a2545;
+    }
+
+    .links{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .link-btn{
+      flex:1;
+      min-width:120px;
+      padding:10px;
+      border-radius:12px;
+      border:1px solid #3a3558;
+      background:transparent;
+      color:white;
+      cursor:pointer;
+      transition:0.2s;
+      font-size:13px;
+      font-weight:500;
+    }
+
+    .link-btn:hover{
+      background:#2a2545;
+    }
+
+    .empty{
+      margin-top:14px;
+      padding:18px;
+      background:#17132a;
+      border:1px dashed #3a3558;
+      border-radius:16px;
+      text-align:center;
+      color:#aaa;
+      font-size:14px;
+      display:none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="topbar">
+      <div>
+        <h2>My Car Approval Status</h2>
+        <div class="sub">Track your submitted cars — pending, approved, rejected ✅</div>
+      </div>
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <!-- ✅ since file is inside add_car folder -->
+        <button class="btn" onclick="window.location.href='../home/home.html'">← Back Home</button>
+        <button class="btn" onclick="loadStatus()">🔄 Refresh</button>
+      </div>
+    </div>
+
+    <!-- ✅ Stats -->
+    <div class="stats">
+      <div class="stat-card">
+        <p>Approved Cars ✅</p>
+        <strong id="approvedCount">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <p>Pending Cars ⏳</p>
+        <strong id="pendingCount">0</strong>
+      </div>
+
+      <div class="stat-card">
+        <p>Rejected Cars ❌</p>
+        <strong id="rejectedCount">0</strong>
+      </div>
+    </div>
+
+    <!-- ✅ Pending -->
+    <div class="section-title">Pending Cars ⏳</div>
+    <div id="pendingGrid" class="grid"></div>
+    <div id="pendingEmpty" class="empty">No Pending Cars Found ✅</div>
+
+    <!-- ✅ Approved -->
+    <div class="section-title">Approved Cars ✅</div>
+    <div id="approvedGrid" class="grid"></div>
+    <div id="approvedEmpty" class="empty">No Approved Cars Found ✅</div>
+
+    <!-- ✅ Rejected -->
+    <div class="section-title">Rejected Cars ❌</div>
+    <div id="rejectedGrid" class="grid"></div>
+    <div id="rejectedEmpty" class="empty">No Rejected Cars Found ✅</div>
+
+  </div>
+
+  <script>
+    const API_BASE = "http://127.0.0.1:3000";
+
+    // ✅ Only logged users
+    const user = JSON.parse(localStorage.getItem("car_rental_user"));
+    if(!user || !user.loggedIn){
+      alert("Please login first ❌");
+      window.location.href = "../login.html";
+    }
+
+    function openMap(location){
+      const url = `https://www.google.com/maps?q=${encodeURIComponent(location)}`;
+      window.open(url, "_blank");
+    }
+
+    function safeImages(imagesStr){
+      try{
+        return JSON.parse(imagesStr || "[]");
+      }catch(e){
+        return [];
+      }
+    }
+
+    function priceText(car){
+      return `₹${car.price_month || 0} / month`;
+    }
+
+    function renderCars(cars, gridId, status){
+      const grid = document.getElementById(gridId);
+      grid.innerHTML = "";
+
+      cars.forEach(car => {
+        const images = safeImages(car.images);
+
+        const badgeClass = status.toLowerCase();
+        const badgeText =
+          status === "Approved" ? "Approved ✅" :
+          status === "Pending" ? "Pending ⏳" :
+          "Rejected ❌";
+
+        const div = document.createElement("div");
+        div.className = "card";
+
+        div.innerHTML = `
+          <strong>${car.company} ${car.model}</strong>
+          <span class="badge ${badgeClass}">${badgeText}</span>
+
+          <div class="info">
+            <div><b>ID:</b> ${car.id}</div>
+            <div><b>Reg No:</b> ${car.reg_number || "-"}</div>
+<div><b>Location:</b> ${car.location || "Not provided"}</div>
+<div><b>Type:</b> ${car.listing_type}</div>
+<div><b>Price:</b> ₹${car.price_month || car.price || "-"}</div>
+
+          </div>
+
+          ${
+            images.length > 0
+            ? `<div class="img-row">
+                ${images.slice(0,4).map(img => `<img src="${img}" alt="car">`).join("")}
+              </div>`
+            : `<div class="info" style="color:#aaa;">No images uploaded</div>`
+          }
+
+          <div class="links">
+            <button class="link-btn" onclick="openMap('${car.location}')">📍 View Map</button>
+            <button class="link-btn" onclick="alert('Owner: ${car.owner_email}')">👤 Owner</button>
+          </div>
+        `;
+
+        grid.appendChild(div);
+      });
+    }
+
+    async function loadStatus(){
+      try{
+        const res = await fetch(`http://127.0.0.1:3000/my-car-status/${user.email}`);
+        const data = await res.json();
+
+        if(!data.success){
+  alert("Failed to load cars ❌");
+  return;
+}
+
+const allCars = data.cars || [];
+
+const pending = allCars.filter(c => c.status === "Pending");
+const approved = allCars.filter(c => c.status === "Approved");
+const rejected = allCars.filter(c => c.status === "Rejected");
+
+
+        document.getElementById("pendingCount").innerText = pending.length;
+        document.getElementById("approvedCount").innerText = approved.length;
+        document.getElementById("rejectedCount").innerText = rejected.length;
+
+        // ✅ Pending section
+        if(pending.length === 0){
+          document.getElementById("pendingGrid").innerHTML = "";
+          document.getElementById("pendingEmpty").style.display = "block";
+        }else{
+          document.getElementById("pendingEmpty").style.display = "none";
+          renderCars(pending, "pendingGrid", "Pending");
+        }
+
+        // ✅ Approved section
+        if(approved.length === 0){
+          document.getElementById("approvedGrid").innerHTML = "";
+          document.getElementById("approvedEmpty").style.display = "block";
+        }else{
+          document.getElementById("approvedEmpty").style.display = "none";
+          renderCars(approved, "approvedGrid", "Approved");
+        }
+
+        // ✅ Rejected section
+        if(rejected.length === 0){
+          document.getElementById("rejectedGrid").innerHTML = "";
+          document.getElementById("rejectedEmpty").style.display = "block";
+        }else{
+          document.getElementById("rejectedEmpty").style.display = "none";
+          renderCars(rejected, "rejectedGrid", "Rejected");
+        }
+
+      }catch(err){
+  console.error(err);
+  alert("Error loading cars ❌ Check backend / console");
+}
+
+    }
+
+    loadStatus();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment & Refund Support | CarRentalPro</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins', sans-serif;
+    }
+
+    body{
+      background:#151320;
+      color:white;
+    }
+
+    /* MAIN HEADER */
+    header{
+      background:#1c1830;
+      padding:18px 50px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #2a2545;
+    }
+
+    header h1{
+      font-size:24px;
+      font-weight:600;
+    }
+
+    nav a{
+      color:#ddd;
+      text-decoration:none;
+      margin-left:22px;
+      font-weight:500;
+    }
+
+    nav a:hover{
+      color:#9b7cff;
+    }
+
+    /* PAGE HEADER */
+    .page-header{
+      position:relative;
+      text-align:center;
+      padding:80px 20px;
+      background:linear-gradient(135deg,#1c1830,#151320);
+    }
+
+    .page-header h2{
+      font-size:38px;
+      margin-bottom:15px;
+    }
+
+    .page-header p{
+      max-width:780px;
+      margin:auto;
+      color:#cfcfcf;
+      font-size:16px;
+      line-height:1.7;
+    }
+
+    /* BACK BUTTON */
+    .back-btn{
+      position:absolute;
+      top:25px;
+      right:30px;
+      background:#1c1830;
+      color:#ddd;
+      padding:7px 18px;
+      border-radius:18px;
+      text-decoration:none;
+      font-size:14px;
+      border:1px solid #2a2545;
+      transition:0.3s;
+    }
+
+    .back-btn:hover{
+      background:#9b7cff;
+      color:#151320;
+    }
+
+    /* CONTENT */
+    .content{
+      max-width:1000px;
+      margin:60px auto;
+      padding:0 20px;
+    }
+
+    .support-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .support-box{
+      background:#1c1830;
+      padding:30px;
+      border-radius:18px;
+      border:1px solid #2a2545;
+      box-shadow:0 18px 40px rgba(0,0,0,0.4);
+      transition:0.3s;
+      text-align:center;
+    }
+
+    .support-box:hover{
+      transform:translateY(-8px);
+      border-color:#9b7cff;
+      box-shadow:0 28px 60px rgba(155,124,255,0.25);
+    }
+
+    .support-box i{
+      font-size:42px;
+      color:#9b7cff;
+      margin-bottom:15px;
+    }
+
+    .support-box h4{
+      font-size:20px;
+      margin-bottom:10px;
+    }
+
+    .support-box p{
+      color:#cfcfcf;
+      font-size:14.5px;
+      line-height:1.6;
+    }
+
+    /* POLICY SECTION */
+    .policy{
+      margin-top:60px;
+      background:#1c1830;
+      padding:35px;
+      border-radius:18px;
+      border:1px solid #2a2545;
+      box-shadow:0 18px 40px rgba(0,0,0,0.4);
+    }
+
+    .policy h3{
+      text-align:center;
+      color:#9b7cff;
+      margin-bottom:20px;
+    }
+
+    .policy ul{
+      color:#cfcfcf;
+      font-size:15px;
+      line-height:1.8;
+      padding-left:20px;
+    }
+
+    /* FOOTER */
+    footer{
+      background:#1c1830;
+      text-align:center;
+      padding:16px;
+      font-size:14px;
+      color:#aaa;
+      border-top:1px solid #2a2545;
+      margin-top:80px;
+    }
+
+    @media(max-width:768px){
+      .back-btn{
+        top:15px;
+        right:15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- MAIN HEADER -->
+<header>
+  <h1>CarRentalPro</h1>
+  <nav>
+    <a href="../home.html">Home</a>
+    <a href="../book_car.html">Book a Car</a>
+    <a href="../services.html">Services</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+</header>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <a href="customer-support.html" class="back-btn">← Back</a>
+
+  <h2>Payment & Refund Support</h2>
+  <p>
+    We provide assistance related to payments, security deposits,
+    billing issues, and refund processing to ensure a smooth experience.
+  </p>
+</section>
+
+<!-- CONTENT -->
+<section class="content">
+
+  <div class="support-grid">
+
+    <div class="support-box">
+      <i class="fas fa-credit-card"></i>
+      <h4>Payment Issues</h4>
+      <p>
+        Support for failed payments, duplicate transactions,
+        incorrect charges, and payment confirmation issues.
+      </p>
+    </div>
+
+    <div class="support-box">
+      <i class="fas fa-file-invoice"></i>
+      <h4>Invoices & Billing</h4>
+      <p>
+        Get invoices for your bookings, clarify billing details,
+        and resolve invoice-related discrepancies.
+      </p>
+    </div>
+
+    <div class="support-box">
+      <i class="fas fa-wallet"></i>
+      <h4>Security Deposit</h4>
+      <p>
+        Assistance related to security deposit collection,
+        deductions, and release after booking completion.
+      </p>
+    </div>
+
+  </div>
+
+  <!-- POLICY -->
+  <div class="policy">
+    <h3>Refund Policy Overview</h3>
+    <ul>
+      <li>Refunds are processed after cancellation confirmation.</li>
+      <li>Security deposit refunds are initiated within 3–5 business days.</li>
+      <li>Refund timelines may vary based on payment method.</li>
+      <li>Partial refunds may apply as per cancellation policy.</li>
+      <li>Customers are notified once the refund is initiated.</li>
+    </ul>
+  </div>
+
+</section>
+
+<footer>
+  &copy; 2025 CarRentalPro. All Rights Reserved.
+</footer>
+
+</body>
+</html>

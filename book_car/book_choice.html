@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Select Rental Type</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(135deg,#141e30,#243b55);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Main Card */
+.container{
+    width:800px;
+    background:#1c1830;
+    border-radius:20px;
+    padding:50px;
+    text-align:center;
+    box-shadow:0 40px 80px rgba(0,0,0,0.6);
+}
+
+h1{
+    color:white;
+    margin-bottom:10px;
+}
+
+p{
+    color:#bbb;
+    margin-bottom:40px;
+}
+
+/* Option Grid */
+.options{
+    display:flex;
+    gap:30px;
+}
+
+/* Cards */
+.card{
+    flex:1;
+    padding:40px;
+    border-radius:16px;
+    background:#17132a;
+    border:1px solid #2a2545;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-10px);
+    border-color:#7f5cff;
+    box-shadow:0 20px 40px rgba(127,92,255,0.4);
+}
+
+.icon{
+    font-size:50px;
+    margin-bottom:20px;
+}
+
+.title{
+    color:white;
+    font-size:20px;
+    font-weight:600;
+}
+
+.desc{
+    color:#aaa;
+    font-size:14px;
+    margin-top:8px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Select Rental Type 🚗</h1>
+<p>Choose how you want to travel</p>
+
+<div class="options">
+
+    <!-- SELF DRIVE -->
+    <div class="card" onclick="selectType('Rental Only')">
+        <div class="icon">🔑</div>
+        <div class="title">Self Drive</div>
+        <div class="desc">
+            Drive the car yourself.<br>
+            Full freedom and privacy.
+        </div>
+    </div>
+
+
+    <!-- WITH DRIVER -->
+    <div class="card" onclick="selectType('With Driver')">
+        <div class="icon">🧑‍✈️</div>
+        <div class="title">With Driver</div>
+        <div class="desc">
+            Sit back and relax.<br>
+            Professional driver included.
+        </div>
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+function selectType(type){
+
+    // store selection
+    localStorage.setItem("rentalType", type);
+
+    // redirect to booking page
+    window.location.href = "../book_car/book_car.html"; 
+    // adjust path based on your folder
+}
+
+</script>
+
+</body>
+</html>
