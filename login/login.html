@@ -7,45 +7,181 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{height:100vh;background:#151320;display:flex;justify-content:center;align-items:center;}
-.container{width:90%;max-width:1200px;height:650px;display:flex;background:#1c1830;border-radius:18px;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,0.6);}
-.left-section{width:50%;background:url("login_car_bg.jpeg") center/cover no-repeat;position:relative;}
-.overlay{position:absolute;inset:0;background:linear-gradient(120deg, rgba(0,0,0,0.35), rgba(0,0,0,0.75));}
-.right-section{width:50%;padding:60px;color:white;}
-.right-section h2{font-size:34px;}
-.subtitle{color:#aaa;margin-bottom:30px;}
-form input{width:100%;padding:14px;background:#2a2545;border:none;border-radius:10px;color:white;margin-bottom:18px;font-size:15px;}
-form input::placeholder{color:#aaa;}
-.options{display:flex;justify-content:space-between;font-size:14px;margin-bottom:25px;}
-.options a{color:#9b7cff;text-decoration:none;}
-.remember-me{display:flex;align-items:center;gap:8px;cursor:pointer;}
-.remember-me input{margin:0;width:16px;height:16px;accent-color:#9b7cff;}
-.login-btn{width:100%;padding:14px;background:linear-gradient(135deg,#7f5cff,#9b7cff);border:none;border-radius:12px;color:white;font-size:16px;cursor:pointer;margin-bottom:20px;}
-.signup-link{text-align:center;font-size:14px;}
-.signup-link a{color:#9b7cff;text-decoration:none;}
-.status{display:none;text-align:center;margin-top:10px;font-size:14px;background:#2a2545;padding:10px;border-radius:10px;color:#cfcfcf;}
-</style>
+  <!-- design system link should be added here once moved to a central place -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #00c9a7;
+      --secondary: #7f5cff;
+      --accent: #9b7cff;
+      --dark: #0b0a12;
+      --dark-elevated: #151320;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      height: 100vh;
+      background: var(--dark);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      height: 600px;
+      display: flex;
+      background: var(--dark-elevated);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+      border: 1px solid var(--glass-border);
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .left-section {
+      width: 50%;
+      background: linear-gradient(rgba(11, 10, 18, 0.2), rgba(11, 10, 18, 0.6)), 
+                  url('../login/login_car_bg.jpeg') center/cover no-repeat;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 40px;
+      background: linear-gradient(to top, var(--dark), transparent);
+    }
+
+    .overlay h2 {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .right-section {
+      width: 50%;
+      padding: 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .right-section h2 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      background: linear-gradient(to right, white, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle { color: #aaa; margin-bottom: 35px; font-size: 15px; }
+
+    form input {
+      width: 100%;
+      padding: 15px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      color: white;
+      margin-bottom: 20px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    form input:focus {
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 0 15px rgba(0, 201, 167, 0.1);
+    }
+
+    .options {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 25px;
+      align-items: center;
+    }
+
+    .options a { color: var(--primary); text-decoration: none; font-weight: 500; }
+
+    .remember-me { display: flex; align-items: center; gap: 8px; cursor: pointer; color: #aaa; }
+    .remember-me input { margin: 0; width: 18px; height: 18px; accent-color: var(--primary); }
+
+    .login-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary), #00e0b9);
+      border: none;
+      border-radius: 12px;
+      color: var(--dark);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 25px;
+      transition: 0.3s;
+    }
+
+    .login-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 30px rgba(0, 201, 167, 0.3);
+    }
+
+    .signup-link { text-align: center; font-size: 14px; color: #aaa; }
+    .signup-link a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+    .status {
+      display: none;
+      text-align: center;
+      margin-top: 20px;
+      font-size: 14px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="container">
-  <div class="left-section"><div class="overlay"></div></div>
+  <div class="left-section">
+    <div class="overlay">
+      <h2>Experience <br> the Elite Way.</h2>
+    </div>
+  </div>
 
   <div class="right-section">
-    <h2>Login</h2>
-    <p class="subtitle">User/Admin Login ✅</p>
+    <h2>Welcome Back</h2>
+    <p class="subtitle">Enter your credentials to continue</p>
 
     <form id="loginForm">
-      <input type="email" id="email" placeholder="Email" required>
+      <input type="email" id="email" placeholder="Email Address" required>
       <input type="password" id="password" placeholder="Password" required>
 
       <div class="options">
         <label class="remember-me">
           <input type="checkbox" id="remember">
-          <span>Remember me</span>
+          <span>Keep me logged in</span>
         </label>
         <a href="forgot_password/forgot_password.html">Forgot password?</a>
       </div>
@@ -54,7 +190,7 @@ form input::placeholder{color:#aaa;}
       <div class="status" id="statusMsg"></div>
 
       <p class="signup-link">
-        Don’t have an account? <a href="signup/signup.html">Sign up</a>
+        New around here? <a href="signup/signup.html">Create Account</a>
       </p>
     </form>
   </div>

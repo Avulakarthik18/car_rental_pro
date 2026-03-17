@@ -11,270 +11,347 @@
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:'Poppins', sans-serif;
+    :root {
+      --primary: #00c9a7;
+      --secondary: #7f5cff;
+      --accent: #9b7cff;
+      --dark: #0b0a12;
+      --dark-elevated: #151320;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    body{
-      background:#151320;
-      color:white;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    /* HEADER */
-    header{
-      background:#1c1830;
-      padding:18px 50px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      border-bottom:1px solid #2a2545;
+    body {
+      background: var(--dark);
+      color: white;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    header h1{
-      font-size:24px;
-      font-weight:600;
+    /* Header */
+    header {
+      background: rgba(11, 10, 18, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--glass-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    nav a{
-      color:#ddd;
-      text-decoration:none;
-      margin-left:22px;
-      font-weight:500;
+    header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(to right, white, var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    nav a:hover{
-      color:#9b7cff;
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: var(--transition);
     }
 
-    /* PAGE HEADER */
-    .page-header{
-      position:relative;
-      text-align:center;
-      padding:80px 20px;
-      background:linear-gradient(135deg,#1c1830,#151320);
+    nav a:hover { color: var(--primary); }
+
+    /* Page Header */
+    .page-header {
+      padding: 120px 8% 60px;
+      text-align: center;
+      background: radial-gradient(circle at top right, rgba(0, 201, 167, 0.05), transparent);
+      position: relative;
     }
 
-    .page-header h2{
-      font-size:38px;
-      margin-bottom:15px;
+    .back-btn {
+      position: absolute;
+      top: 40px;
+      right: 8%;
+      background: var(--glass-bg);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--glass-border);
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
     }
 
-    .page-header p{
-      max-width:800px;
-      margin:auto;
-      color:#cfcfcf;
-      font-size:16px;
-      line-height:1.7;
+    .back-btn:hover {
+      background: var(--primary);
+      color: var(--dark);
+      border-color: var(--primary);
+      transform: translateX(-5px);
     }
 
-    /* BACK BUTTON */
-    .back-btn{
-      position:absolute;
-      top:25px;
-      right:30px;
-      background:#1c1830;
-      color:#ddd;
-      padding:7px 18px;
-      border-radius:18px;
-      text-decoration:none;
-      font-size:14px;
-      border:1px solid #2a2545;
-      transition:0.3s;
+    .page-header h2 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, white, #888);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .back-btn:hover{
-      background:#9b7cff;
-      color:#151320;
+    .page-header p {
+      color: #888;
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    /* CONTENT */
-    .content{
-      max-width:900px;
-      margin:60px auto;
-      padding:0 20px;
+    /* Content */
+    .content {
+      max-width: 1000px;
+      margin: 0 auto 100px;
+      padding: 0 8%;
     }
 
-    /* FAQ CARD */
-    .faq{
-      background:#1c1830;
-      border-radius:16px;
-      border:1px solid #2a2545;
-      margin-bottom:18px;
-      padding:20px 25px;
-      box-shadow:0 15px 35px rgba(0,0,0,0.4);
+    /* FAQ Card */
+    .faq {
+      background: var(--dark-elevated);
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      margin-bottom: 20px;
+      padding: 30px 40px;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
-    .faq-question{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      cursor:pointer;
+    .faq:hover {
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.05);
+      transform: scale(1.01);
     }
 
-    .faq-question h4{
-      font-size:18px;
-      color:#9b7cff;
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
     }
 
-    .faq-question .icon{
-      font-size:22px;
-      transition:0.3s;
+    .faq-question h4 {
+      font-size: 20px;
+      font-weight: 600;
+      color: white;
+      transition: var(--transition);
     }
 
-    .faq-answer{
-      max-height:0;
-      overflow:hidden;
-      transition:max-height 0.4s ease;
+    .faq:hover .faq-question h4 {
+      color: var(--primary);
     }
 
-    .faq-answer p{
-      margin-top:12px;
-      color:#cfcfcf;
-      font-size:14.8px;
-      line-height:1.7;
+    .faq-question .icon {
+      width: 32px;
+      height: 32px;
+      background: var(--glass-bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--primary);
+      transition: var(--transition);
+      border: 1px solid var(--glass-border);
     }
 
-    .faq.active .faq-answer{
-      max-height:200px;
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: var(--transition);
+      opacity: 0;
     }
 
-    .faq.active .icon{
-      transform:rotate(45deg); /* + becomes × */
+    .faq-answer p {
+      margin-top: 25px;
+      color: #888;
+      font-size: 16px;
+      line-height: 1.8;
+      padding-top: 20px;
+      border-top: 1px solid var(--glass-border);
     }
 
-    /* FOOTER */
-    footer{
-      background:#1c1830;
-      text-align:center;
-      padding:16px;
-      font-size:14px;
-      color:#aaa;
-      border-top:1px solid #2a2545;
-      margin-top:80px;
+    .faq.active {
+      background: var(--dark-elevated);
+      border-color: var(--primary);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     }
 
-    @media(max-width:768px){
-      .back-btn{
-        top:15px;
-        right:15px;
-      }
+    .faq.active .faq-answer {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .faq.active .icon {
+      transform: rotate(45deg);
+      background: var(--primary);
+      color: var(--dark);
+      border-color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-elevated);
+      padding: 60px 8% 40px;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      color: #666;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .page-header h2 { font-size: 40px; }
+      .page-header { padding: 100px 8% 60px; }
+      .faq { padding: 25px; }
+      .faq-question h4 { font-size: 17px; }
+      .back-btn { top: 20px; position: relative; display: inline-flex; margin-bottom: 30px; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-<header>
-  <h1>CarRentalPro</h1>
-  <nav>
-    <a href="../home.html">Home</a>
-    <a href="../book_car.html">Book a Car</a>
-    <a href="../services.html">Services</a>
-    <a href="../contact.html">Contact</a>
-  </nav>
-</header>
+  <header>
+    <h1>CarRentalPro</h1>
+    <nav>
+      <a href="../../home/home.html">Home</a>
+      <a href="../../book_car/book_car.html">Book a Car</a>
+      <a href="../services.html">Services</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
 
-<!-- PAGE HEADER -->
-<section class="page-header">
-  <a href="customer-support.html" class="back-btn">← Back</a>
+  <section class="page-header">
+    <a href="customer-support.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back</span>
+    </a>
+    <h2>Knowledge Base</h2>
+    <p>
+      Instant clarity on our most frequently asked logistical, billing, 
+      and operational questions.
+    </p>
+  </section>
 
-  <h2>FAQs & Help Center</h2>
-  <p>
-    Find quick answers to commonly asked questions related to
-    bookings, payments, cancellations, and vehicle usage.
-  </p>
-</section>
+  <section class="content">
 
-<!-- FAQ CONTENT -->
-<section class="content">
+    <div class="faq">
+      <div class="faq-question">
+        <h4>How do I initiate a luxury reservation?</h4>
+        <span class="icon"><i class="fas fa-plus"></i></span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Navigate to the 'Book a Car' section, select your preferred vehicle class (Sedan, SUV, or Electric), 
+          and follow the prompts to configure your rental duration and protection plan.
+        </p>
+      </div>
+    </div>
 
-  <div class="faq">
-    <div class="faq-question">
-      <h4>How do I book a car?</h4>
-      <span class="icon">+</span>
+    <div class="faq">
+      <div class="faq-question">
+        <h4>What documentation is required for vehicle release?</h4>
+        <span class="icon"><i class="fas fa-plus"></i></span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          We require a high-resolution scan of your valid driver's license alongside a government-issued 
+          identification or passport. For doorstep delivery, these must be verified 2 hours prior to arrival.
+        </p>
+      </div>
     </div>
-    <div class="faq-answer">
-      <p>
-        You can book a car by selecting a vehicle, choosing a rental plan,
-        and completing the booking form with required details.
-      </p>
-    </div>
-  </div>
 
-  <div class="faq">
-    <div class="faq-question">
-      <h4>What documents are required for booking?</h4>
-      <span class="icon">+</span>
+    <div class="faq">
+      <div class="faq-question">
+        <h4>Which financial instruments are accepted?</h4>
+        <span class="icon"><i class="fas fa-plus"></i></span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          We settle payments via all major credit cards (Visa, Mastercard, Amex), premium debit cards, 
+          and encrypted digital wallets for local transactions.
+        </p>
+      </div>
     </div>
-    <div class="faq-answer">
-      <p>
-        A valid driving license and a government-issued ID proof
-        are required at the time of booking.
-      </p>
-    </div>
-  </div>
 
-  <div class="faq">
-    <div class="faq-question">
-      <h4>What payment methods are accepted?</h4>
-      <span class="icon">+</span>
+    <div class="faq">
+      <div class="faq-question">
+        <h4>What is the typical refund cycle?</h4>
+        <span class="icon"><i class="fas fa-plus"></i></span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Logistical processing is initiated immediately upon return. Your financial institution will typically 
+          reflect the credit within 3 to 5 business standard cycles.
+        </p>
+      </div>
     </div>
-    <div class="faq-answer">
-      <p>
-        We accept debit cards, credit cards, and online payment methods.
-      </p>
-    </div>
-  </div>
 
-  <div class="faq">
-    <div class="faq-question">
-      <h4>How long does it take to receive a refund?</h4>
-      <span class="icon">+</span>
+    <div class="faq">
+      <div class="faq-question">
+        <h4>Can I modify my reservation mid-trip?</h4>
+        <span class="icon"><i class="fas fa-plus"></i></span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Extensions and modifications are supported via our real-time concierge. Please contact support 
+          at least 6 hours before your scheduled return to ensure vehicle availability.
+        </p>
+      </div>
     </div>
-    <div class="faq-answer">
-      <p>
-        Refunds are usually processed within 3–5 business days,
-        depending on the payment method used.
-      </p>
-    </div>
-  </div>
 
-  <div class="faq">
-    <div class="faq-question">
-      <h4>Can I cancel or modify my booking?</h4>
-      <span class="icon">+</span>
+    <div class="faq">
+      <div class="faq-question">
+        <h4>What does the premium protection plan cover?</h4>
+        <span class="icon"><i class="fas fa-plus"></i></span>
+      </div>
+      <div class="faq-answer">
+        <p>
+          Beyond standard liability, our premium plan covers collision damage, theft protection, and 24/7 
+          roadside recovery with zero deductible for qualified incidents.
+        </p>
+      </div>
     </div>
-    <div class="faq-answer">
-      <p>
-        Yes, bookings can be cancelled or modified as per the
-        cancellation policy. Charges may apply based on timing.
-      </p>
-    </div>
-  </div>
 
-  <div class="faq">
-    <div class="faq-question">
-      <h4>Is insurance included with the rental?</h4>
-      <span class="icon">+</span>
-    </div>
-    <div class="faq-answer">
-      <p>
-        Yes, basic insurance coverage is included with every rental.
-        Additional coverage options may be available.
-      </p>
-    </div>
-  </div>
+  </section>
 
-</section>
-
-<footer>
-  &copy; 2025 CarRentalPro. All Rights Reserved.
-</footer>
+  <footer>
+    <div class="footer-links">
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms & Conditions</a>
+      <a href="../contact.html">Support</a>
+    </div>
+    <p class="copyright">&copy; 2025 CarRentalPro. All Rights Reserved.</p>
+  </footer>
 
 <!-- JS FOR ACCORDION -->
 <script>

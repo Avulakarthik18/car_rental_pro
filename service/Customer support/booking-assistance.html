@@ -11,249 +11,338 @@
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:'Poppins', sans-serif;
+    :root {
+      --primary: #00c9a7;
+      --secondary: #7f5cff;
+      --accent: #9b7cff;
+      --dark: #0b0a12;
+      --dark-elevated: #151320;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    body{
-      background:#151320;
-      color:white;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    /* MAIN HEADER */
-    header{
-      background:#1c1830;
-      padding:18px 50px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      border-bottom:1px solid #2a2545;
+    body {
+      background: var(--dark);
+      color: white;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    header h1{
-      font-size:24px;
-      font-weight:600;
+    /* Header */
+    header {
+      background: rgba(11, 10, 18, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--glass-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    nav a{
-      color:#ddd;
-      text-decoration:none;
-      margin-left:22px;
-      font-weight:500;
+    header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(to right, white, var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    nav a:hover{
-      color:#9b7cff;
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: var(--transition);
     }
 
-    /* PAGE HEADER */
-    .page-header{
-      position:relative;
-      text-align:center;
-      padding:80px 20px;
-      background:linear-gradient(135deg,#1c1830,#151320);
+    nav a:hover { color: var(--primary); }
+
+    /* Page Header */
+    .page-header {
+      padding: 120px 8% 60px;
+      text-align: center;
+      background: radial-gradient(circle at top right, rgba(0, 201, 167, 0.05), transparent);
+      position: relative;
     }
 
-    .page-header h2{
-      font-size:38px;
-      margin-bottom:15px;
+    .back-btn {
+      position: absolute;
+      top: 40px;
+      right: 8%;
+      background: var(--glass-bg);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--glass-border);
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
     }
 
-    .page-header p{
-      max-width:760px;
-      margin:auto;
-      color:#cfcfcf;
-      font-size:16px;
-      line-height:1.7;
+    .back-btn:hover {
+      background: var(--primary);
+      color: var(--dark);
+      border-color: var(--primary);
+      transform: translateX(-5px);
     }
 
-    /* BACK BUTTON */
-    .back-btn{
-      position:absolute;
-      top:25px;
-      right:30px;
-      background:#1c1830;
-      color:#ddd;
-      padding:7px 18px;
-      border-radius:18px;
-      text-decoration:none;
-      font-size:14px;
-      border:1px solid #2a2545;
-      transition:0.3s;
+    .page-header h2 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, white, #888);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .back-btn:hover{
-      background:#9b7cff;
-      color:#151320;
+    .page-header p {
+      color: #888;
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    /* CONTENT */
-    .content{
-      max-width:1000px;
-      margin:60px auto;
-      padding:0 20px;
+    /* Content */
+    .content {
+      max-width: 1400px;
+      margin: 0 auto 100px;
+      padding: 0 8%;
     }
 
-    .assist-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-      gap:30px;
+    .assist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 80px;
     }
 
-    .assist-card{
-      background:#1c1830;
-      padding:30px;
-      border-radius:18px;
-      border:1px solid #2a2545;
-      text-align:center;
-      box-shadow:0 18px 40px rgba(0,0,0,0.4);
-      transition:0.3s;
+    .assist-card {
+      background: var(--dark-elevated);
+      padding: 50px 35px;
+      border-radius: 32px;
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
 
-    .assist-card:hover{
-      transform:translateY(-8px);
-      border-color:#9b7cff;
-      box-shadow:0 28px 60px rgba(155,124,255,0.25);
+    .assist-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 201, 167, 0.03), transparent);
     }
 
-    .assist-card i{
-      font-size:42px;
-      color:#9b7cff;
-      margin-bottom:15px;
+    .assist-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
     }
 
-    .assist-card h4{
-      font-size:20px;
-      margin-bottom:10px;
+    .assist-card i {
+      font-size: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 25px;
+      display: inline-block;
     }
 
-    .assist-card p{
-      color:#cfcfcf;
-      font-size:14.5px;
-      line-height:1.6;
+    .assist-card h4 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
     }
 
-    /* STEPS */
-    .steps{
-      margin-top:60px;
-      background:#1c1830;
-      padding:35px;
-      border-radius:18px;
-      border:1px solid #2a2545;
-      box-shadow:0 18px 40px rgba(0,0,0,0.4);
+    .assist-card p {
+      color: #888;
+      font-size: 16px;
     }
 
-    .steps h3{
-      color:#9b7cff;
-      margin-bottom:20px;
-      text-align:center;
+    /* Steps Section */
+    .steps {
+      background: var(--dark-elevated);
+      padding: 60px 50px;
+      border-radius: 40px;
+      border: 1px solid var(--glass-border);
+      position: relative;
+      overflow: hidden;
     }
 
-    .steps ol{
-      color:#cfcfcf;
-      font-size:15px;
-      line-height:1.8;
-      padding-left:20px;
+    .steps::after {
+      content: '';
+      position: absolute;
+      bottom: -100px;
+      right: -100px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(127, 92, 255, 0.05), transparent);
+      z-index: 0;
     }
 
-    /* FOOTER */
-    footer{
-      background:#1c1830;
-      text-align:center;
-      padding:16px;
-      font-size:14px;
-      color:#aaa;
-      border-top:1px solid #2a2545;
-      margin-top:80px;
+    .steps h3 {
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
     }
 
-    @media(max-width:768px){
-      .back-btn{
-        top:15px;
-        right:15px;
-      }
+    .steps ol {
+      color: #aaa;
+      font-size: 18px;
+      counter-reset: step-counter;
+      list-style: none;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .steps ol li {
+      margin-bottom: 30px;
+      padding-left: 70px;
+      position: relative;
+    }
+
+    .steps ol li::before {
+      counter-increment: step-counter;
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0px;
+      width: 44px;
+      height: 44px;
+      background: var(--primary);
+      color: var(--dark);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      box-shadow: 0 10px 20px rgba(0, 201, 167, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-elevated);
+      padding: 60px 8% 40px;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      color: #666;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .page-header h2 { font-size: 40px; }
+      .page-header { padding: 100px 8% 60px; }
+      .back-btn { top: 20px; position: relative; display: inline-flex; margin-bottom: 30px; }
+      .steps { padding: 40px 25px; }
+      .steps ol li { padding-left: 60px; font-size: 16px; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- MAIN HEADER -->
-<header>
-  <h1>CarRentalPro</h1>
-  <nav>
-    <a href="../home.html">Home</a>
-    <a href="../book_car.html">Book a Car</a>
-    <a href="../services.html">Services</a>
-    <a href="../contact.html">Contact</a>
-  </nav>
-</header>
+  <header>
+    <h1>CarRentalPro</h1>
+    <nav>
+      <a href="../../home/home.html">Home</a>
+      <a href="../../book_car/book_car.html">Book a Car</a>
+      <a href="../services.html">Services</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
 
-<!-- PAGE HEADER -->
-<section class="page-header">
-  <a href="customer-support.html" class="back-btn">← Back</a>
+  <section class="page-header">
+    <a href="customer-support.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back</span>
+    </a>
+    <h2>Booking Assistance</h2>
+    <p>
+      Our expert advisors are here to help you navigate the fleet, select the ideal 
+      rental plan, and ensure your reservation is locked in seamlessly.
+    </p>
+  </section>
 
-  <h2>Booking Assistance</h2>
-  <p>
-    Our booking assistance service helps users select the right vehicle,
-    choose suitable rental plans, and complete bookings without confusion.
-  </p>
-</section>
+  <section class="content">
 
-<!-- CONTENT -->
-<section class="content">
+    <div class="assist-grid">
 
-  <div class="assist-grid">
+      <div class="assist-card">
+        <i class="fas fa-car-side"></i>
+        <h4>Fleet Concierge</h4>
+        <p>Get personalized recommendations based on your group size, terrain requirements, and prestige level.</p>
+      </div>
 
-    <div class="assist-card">
-      <i class="fas fa-car"></i>
-      <h4>Vehicle Selection Help</h4>
-      <p>
-        Guidance to choose the right car based on travel purpose,
-        number of passengers, and budget.
-      </p>
+      <div class="assist-card">
+        <i class="fas fa-calendar-alt"></i>
+        <h4>Plan Optimization</h4>
+        <p>We analyze your schedule to suggest the most cost-effective daily, weekly, or monthly subscription plans.</p>
+      </div>
+
+      <div class="assist-card">
+        <i class="fas fa-file-signature"></i>
+        <h4>Protocol Guidance</h4>
+        <p>Avoid documentation hurdles with step-by-step walkthroughs for driver verification and insurance claims.</p>
+      </div>
+
     </div>
 
-    <div class="assist-card">
-      <i class="fas fa-calendar-check"></i>
-      <h4>Rental Plan Guidance</h4>
-      <p>
-        Assistance in selecting daily, weekly, or long-term
-        rental plans as per customer needs.
-      </p>
+    <div class="steps">
+      <h3>The Elevation Process</h3>
+      <ol>
+        <li>Connect with our dedicated concierge via phone or priority email.</li>
+        <li>Share your destination details and specific vehicle preferences.</li>
+        <li>Receive a tailored logistics proposal with optimized rental terms.</li>
+        <li>Confirm your selection and receive instant digital credentials.</li>
+      </ol>
     </div>
 
-    <div class="assist-card">
-      <i class="fas fa-clipboard-list"></i>
-      <h4>Booking Process Support</h4>
-      <p>
-        Step-by-step guidance to complete the booking process
-        smoothly and avoid errors.
-      </p>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms & Conditions</a>
+      <a href="../contact.html">Support</a>
     </div>
-
-  </div>
-
-  <!-- STEPS -->
-  <div class="steps">
-    <h3>How Booking Assistance Works</h3>
-    <ol>
-      <li>User contacts support through call or email.</li>
-      <li>Support team understands travel requirements.</li>
-      <li>Recommended vehicle and rental plan are suggested.</li>
-      <li>Booking is completed successfully with confirmation.</li>
-    </ol>
-  </div>
-
-</section>
-
-<footer>
-  &copy; 2025 CarRentalPro. All Rights Reserved.
-</footer>
+    <p class="copyright">&copy; 2025 CarRentalPro. All Rights Reserved.</p>
+  </footer>
 
 </body>
 </html>

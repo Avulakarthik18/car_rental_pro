@@ -7,196 +7,200 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-
-    body{
-      background:#151320;
-      color:white;
-      padding:30px 18px;
-      min-height:100vh;
+    :root {
+      --primary: #00c9a7;
+      --secondary: #7f5cff;
+      --accent: #9b7cff;
+      --dark: #0b0a12;
+      --dark-elevated: #151320;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
     }
 
-    .container{
-      max-width:1200px;
-      margin:auto;
-      background:#1c1830;
-      border:1px solid #2a2545;
-      border-radius:18px;
-      box-shadow:0 30px 70px rgba(0,0,0,0.6);
-      padding:22px;
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: var(--dark);
+      color: white;
+      padding: 40px 8%;
+      min-height: 100vh;
     }
 
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:14px;
-      border-bottom:1px solid #2a2545;
-      padding-bottom:16px;
-      margin-bottom:18px;
+    .container {
+      max-width: 1400px;
+      margin: auto;
+      background: var(--dark-elevated);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      animation: fadeIn 0.8s ease;
     }
 
-    h2{
-      font-size:24px;
-      font-weight:600;
-      color:#9b7cff;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 25px;
+      border-bottom: 1px solid var(--glass-border);
+      margin-bottom: 30px;
+      gap: 20px;
     }
 
-    .sub{
-      color:#aaa;
-      font-size:13px;
-      margin-top:6px;
+    header h1 {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(to right, white, var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .btn{
-      padding:10px 14px;
-      border-radius:10px;
-      border:1px solid #3a3558;
-      background:transparent;
-      color:white;
-      cursor:pointer;
-      transition:0.2s;
-      font-size:14px;
-      font-weight:500;
+    .sub { color: #888; font-size: 14px; margin-top: 5px; }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .btn:hover{background:#2a2545;}
-
-    .bar{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin:18px 0;
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
     }
 
-    input[type="text"], select{
-      flex:1;
-      min-width:180px;
-      padding:12px;
-      border:none;
-      border-radius:10px;
-      background:#2a2545;
-      color:white;
-      outline:none;
-      font-size:14px;
+    /* Search Bar */
+    .bar {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px solid var(--glass-border);
     }
 
-    input::placeholder{color:#aaa;}
-
-    .search-btn{
-      padding:12px 18px;
-      border:none;
-      border-radius:10px;
-      cursor:pointer;
-      background:linear-gradient(135deg,#7f5cff,#9b7cff);
-      color:white;
-      font-weight:600;
-      transition:0.2s;
+    input[type="text"], select {
+      flex: 1;
+      min-width: 200px;
+      padding: 14px 18px;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      outline: none;
+      font-size: 14px;
+      transition: 0.3s;
     }
 
-    .search-btn:hover{
-      transform:scale(1.03);
-      opacity:0.95;
+    input:focus, select:focus { border-color: var(--primary); background: rgba(255, 255, 255, 0.08); }
+
+    .search-btn {
+      padding: 14px 30px;
+      background: linear-gradient(135deg, var(--primary), #00e0b9);
+      color: var(--dark);
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-      gap:16px;
-      margin-top:10px;
+    .search-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 201, 167, 0.3); }
+
+    /* Results */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
     }
 
-    .car-card{
-      background:#17132a;
-      border:1px solid #2a2545;
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:0 10px 25px rgba(0,0,0,0.35);
-      transition:0.25s;
-      display:flex;
-      flex-direction:column;
+    .car-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: 0.4s;
+      display: flex;
+      flex-direction: column;
     }
 
-    .car-card:hover{transform:translateY(-6px);}
+    .car-card:hover { transform: translateY(-10px); border-color: var(--primary); }
 
-    .car-card img{
-      width:100%;
-      height:170px;
-      object-fit:cover;
-      background:#2a2545;
+    .car-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #2a2545;
     }
 
-    .card-body{
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      flex:1;
+    .card-body { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+
+    .car-title { font-size: 20px; font-weight: 700; margin-bottom: 15px; }
+
+    .details { font-size: 14px; color: #aaa; line-height: 1.8; margin-bottom: 20px; }
+    .details b { color: #ccc; }
+
+    .price { font-size: 24px; font-weight: 700; color: var(--primary); margin-top: auto; }
+
+    .btn-row { display: flex; gap: 12px; margin-top: 25px; }
+
+    .buy-btn {
+      flex: 2;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--primary), #00e0b9);
+      color: var(--dark);
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
-    .car-title{
-      font-size:16px;
-      font-weight:600;
+    .buy-btn:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(0, 201, 167, 0.3); }
+
+    .info-btn {
+      flex: 1;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      color: white;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .info-btn:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--primary); }
+
+    .no-results {
+      padding: 60px;
+      border-radius: 20px;
+      border: 2px dashed var(--glass-border);
+      background: rgba(255, 255, 255, 0.01);
+      color: #666;
+      text-align: center;
+      font-size: 18px;
     }
 
-    .details{
-      font-size:13px;
-      color:#cfcfcf;
-      line-height:1.6;
-    }
-
-    .price{
-      font-weight:600;
-      color:#9b7cff;
-    }
-
-    .btn-row{
-      display:flex;
-      gap:10px;
-      margin-top:auto;
-    }
-
-    .buy-btn{
-      flex:1;
-      padding:12px;
-      border:none;
-      border-radius:12px;
-      cursor:pointer;
-      background:linear-gradient(135deg,#7f5cff,#9b7cff);
-      color:white;
-      font-weight:600;
-      transition:0.2s;
-    }
-
-    .buy-btn:hover{transform:scale(1.02);opacity:0.95;}
-
-    .info-btn{
-      flex:1;
-      padding:12px;
-      border-radius:12px;
-      cursor:pointer;
-      background:transparent;
-      border:1px solid #3a3558;
-      color:white;
-      font-weight:600;
-      transition:0.2s;
-    }
-
-    .info-btn:hover{background:#2a2545;}
-
-    .no-results{
-      margin-top:18px;
-      padding:18px;
-      border-radius:14px;
-      border:1px dashed #3a3558;
-      background:#17132a;
-      color:#aaa;
-      text-align:center;
-      display:none;
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   </style>
+  </style>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
 
 <body>
@@ -208,7 +212,10 @@
         <h2>Buy Cars</h2>
         <div class="sub">Browse verified cars available for sale ✅</div>
       </div>
-      <button class="btn" onclick="window.location.href='../home/home.html'">← Back Home</button>
+      <div class="header-actions" style="display:flex; gap:12px;">
+        <button class="btn btn-primary" onclick="window.location.href='my_bids.html'"><i class="fas fa-gavel"></i> My Bids</button>
+        <button class="btn" onclick="window.location.href='../home/home.html'">← Back Home</button>
+      </div>
     </div>
 
     <div class="bar">
@@ -234,6 +241,38 @@
     <!-- Cards -->
     <div id="results" class="grid"></div>
     <div id="noResults" class="no-results">No cars found ❌</div>
+
+  </div>
+
+    <!-- Negotiation Modal -->
+    <div id="bidModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); backdrop-filter:blur(10px); z-index:2000; align-items:center; justify-content:center;">
+      <div style="background:var(--dark-elevated); width:500px; padding:40px; border-radius:24px; border:1px solid var(--glass-border); box-shadow:0 0 100px rgba(0,0,0,0.5); position:relative;">
+        <button onclick="closeModal()" style="position:absolute; top:20px; right:20px; background:none; border:none; color:#888; font-size:24px; cursor:pointer;"><i class="fas fa-times"></i></button>
+        <h2 style="margin-bottom:10px; color:var(--primary);">Place Your Bid</h2>
+        <p style="color:#888; font-size:14px; margin-bottom:25px;">The owner will review your offer and details before accepting.</p>
+        
+        <div style="display:grid; gap:20px;">
+          <input type="hidden" id="bidCarId">
+          <div>
+            <label style="font-size:12px; color:#666; display:block; margin-bottom:5px;">Full Legal Name</label>
+            <input type="text" id="buyerName" placeholder="Karthik" required>
+          </div>
+          <div>
+            <label style="font-size:12px; color:#666; display:block; margin-bottom:5px;">Mobile Number</label>
+            <input type="tel" id="buyerMobile" placeholder="9550662993" required>
+          </div>
+          <div>
+            <label style="font-size:12px; color:#666; display:block; margin-bottom:5px;">Identity Proof No. (Aadhar/Passport)</label>
+            <input type="text" id="buyerIdProof" placeholder="4228 0790 1230" required>
+          </div>
+          <div>
+            <label style="font-size:12px; color:#666; display:block; margin-bottom:5px;">Your Offer (₹)</label>
+            <input type="number" id="offeredPrice" required>
+          </div>
+          <button class="buy-btn" id="submitBidBtn" onclick="submitBid()">Send Buy Request</button>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -375,8 +414,8 @@ function displayCars(list){
           <div class="btn-row">
 
             <button class="buy-btn"
-              onclick="sendBuyRequest(${car.id})">
-              Buy
+              onclick="openBidModal(${car.id}, ${car.selling_price})">
+              Buy / Negotiate
             </button>
 
             <button class="info-btn"
@@ -391,44 +430,61 @@ function displayCars(list){
   });
 }
 
-
-
-// 🔥 BUY REQUEST (Next Feature)
-// 🔥 REAL BUY REQUEST FUNCTION
-async function sendBuyRequest(carId){
-
-  try{
-
-    const response = await fetch(
-      `${API_BASE}/create-buy-request`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          car_id: carId,
-          buyer_email: user.email
-        })
-      }
-    );
-
-    const data = await response.json();
-
-    if(data.success){
-      alert("✅ Buy request sent to seller successfully!");
-    }else{
-      alert(data.message || "Something went wrong ❌");
-    }
-
-  }catch(err){
-
-    console.error("BUY REQUEST ERROR:", err);
-    alert("Server error ❌");
-
-  }
+function openBidModal(carId, askingPrice) {
+  document.getElementById('bidCarId').value = carId;
+  document.getElementById('offeredPrice').value = askingPrice;
+  document.getElementById('buyerName').value = user.name || "";
+  document.getElementById('bidModal').style.display = 'flex';
 }
 
+function closeModal() {
+  document.getElementById('bidModal').style.display = 'none';
+}
+
+async function submitBid() {
+  const carId = document.getElementById('bidCarId').value;
+  const name = document.getElementById('buyerName').value;
+  const mobile = document.getElementById('buyerMobile').value;
+  const idProof = document.getElementById('buyerIdProof').value;
+  const price = document.getElementById('offeredPrice').value;
+
+  if(!name || !mobile || !idProof || !price) {
+    alert("Please fill all details ⚠️");
+    return;
+  }
+
+  const btn = document.getElementById('submitBidBtn');
+  btn.disabled = true;
+  btn.innerText = "Sending Request...";
+
+  try {
+    const res = await fetch(`${API_BASE}/create-buy-request`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        car_id: carId,
+        buyer_email: user.email,
+        buyer_name: name,
+        buyer_mobile: mobile,
+        offered_price: price
+      })
+    });
+
+    const data = await res.json();
+    if(data.success) {
+      alert("Request sent! The owner will contact you. ✅");
+      closeModal();
+      window.location.href = "my_buy_request.html"; // Redirect to bids tracking
+    } else {
+      alert(data.message);
+    }
+  } catch (err) {
+    alert("Server error ❌");
+  } finally {
+    btn.disabled = false;
+    btn.innerText = "Send Buy Request";
+  }
+}
 
 
 // SHOW DETAILS

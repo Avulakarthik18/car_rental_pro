@@ -11,246 +11,361 @@
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:'Poppins', sans-serif;
+    :root {
+      --primary: #00c9a7;
+      --secondary: #7f5cff;
+      --accent: #9b7cff;
+      --dark: #0b0a12;
+      --dark-elevated: #151320;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    body{
-      background:#151320;
-      color:white;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    /* HEADER */
-    header{
-      background:#1c1830;
-      padding:18px 50px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      border-bottom:1px solid #2a2545;
+    body {
+      background: var(--dark);
+      color: white;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    header h1{font-size:24px;font-weight:600;}
-
-    nav a{
-      color:#ddd;
-      text-decoration:none;
-      margin-left:22px;
-      font-weight:500;
-    }
-    nav a:hover{color:#9b7cff;}
-
-    /* PAGE HEADER */
-    .page-header{
-      position:relative;
-      text-align:center;
-      padding:80px 20px;
-      background:linear-gradient(135deg,#1c1830,#151320);
+    /* Header */
+    header {
+      background: rgba(11, 10, 18, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--glass-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    .back-btn{
-      position:absolute;
-      top:25px;
-      right:30px;
-      background:#1c1830;
-      color:#ddd;
-      padding:7px 18px;
-      border-radius:18px;
-      text-decoration:none;
-      border:1px solid #2a2545;
+    header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(to right, white, var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .back-btn:hover{
-      background:#9b7cff;
-      color:#151320;
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: var(--transition);
     }
 
-    .page-header h2{
-      font-size:38px;
-      margin-bottom:15px;
+    nav a:hover { color: var(--primary); }
+
+    /* Hero Section */
+    .hero {
+      padding: 120px 8% 80px;
+      text-align: center;
+      background: radial-gradient(circle at top right, rgba(0, 201, 167, 0.05), transparent);
+      position: relative;
     }
 
-    .page-header p{
-      max-width:780px;
-      margin:auto;
-      color:#cfcfcf;
-      font-size:16px;
-      line-height:1.7;
+    .back-btn {
+      position: absolute;
+      top: 40px;
+      right: 8%;
+      background: var(--glass-bg);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--glass-border);
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
     }
 
-    /* CONTENT */
-    .content{
-      max-width:1000px;
-      margin:60px auto;
-      padding:0 20px;
+    .back-btn:hover {
+      background: var(--primary);
+      color: var(--dark);
+      border-color: var(--primary);
+      transform: translateX(-5px);
     }
 
-    .info-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-      gap:30px;
+    .hero h2 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, white, #888);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .info-card{
-      background:#1c1830;
-      padding:30px;
-      border-radius:18px;
-      border:1px solid #2a2545;
-      text-align:center;
-      transition:0.3s;
+    .hero p {
+      color: #888;
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    .info-card:hover{
-      transform:translateY(-8px);
-      border-color:#9b7cff;
+    /* Info Grid */
+    .content {
+      max-width: 1300px;
+      margin: 0 auto 100px;
+      padding: 0 8%;
     }
 
-    .info-card i{
-      font-size:42px;
-      color:#9b7cff;
-      margin-bottom:15px;
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 80px;
     }
 
-    .info-card h4{
-      font-size:20px;
-      margin-bottom:10px;
+    .info-card {
+      background: var(--glass-bg);
+      padding: 50px 35px;
+      border-radius: 32px;
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      transition: var(--transition);
     }
 
-    .info-card p{
-      color:#cfcfcf;
-      font-size:14.5px;
-      line-height:1.6;
+    .info-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    /* STEPS */
-    .steps{
-      margin-top:50px;
-      background:#1c1830;
-      padding:35px;
-      border-radius:18px;
-      border:1px solid #2a2545;
+    .info-card i {
+      font-size: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 25px;
+      display: inline-block;
     }
 
-    .steps h3{
-      color:#9b7cff;
-      margin-bottom:20px;
-      text-align:center;
+    .info-card h4 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 12px;
     }
 
-    .steps ol{
-      color:#cfcfcf;
-      font-size:15px;
-      line-height:1.8;
-      padding-left:20px;
+    .info-card p {
+      color: #888;
+      font-size: 16px;
     }
 
-    /* CTA */
-    .cta{
-      text-align:center;
-      margin:60px 0;
+    /* Steps Section */
+    .steps {
+      background: var(--dark-elevated);
+      padding: 60px 50px;
+      border-radius: 40px;
+      border: 1px solid var(--glass-border);
+      position: relative;
+      overflow: hidden;
     }
 
-    .cta button{
-      background:#9b7cff;
-      color:#151320;
-      padding:14px 40px;
-      border:none;
-      border-radius:30px;
-      font-size:16px;
-      font-weight:600;
-      cursor:pointer;
+    .steps::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 201, 167, 0.03), transparent);
     }
 
-    .cta button:hover{
-      background:#b59cff;
+    .steps h3 {
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 40px;
+      text-align: center;
+      position: relative;
     }
 
-    footer{
-      background:#1c1830;
-      text-align:center;
-      padding:16px;
-      font-size:14px;
-      color:#aaa;
-      border-top:1px solid #2a2545;
-      margin-top:80px;
+    .steps ol {
+      color: #aaa;
+      font-size: 18px;
+      counter-reset: step-counter;
+      list-style: none;
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .steps ol li {
+      margin-bottom: 30px;
+      padding-left: 70px;
+      position: relative;
+    }
+
+    .steps ol li::before {
+      counter-increment: step-counter;
+      content: counter(step-counter);
+      position: absolute;
+      left: 0;
+      top: 0px;
+      width: 44px;
+      height: 44px;
+      background: var(--primary);
+      color: var(--dark);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      box-shadow: 0 10px 20px rgba(0, 201, 167, 0.2);
+    }
+
+    /* CTA Section */
+    .cta {
+      text-align: center;
+      margin: 100px 0;
+    }
+
+    .btn-action {
+      background: linear-gradient(135deg, var(--primary), #00e0b9);
+      color: var(--dark);
+      padding: 22px 55px;
+      border-radius: 20px;
+      border: none;
+      font-weight: 800;
+      font-size: 18px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      transition: var(--transition);
+      box-shadow: 0 20px 40px rgba(0, 201, 167, 0.2);
+    }
+
+    .btn-action:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 30px 60px rgba(0, 201, 167, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-elevated);
+      padding: 60px 8% 40px;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      color: #666;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 40px; }
+      .hero { padding: 100px 8% 60px; }
+      .back-btn { top: 20px; position: relative; display: inline-flex; margin-bottom: 30px; }
+      .steps { padding: 40px 25px; }
+      .steps ol li { padding-left: 60px; font-size: 16px; }
     }
   </style>
 </head>
 
 <body>
 
-<header>
-  <h1>CarRentalPro</h1>
-  <nav>
-    <a href="../../home/home.html">Home</a>
-    <a href="../../book_car/book_car.html">Book a Car</a>
-    <a href="../services.html">Services</a>
-    <a href="../contact.html">Contact</a>
-  </nav>
-</header>
+  <header>
+    <h1>CarRentalPro</h1>
+    <nav>
+      <a href="../../home/home.html">Home</a>
+      <a href="../../book_car/book_car.html">Book a Car</a>
+      <a href="../services.html">Services</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
 
-<section class="page-header">
-  <a href="../services.html" class="back-btn">← Back</a>
-  <h2>Doorstep Delivery</h2>
-  <p>
-    Get your rented car delivered directly to your location with
-    complete safety, punctuality, and comfort.
-  </p>
-</section>
+  <section class="hero">
+    <a href="../services.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back</span>
+    </a>
+    <h2>Doorstep Delivery</h2>
+    <p>
+      Skip the queues. Get your premium vehicle delivered directly to your front door 
+      with complete safety and elite punctuality.
+    </p>
+  </section>
 
-<section class="content">
+  <section class="content">
 
-  <div class="info-grid">
-    <div class="info-card">
-      <i class="fas fa-map-marker-alt"></i>
-      <h4>Choose Delivery Location</h4>
-      <p>Select home, office, or any accessible address.</p>
+    <div class="info-grid">
+      <div class="info-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <h4>Prime Location</h4>
+        <p>Deliver to your home, office, or any major landmark within the city limits.</p>
+      </div>
+
+      <div class="info-card">
+        <i class="fas fa-clock"></i>
+        <h4>Elite Timing</h4>
+        <p>Our dedicated handlers ensure your vehicle arrives exactly when promised.</p>
+      </div>
+
+      <div class="info-card">
+        <i class="fas fa-shield-alt"></i>
+        <h4>Safety First</h4>
+        <p>Every vehicle is deep-sanitized and fully inspected before it reaches you.</p>
+      </div>
     </div>
 
-    <div class="info-card">
-      <i class="fas fa-clock"></i>
-      <h4>On-Time Delivery</h4>
-      <p>Your vehicle reaches you exactly at the scheduled time.</p>
+    <div class="steps">
+      <h3>Seamless Delivery Process</h3>
+      <ol>
+        <li>Select your desired vehicle and choose the 'Doorstep' option.</li>
+        <li>Specify your preferred delivery address and exact time slot.</li>
+        <li>A professional handler is assigned to prepare and deliver your car.</li>
+        <li>Receive live updates and track your vehicle's journey in real-time.</li>
+      </ol>
     </div>
 
-    <div class="info-card">
-      <i class="fas fa-car"></i>
-      <h4>Verified Vehicles</h4>
-      <p>Sanitized, inspected, and road-ready cars.</p>
+    <div class="cta">
+      <button class="btn-action" onclick="goToLocation()">
+        <span>Configure Delivery</span>
+        <i class="fas fa-map-marked-alt"></i>
+      </button>
     </div>
-  </div>
 
-  <div class="steps">
-    <h3>How Doorstep Delivery Works</h3>
-    <ol>
-      <li>Select a car and choose doorstep delivery.</li>
-      <li>Enter delivery location and time.</li>
-      <li>Vehicle is prepared and assigned to a driver.</li>
-      <li>Track delivery until arrival.</li>
-    </ol>
-  </div>
+  </section>
 
-  <!-- ✅ CONNECTING BUTTON -->
-  <div class="cta">
-    <button onclick="goToLocation()">Choose Delivery Location</button>
-  </div>
+  <footer>
+    <div class="footer-links">
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms & Conditions</a>
+      <a href="../contact.html">Support</a>
+    </div>
+    <p class="copyright">&copy; 2025 CarRentalPro. All Rights Reserved.</p>
+  </footer>
 
-</section>
-
-<footer>
-  &copy; 2025 CarRentalPro. All Rights Reserved.
-</footer>
-
-<script>
-function goToLocation(){
-  // assumes selectedCar already exists
-  window.location.href = "choose-delivery-location.html";
-}
-</script>
+  <script>
+    function goToLocation(){
+      window.location.href = "choose-delivery-location.html";
+    }
+  </script>
 
 </body>
 </html>

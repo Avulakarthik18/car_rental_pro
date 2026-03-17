@@ -5,228 +5,334 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luxury Vehicles | CarRentalPro</title>
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<!-- Google Font -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #00c9a7;
+      --secondary: #7f5cff;
+      --accent: #9b7cff;
+      --dark: #0b0a12;
+      --dark-elevated: #151320;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins', sans-serif;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
 
-body{
-  background:#151320;
-  color:white;
-}
+    body {
+      background: var(--dark);
+      color: white;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-/* HEADER */
-header{
-  background:#1c1830;
-  padding:18px 50px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  border-bottom:1px solid #2a2545;
-}
+    /* Header */
+    header {
+      background: rgba(11, 10, 18, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--glass-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-header h1{font-size:24px;font-weight:600;}
-nav a{color:#ddd;text-decoration:none;margin-left:22px;}
-nav a:hover{color:#9b7cff;}
+    header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(to right, white, var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-/* PAGE HEADER */
-.luxury-header{
-  position:relative;
-  text-align:center;
-  padding:80px 20px;
-  background:linear-gradient(135deg,#1c1830,#151320);
-}
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: var(--transition);
+    }
 
-.back-btn{
-  position:absolute;
-  top:25px;
-  right:30px;
-  background:#1c1830;
-  color:#ddd;
-  padding:7px 18px;
-  border-radius:18px;
-  text-decoration:none;
-  border:1px solid #2a2545;
-}
+    nav a:hover { color: var(--primary); }
 
-.back-btn:hover{
-  background:#9b7cff;
-  color:#151320;
-}
+    /* Hero Section */
+    .luxury-hero {
+      padding: 120px 8% 80px;
+      text-align: center;
+      background: radial-gradient(circle at top right, rgba(0, 201, 167, 0.05), transparent),
+                  radial-gradient(circle at bottom left, rgba(127, 92, 255, 0.05), transparent);
+      position: relative;
+    }
 
-.luxury-header h2{
-  font-size:38px;
-  margin-bottom:16px;
-}
+    .back-btn {
+      position: absolute;
+      top: 40px;
+      right: 8%;
+      background: var(--glass-bg);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--glass-border);
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+    }
 
-.luxury-header p{
-  max-width:750px;
-  margin:auto;
-  color:#cfcfcf;
-}
+    .back-btn:hover {
+      background: var(--primary);
+      color: var(--dark);
+      border-color: var(--primary);
+      transform: translateX(-5px);
+    }
 
-/* SECTION */
-.section{
-  max-width:1100px;
-  margin:60px auto;
-  padding:0 20px;
-}
+    .luxury-hero h2 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      background: linear-gradient(to right, white, #888);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.section h3{
-  text-align:center;
-  font-size:28px;
-  margin-bottom:30px;
-  color:#9b7cff;
-}
+    .luxury-hero p {
+      color: #888;
+      font-size: 20px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-/* CAR GRID */
-.cars-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
-}
+    /* Grid Section */
+    .section {
+      max-width: 1300px;
+      margin: 0 auto 100px;
+      padding: 0 8%;
+    }
 
-.car-card{
-  position:relative;
-  background:#1c1830;
-  padding:35px 25px;
-  border-radius:18px;
-  border:2px solid #2a2545;
-  text-align:center;
-  cursor:pointer;
-  transition:0.3s;
-}
+    .section h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 50px;
+      text-align: center;
+      background: linear-gradient(to right, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-.car-card:hover{
-  transform:translateY(-8px);
-  border-color:#9b7cff;
-}
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
 
-/* SELECTED */
-.car-card.selected{
-  border-color:#9b7cff;
-  box-shadow:0 0 25px rgba(155,124,255,0.6);
-}
+    .car-card {
+      position: relative;
+      background: var(--glass-bg);
+      padding: 60px 40px;
+      border-radius: 32px;
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      overflow: hidden;
+    }
 
-/* TICK ICON */
-.tick{
-  position:absolute;
-  top:18px;
-  left:18px;
-  font-size:22px;
-  color:#9b7cff;
-  display:none;
-}
+    .car-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 201, 167, 0.05), transparent);
+      opacity: 0;
+      transition: var(--transition);
+    }
 
-.car-card.selected .tick{
-  display:block;
-}
+    .car-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+    }
 
-.car-icon{
-  font-size:46px;
-  color:#9b7cff;
-  margin-bottom:18px;
-}
+    .car-card:hover::before { opacity: 1; }
 
-.car-card h4{margin-bottom:12px;}
-.car-card p{color:#cfcfcf;font-size:14.8px;}
+    .car-card.selected {
+      border: 2px solid var(--primary);
+      background: rgba(0, 201, 167, 0.05);
+      box-shadow: 0 0 40px rgba(0, 201, 167, 0.15);
+    }
 
-/* CTA */
-.cta{
-  text-align:center;
-  margin:80px 0;
-}
+    .tick {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      font-size: 24px;
+      color: var(--primary);
+      opacity: 0;
+      transform: scale(0.5);
+      transition: var(--transition);
+    }
 
-.cta button{
-  background:#9b7cff;
-  color:#151320;
-  padding:14px 38px;
-  border-radius:30px;
-  border:none;
-  font-weight:600;
-  font-size:16px;
-  cursor:pointer;
-}
+    .car-card.selected .tick {
+      opacity: 1;
+      transform: scale(1);
+    }
 
-.cta button:hover{
-  background:#b59cff;
-}
+    .car-icon {
+      font-size: 64px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+      transition: var(--transition);
+    }
 
-/* FOOTER */
-footer{
-  background:#1c1830;
-  text-align:center;
-  padding:16px;
-  font-size:14px;
-  color:#aaa;
-  border-top:1px solid #2a2545;
-}
-</style>
+    .car-card:hover .car-icon {
+      transform: scale(1.1);
+    }
+
+    .car-card h4 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: white;
+    }
+
+    .car-card p {
+      color: #888;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    /* CTA Section */
+    .cta {
+      text-align: center;
+      margin-bottom: 120px;
+    }
+
+    .btn-book {
+      background: linear-gradient(135deg, var(--primary), #00e0b9);
+      color: var(--dark);
+      padding: 20px 50px;
+      border-radius: 16px;
+      border: none;
+      font-weight: 800;
+      font-size: 18px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      transition: var(--transition);
+      box-shadow: 0 20px 40px rgba(0, 201, 167, 0.2);
+    }
+
+    .btn-book:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 60px rgba(0, 201, 167, 0.3);
+      background: linear-gradient(135deg, #00f0c8, var(--primary));
+    }
+
+    .btn-book i { font-size: 20px; }
+
+    /* Footer */
+    footer {
+      background: var(--dark-elevated);
+      padding: 60px 8% 40px;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      color: #666;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .luxury-hero h2 { font-size: 40px; }
+      .luxury-hero { padding: 100px 8% 60px; }
+      .back-btn { top: 20px; position: relative; display: inline-flex; margin-bottom: 30px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <h1>CarRentalPro</h1>
-  <nav>
-    <a href="../../home/home.html">Home</a>
-    <a href="../book_car/book_car.html">Book a Car</a>
-    <a href="../services.html">Services</a>
-    <a href="../contact.html">Contact</a>
-  </nav>
-</header>
+  <header>
+    <h1>CarRentalPro</h1>
+    <nav>
+      <a href="../../home/home.html">Home</a>
+      <a href="../book_car/book_car.html">Book a Car</a>
+      <a href="../services.html">Services</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
 
-<section class="luxury-header">
-  <a href="../services.html" class="back-btn">← Back</a>
-  <h2>Luxury Vehicles</h2>
-  <p>Select a premium vehicle type based on your travel needs.</p>
-</section>
+  <section class="luxury-hero">
+    <a href="../services.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back to Services</span>
+    </a>
+    <h2>Luxury Fleet</h2>
+    <p>Experience the pinnacle of automotive excellence with our curated luxury collection.</p>
+  </section>
 
-<section class="section">
-  <h3>Select Your Luxury Vehicle Type</h3>
+  <section class="section">
+    <h3>Choose Your Experience</h3>
 
-  <div class="cars-grid">
+    <div class="cars-grid">
+      <div class="car-card" data-type="Luxury Sedans">
+        <i class="fas fa-check-circle tick"></i>
+        <div class="car-icon"><i class="fas fa-car"></i></div>
+        <h4>Grand Sedans</h4>
+        <p>Unmatched elegance and smooth performance for executive travel and ultimate comfort.</p>
+      </div>
 
-    <div class="car-card" data-type="Luxury Sedans">
-      <i class="fas fa-check-circle tick"></i>
-      <i class="fas fa-car car-icon"></i>
-      <h4>Luxury Sedans</h4>
-      <p>Ideal for business travel and premium comfort.</p>
+      <div class="car-card" data-type="Luxury SUVs">
+        <i class="fas fa-check-circle tick"></i>
+        <div class="car-icon"><i class="fas fa-truck-monster"></i></div>
+        <h4>Elite SUVs</h4>
+        <p>Commanding presence and versatile luxury for family adventures and long-distance touring.</p>
+      </div>
+
+      <div class="car-card" data-type="Premium Electric Cars">
+        <i class="fas fa-check-circle tick"></i>
+        <div class="car-icon"><i class="fas fa-bolt"></i></div>
+        <h4>Modern Electric</h4>
+        <p>Silent power and sustainable luxury featuring the latest in automotive technology.</p>
+      </div>
     </div>
 
-    <div class="car-card" data-type="Luxury SUVs">
-      <i class="fas fa-check-circle tick"></i>
-      <i class="fas fa-truck-monster car-icon"></i>
-      <h4>Luxury SUVs</h4>
-      <p>Perfect for family trips and long journeys.</p>
+    <div class="cta">
+      <button class="btn-book" onclick="goNext()">
+        <span>Continue Booking</span>
+        <i class="fas fa-chevron-right"></i>
+      </button>
     </div>
+  </section>
 
-    <div class="car-card" data-type="Premium Electric Cars">
-      <i class="fas fa-check-circle tick"></i>
-      <i class="fas fa-bolt car-icon"></i>
-      <h4>Premium Electric Cars</h4>
-      <p>Eco-friendly luxury with advanced technology.</p>
+  <footer>
+    <div class="footer-links">
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms & Conditions</a>
+      <a href="../contact.html">Support</a>
     </div>
-
-  </div>
-</section>
-
-<div class="cta">
-  <button onclick="goNext()">Book Your Luxury Vehicle</button>
-</div>
-
-<footer>
-  &copy; 2025 CarRentalPro. All Rights Reserved.
-</footer>
+    <p class="copyright">&copy; 2025 CarRentalPro. All Rights Reserved.</p>
+  </footer>
 
 <script>
 let selectedType = "";

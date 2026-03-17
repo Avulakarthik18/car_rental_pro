@@ -15,276 +15,253 @@ href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css"/>
 
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-
-    body{
-      background:#151320;
-      color:white;
-      padding:30px 18px;
-      min-height:100vh;
+    :root {
+      --primary: #00c9a7;
+      --secondary: #7f5cff;
+      --accent: #9b7cff;
+      --dark: #0b0a12;
+      --dark-elevated: #151320;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
     }
 
-    .container{
-      max-width:1200px;
-      margin:auto;
-      background:#1c1830;
-      border:1px solid #2a2545;
-      border-radius:18px;
-      box-shadow:0 30px 70px rgba(0,0,0,0.6);
-      padding:22px;
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+    body {
+      background: var(--dark);
+      color: white;
+      padding: 40px 8%;
+      min-height: 100vh;
     }
 
-    .topbar{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-      gap:14px;
-      border-bottom:1px solid #2a2545;
-      padding-bottom:16px;
-      margin-bottom:18px;
+    .container {
+      max-width: 1400px;
+      margin: auto;
+      background: var(--dark-elevated);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      animation: fadeIn 0.8s ease;
     }
 
-    h2{
-      font-size:24px;
-      font-weight:600;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 25px;
+      border-bottom: 1px solid var(--glass-border);
+      margin-bottom: 30px;
+      gap: 20px;
     }
 
-    .sub{
-      color:#aaa;
-      font-size:13px;
-      margin-top:6px;
+    h2 {
+      font-size: 28px;
+      font-weight: 700;
+      background: linear-gradient(to right, white, var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .btn{
-      padding:10px 14px;
-      border-radius:10px;
-      border:1px solid #3a3558;
-      background:transparent;
-      color:white;
-      cursor:pointer;
-      transition:0.2s;
-      font-size:14px;
+    .sub { color: #888; font-size: 14px; margin-top: 5px; }
+
+    .btn {
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .btn:hover{
-      background:#2a2545;
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary);
     }
 
-    .bar{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin:18px 0;
+    /* Search Bar */
+    .bar {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 20px;
+      border-radius: 18px;
+      border: 1px solid var(--glass-border);
     }
 
-    input[type="text"], select{
-      flex:1;
-      min-width:180px;
-      padding:12px;
-      border:none;
-      border-radius:10px;
-      background:#2a2545;
-      color:white;
-      outline:none;
-      font-size:14px;
+    input[type="text"], select {
+      flex: 1;
+      min-width: 200px;
+      padding: 14px 18px;
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      outline: none;
+      font-size: 14px;
+      transition: 0.3s;
     }
 
-    input::placeholder{
-      color:#aaa;
+    input:focus, select:focus { border-color: var(--primary); background: rgba(255, 255, 255, 0.08); }
+
+    .search-btn {
+      padding: 14px 30px;
+      background: linear-gradient(135deg, var(--primary), #00e0b9);
+      color: var(--dark);
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
-    .search-btn{
-      padding:12px 18px;
-      border:none;
-      border-radius:10px;
-      cursor:pointer;
-      background:linear-gradient(135deg,#7f5cff,#9b7cff);
-      color:white;
-      font-weight:600;
-      transition:0.2s;
+    .search-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(0, 201, 167, 0.3); }
+
+    /* Results */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
     }
 
-    .search-btn:hover{
-      transform:scale(1.03);
-      opacity:0.95;
+    .car-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: 0.4s;
+      display: flex;
+      flex-direction: column;
     }
 
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
-      gap:16px;
-      margin-top:10px;
+    .car-card:hover { transform: translateY(-10px); border-color: var(--primary); }
+
+    .car-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #2a2545;
     }
 
-    .car-card{
-      background:#17132a;
-      border:1px solid #2a2545;
-      border-radius:16px;
-      overflow:hidden;
-      box-shadow:0 10px 25px rgba(0,0,0,0.35);
-      transition:0.25s;
-      display:flex;
-      flex-direction:column;
+    .card-body { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+
+    .car-title { font-size: 20px; font-weight: 700; margin-bottom: 15px; }
+
+    .details { font-size: 14px; color: #aaa; line-height: 1.8; margin-bottom: 20px; }
+    .details b { color: #ccc; }
+
+    .price { font-size: 20px; font-weight: 700; color: var(--primary); margin-top: auto; }
+
+    .book-btn {
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, var(--primary), #00e0b9);
+      color: var(--dark);
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: 0.3s;
     }
 
-    .car-card:hover{
-      transform:translateY(-6px);
+    .book-btn:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(0, 201, 167, 0.3); }
+
+    .no-results {
+      padding: 60px;
+      border-radius: 20px;
+      border: 2px dashed var(--glass-border);
+      background: rgba(255, 255, 255, 0.01);
+      color: #666;
+      text-align: center;
+      font-size: 18px;
     }
 
-    .car-card img{
-      width:100%;
-      height:170px;
-      object-fit:cover;
-      background:#2a2545;
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(15px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
     }
 
-    .card-body{
-      padding:14px;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      flex:1;
+    .modal-content {
+      width: 500px;
+      max-width: 100%;
+      background: var(--dark-elevated);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 40px;
+      max-height: 90vh;
+      overflow-y: auto;
+      animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
-    .car-title{
-      font-size:16px;
-      font-weight:600;
+    .modal-content h3 { text-align: center; margin-bottom: 30px; color: var(--primary); font-size: 24px; font-weight: 700; }
+
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 8px; font-size: 13px; color: #888; font-weight: 500; }
+    .form-group input {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      color: white;
+      outline: none;
     }
 
-    .details{
-      font-size:13px;
-      color:#cfcfcf;
-      line-height:1.6;
+    .price-summary {
+      background: rgba(0, 201, 167, 0.05);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 201, 167, 0.2);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      margin: 30px 0;
     }
 
-    .price{
-      font-weight:600;
-      color:#9b7cff;
+    .modal-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--primary);
+      color: var(--dark);
+      border: none;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      margin-bottom: 12px;
     }
 
-    .book-btn{
-      margin-top:auto;
-      padding:12px;
-      border:none;
-      border-radius:12px;
-      cursor:pointer;
-      background:linear-gradient(135deg,#7f5cff,#9b7cff);
-      color:white;
-      font-weight:600;
-      transition:0.2s;
-    }
+    .close-btn { background: rgba(255, 255, 255, 0.05); color: #ff6b6b; border: 1px solid rgba(255, 107, 107, 0.2); }
 
-    .book-btn:hover{
-      transform:scale(1.02);
-      opacity:0.95;
-    }
-
-    .no-results{
-      margin-top:18px;
-      padding:18px;
-      border-radius:14px;
-      border:1px dashed #3a3558;
-      background:#17132a;
-      color:#aaa;
-      text-align:center;
-      display:none;
-    }
-
-    .modal{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.6);
-      z-index:1000;
-      justify-content:center;
-      align-items:center;
-      overflow-y:auto;
-  padding:20px;
-    }
-
-    .modal-content{
-      width:420px;
-      max-width:95%;
-      background:#1c1830;
-      border:1px solid #2a2545;
-      border-radius:16px;
-      box-shadow:0 30px 70px rgba(0,0,0,0.6);
-      padding:20px;
-      color:white;
-      max-height:90vh;
-  overflow-y:auto;
-    }
-
-    .modal-content h3{
-      text-align:center;
-      margin-bottom:14px;
-      color:#9b7cff;
-      font-size:18px;
-    }
-
-    .form-group{
-      margin-bottom:12px;
-      font-size:16px;
-    }
-
-    .form-group label{
-      display:block;
-      margin-bottom:6px;
-      font-size:13px;
-      color:#cfcfcf;
-    }
-
-    .form-group input{
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:10px;
-      background:#2a2545;
-      color:white;
-      outline:none;
-    }
-
-    .price-summary{
-      margin-top:10px;
-      padding:12px;
-      border-radius:12px;
-      background:#17132a;
-      border:1px solid #2a2545;
-      font-size:14px;
-      color:#cfcfcf;
-      font-weight:500;
-      text-align:center;
-    }
-
-    .modal-btn{
-      width:100%;
-      padding:12px;
-      border:none;
-      border-radius:12px;
-      cursor:pointer;
-      font-weight:600;
-      margin-top:10px;
-      background:linear-gradient(135deg,#7f5cff,#9b7cff);
-      color:white;
-      transition:0.2s;
-    }
-
-    .modal-btn:hover{
-      transform:scale(1.02);
-      opacity:0.95;
-    }
-
-    .close-btn{
-      background:#b71c1c;
-    }
-
-    .close-btn:hover{
-      opacity:0.95;
-    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
   </style>
 </head>
 
@@ -325,100 +302,34 @@ href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css
 
   </div>
 
- <div id="bookingModal" class="modal">
+  <!-- Booking Modal for Map -->
+  <div id="bookingModal" class="modal">
     <div class="modal-content">
-      <h3 id="modalCarName">Book This Car</h3>
-
-      <form id="bookingForm">
-
+      <h3 id="modalTitle">Book Car</h3>
+      
+      <div id="driverFields" style="display:none;">
         <div class="form-group">
-          <label>Full Name</label>
-          <input type="text" id="name" required />
+          <label>Pickup Location</label>
+          <input type="text" id="pickupLocation" placeholder="Enter pickup location (e.g. Hyderabad)">
         </div>
-
         <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="email" required />
+          <label>Drop Location</label>
+          <input type="text" id="dropLocation" placeholder="Enter drop location (e.g. Bangalore)">
         </div>
-
-        <div class="form-group">
-          <label>Mobile Number</label>
-          <input type="tel" id="mobile" pattern="[0-9]{10}" required />
-        </div>
-
-        <!-- 🔥 ADDED NOMINEE -->
-        <div class="form-group">
-          <label>Nominee Name</label>
-          <input type="text" id="nominee"/>
-        </div>
-
-        <!-- 🔥 DRIVER DETAILS (AUTO FILLED) -->
-<div id="driverDetails" style="display:none;
-background:#17132a;
-padding:12px;
-border-radius:12px;
-margin-bottom:10px;">
-
-<b style="color:#9b7cff;">Driver Details</b>
-
-<p>Name: <span id="driverNameText"></span></p>
-<p>Mobile: <span id="driverMobileText"></span></p>
-</div>
-        <!-- 🔥 ADDED DRIVER SECTION -->
-        <div id="driverFields">
-
-          <div class="form-group">
-            <label>Pickup Location</label>
-            <input type="text" id="pickupLocation"/>
-          </div>
-
-          <div class="form-group">
-            <label>Drop Location</label>
-            <input type="text" id="dropLocation"/>
-          </div>
-
-          <!-- ROUTE MAP -->
-<div id="map" style="
-height:250px;
-width:100%;
-margin-top:10px;
-border-radius:12px;
-display:none;">
-</div>
-
-<div id="distanceInfo" style="
-margin-top:8px;
-font-size:14px;
-color:#cfcfcf;
-display:none;">
-</div>
-
-
-          <div class="form-group">
-            <label>Passengers</label>
-            <input type="number" id="passengers" min="1"/>
-          </div>
-
-        </div>
-
-
-        <div class="form-group">
-          <label>Pickup Date & Time</label>
-          <input type="datetime-local" id="pickupDate" required />
-        </div>
-
-        <div class="form-group">
-          <label>Drop-off Date & Time</label>
-          <input type="datetime-local" id="dropDate" required />
-        </div>
-
-        <div class="price-summary" id="priceSummary">Total Cost: ₹0</div>
-
-        <button type="submit" class="modal-btn">Confirm Booking ✅</button>
-        <button type="button" class="modal-btn close-btn" onclick="closeModal()">Cancel</button>
-      </form>
+        
+        <button class="modal-btn" type="button" onclick="showRoute()">Calculate Route & Fare</button>
+        
+        <div id="map" style="height:250px; width:100%; border-radius:12px; margin-top:20px; display:none; background:#2a2545;"></div>
+        <div id="distanceInfo" style="margin-top:20px; font-size:14px; color:#aaa; display:none;"></div>
+      </div>
+      
+      <div id="priceSummary" class="price-summary">Total Cost: ₹0</div>
+      
+      <button class="modal-btn" id="confirmBookBtn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+      <button class="modal-btn close-btn" onclick="closeModal()">Cancel</button>
     </div>
   </div>
+
 
 <script>
 
@@ -549,7 +460,7 @@ function displayCars(filteredCars){
           </div>
 
           <button class="book-btn"
-            onclick="openModal(${car.id}, '${car.company} ${car.model}', ${car.price_month})">
+            onclick="openModal(${car.id}, '${car.company} ${car.model}', ${car.price_month}, '${img}', '${car.driver_name}', '${car.driver_mobile}')">
             Book Now
           </button>
 
@@ -694,165 +605,76 @@ function showRoute(){
 
 
 
-function openModal(carId, carName, price){
-
-  const car = cars.find(c => Number(c.id) === Number(carId));
-
-  selectedCarId = carId;
-  modal.style.display = "flex";
-
-  selectedCarPrice = price;
-  selectedCarName = carName;
-
-  document.getElementById("modalCarName").innerText = `Book: ${carName}`;
-  document.getElementById("priceSummary").innerText = "Total Cost: ₹0";
-
-  document.getElementById("email").value = user.email;
-
-  if(type === "With Driver" && car){
-
-    document.getElementById("driverDetails").style.display="block";
-    selectedDriverMobile = car.driver_mobile;
-selectedDriverName = car.driver_name;
-
-    document.getElementById("driverNameText").innerText =
-        car.driver_name ? car.driver_name : "Driver not provided";
-
-    document.getElementById("driverMobileText").innerText =
-        maskPhone(car.driver_mobile);
-
-  }else{
-
-    document.getElementById("driverDetails").style.display="none";
-  }
-  setTimeout(()=>{
-
-    if(leafletMap){
-        leafletMap.invalidateSize();
+function openModal(carId, carName, price, carImg, driverName, driverMobile) {
+    selectedCarId = carId;
+    selectedCarName = carName;
+    selectedCarPrice = price; // standard monthly price
+    selectedImg = carImg;
+    selectedDriverName = driverName;
+    selectedDriverMobile = driverMobile;
+    
+    document.getElementById("modalTitle").innerText = `Book ${carName}`;
+    
+    if(type === "Rental Only") {
+        document.getElementById("driverFields").style.display = "none";
+        document.getElementById("priceSummary").innerText = `Base Price: ₹${price} / month (calculated later)`;
+    } else {
+        document.getElementById("driverFields").style.display = "block";
+        document.getElementById("priceSummary").innerText = "Enter locations to calculate fare";
+        distanceFare = 0;
     }
-
-},400);
+    
+    modal.style.display = "flex";
 }
 
-
-
-function closeModal(){
-  modal.style.display = "none";
+function closeModal() {
+    modal.style.display = "none";
 }
 
-
-
-// PRICE
-function calculatePrice(){
-  if(type === "With Driver"){
-      return;
-  }
-
-  const pickup = document.getElementById("pickupDate").value;
-  const drop = document.getElementById("dropDate").value;
-
-  if(!pickup || !drop || selectedCarPrice <= 0) return;
-
-  const start = new Date(pickup);
-  const end = new Date(drop);
-
-  if(end <= start){
-    document.getElementById("priceSummary").innerText = "Invalid dates ❌";
-    return;
-  }
-
-  const diffTime = end - start;
-  const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-  const perDay = selectedCarPrice / 30;
-  const total = Math.round(days * perDay);
-
-  document.getElementById("priceSummary").innerText = `Total Cost: ₹${total}`;
-}
-
-
-
-document.getElementById("pickupDate").addEventListener("change", calculatePrice);
-document.getElementById("dropDate").addEventListener("change", calculatePrice);
-
-
-// ⭐⭐⭐ ROUTE LISTENERS (ADDED)
-document.getElementById("pickupLocation")?.addEventListener("change", showRoute);
-document.getElementById("dropLocation")?.addEventListener("change", showRoute);
-
-
-
-
-// BOOKING
-document.getElementById("bookingForm").addEventListener("submit", async function(e){
-
-  e.preventDefault();
-
-  const pickup = document.getElementById("pickupDate").value;
-  const drop = document.getElementById("dropDate").value;
-
-  if(new Date(drop) <= new Date(pickup)){
-    alert("Drop date must be after pickup ❌");
-    return;
-  }
-
-  const totalText = document.getElementById("priceSummary").innerText;
-  const totalCost = Number(totalText.replace(/[^0-9]/g, "")) || 0;
-
-  try{
-
-    const res = await fetch(`${API_BASE}/book-car`, {
-
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-
-      body: JSON.stringify({
-
-        car_id: selectedCarId,
-        car_name: selectedCarName,
-        rental_type: type,
-
-        customer_name: document.getElementById("name").value,
-        customer_email: user.email,
-        customer_mobile: document.getElementById("mobile").value,
-
-        nominee: document.getElementById("nominee")?.value || null,
-
-        pickup_location: document.getElementById("pickupLocation")?.value || null,
-        drop_location: document.getElementById("dropLocation")?.value || null,
-        passenger_count: document.getElementById("passengers")?.value || null,
-        driver_name: selectedDriverName,
-driver_mobile: selectedDriverMobile,
-
-
-
-        pickup_datetime: pickup,
-        drop_datetime: drop,
-        total_cost: totalCost
-      })
-
-    });
-
-    const data = await res.json();
-
-if(!res.ok){
-    alert(data.message); // ⭐ REAL ERROR
-    return;
-}
-
-alert(data.message); // success message
-
-    if(data.success){
-      closeModal();
-      this.reset();
+function proceedToCheckout() {
+    if(type === "With Driver" && distanceFare === 0) {
+        alert("Please calculate the route first ❌");
+        return;
     }
+    
+    let finalPrice = (type === "With Driver") ? distanceFare : selectedCarPrice;
+    
+    const pendingBooking = {
+        carId: selectedCarId,
+        carName: selectedCarName,
+        carImg: selectedImg,
+        price: finalPrice,
+        type: type,
+        flowType: 'rent',
+        driverName: selectedDriverName,
+        driverMobile: selectedDriverMobile,
+        pickupLocMap: document.getElementById("pickupLocation")?.value || "",
+        dropLocMap: document.getElementById("dropLocation")?.value || ""
+    };
 
-  }catch(err){
+    localStorage.setItem('pendingBooking', JSON.stringify(pendingBooking));
+    window.location.href = "../checkout/checkout.html";
+}
 
-    console.error("BOOKING ERROR:", err);
-    alert("Booking failed ❌ Server error");
-  }
-});
+let selectedImg = "";
+
+function initiateCheckout(carId, carName, price, carImg) {
+    const car = cars.find(c => Number(c.id) === Number(carId));
+    
+    const pendingBooking = {
+        carId: carId,
+        carName: carName,
+        carImg: carImg,
+        price: price,
+        type: type,
+        flowType: 'rent',
+        driverName: car ? car.driver_name : null,
+        driverMobile: car ? car.driver_mobile : null
+    };
+
+    localStorage.setItem('pendingBooking', JSON.stringify(pendingBooking));
+    window.location.href = "../checkout/checkout.html";
+}
 
 
 // FETCH

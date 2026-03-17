@@ -6,254 +6,294 @@
   <title>24/7 Customer Support | CarRentalPro</title>
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:'Poppins', sans-serif;
+    :root {
+      --primary: #00c9a7;
+      --secondary: #7f5cff;
+      --accent: #9b7cff;
+      --dark: #0b0a12;
+      --dark-elevated: #151320;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    body{
-      background:#151320;
-      color:white;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    /* MAIN HEADER */
-    header{
-      background:#1c1830;
-      padding:18px 50px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      border-bottom:1px solid #2a2545;
+    body {
+      background: var(--dark);
+      color: white;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    header h1{
-      font-size:24px;
-      font-weight:600;
+    /* Header */
+    header {
+      background: rgba(11, 10, 18, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--glass-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    nav a{
-      color:#ddd;
-      text-decoration:none;
-      margin-left:22px;
-      font-weight:500;
+    header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(to right, white, var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    nav a:hover{
-      color:#9b7cff;
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: var(--transition);
     }
 
-    /* PAGE HEADER */
-    .support-header{
-      position:relative;
-      text-align:center;
-      padding:80px 20px;
-      background:linear-gradient(135deg,#1c1830,#151320);
+    nav a:hover { color: var(--primary); }
+
+    /* Support Header (Hero) */
+    .support-header {
+      padding: 120px 8% 80px;
+      text-align: center;
+      background: radial-gradient(circle at top right, rgba(0, 201, 167, 0.05), transparent);
+      position: relative;
     }
 
-    .support-header h2{
-      font-size:38px;
-      margin-bottom:15px;
+    .back-btn {
+      position: absolute;
+      top: 40px;
+      right: 8%;
+      background: var(--glass-bg);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--glass-border);
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
     }
 
-    .support-header p{
-      max-width:760px;
-      margin:auto;
-      color:#cfcfcf;
-      font-size:16px;
-      line-height:1.7;
+    .back-btn:hover {
+      background: var(--primary);
+      color: var(--dark);
+      border-color: var(--primary);
+      transform: translateX(-5px);
     }
 
-    /* BACK BUTTON */
-    .back-btn{
-      position:absolute;
-      top:25px;
-      right:30px;
-      background:#1c1830;
-      color:#ddd;
-      padding:7px 18px;
-      border-radius:18px;
-      text-decoration:none;
-      font-size:14px;
-      border:1px solid #2a2545;
-      transition:0.3s;
+    .support-header h2 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, white, #888);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .back-btn:hover{
-      background:#9b7cff;
-      color:#151320;
+    .support-header p {
+      color: #888;
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    /* SECTION */
-    .section{
-      max-width:1100px;
-      margin:60px auto;
-      padding:0 20px;
+    /* Section */
+    .section {
+      max-width: 1400px;
+      margin: 0 auto 100px;
+      padding: 0 8%;
     }
 
-    .section h3{
-      text-align:center;
-      font-size:28px;
-      margin-bottom:35px;
-      color:#9b7cff;
+    .section h3 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 50px;
+      text-align: center;
+      color: var(--primary);
     }
 
-    /* SUPPORT GRID */
-    .support-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-      gap:30px;
+    /* Support Grid */
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
     }
 
-    /* MAKE CARDS CLICKABLE */
-    .support-card{
-      background:#1c1830;
-      padding:35px 25px;
-      border-radius:18px;
-      border:1px solid #2a2545;
-      text-align:center;
-      transition:0.35s ease;
-      box-shadow:0 18px 40px rgba(0,0,0,0.4);
-      text-decoration:none;
-      color:white;
-      cursor:pointer;
-      display:block;
+    .support-card {
+      background: var(--dark-elevated);
+      padding: 60px 40px;
+      border-radius: 40px;
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      transition: var(--transition);
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
     }
 
-    .support-card:hover{
-      transform:translateY(-10px);
-      border-color:#9b7cff;
-      box-shadow:0 28px 60px rgba(155,124,255,0.25);
+    .support-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 201, 167, 0.05), transparent);
+      opacity: 0;
+      transition: var(--transition);
     }
 
-    .support-icon{
-      font-size:44px;
-      color:#9b7cff;
-      margin-bottom:15px;
+    .support-card:hover {
+      transform: translateY(-12px);
+      border-color: var(--primary);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
     }
 
-    .support-card h4{
-      font-size:20px;
-      margin-bottom:10px;
+    .support-card:hover::before { opacity: 1; }
+
+    .support-icon {
+      font-size: 56px;
+      margin-bottom: 30px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: var(--transition);
+      z-index: 1;
     }
 
-    .support-card p{
-      color:#cfcfcf;
-      font-size:14.5px;
-      line-height:1.6;
+    .support-card h4 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      z-index: 1;
     }
 
-    /* FOOTER */
-    footer{
-      background:#1c1830;
-      text-align:center;
-      padding:16px;
-      font-size:14px;
-      color:#aaa;
-      border-top:1px solid #2a2545;
-      margin-top:80px;
+    .support-card p {
+      color: #888;
+      font-size: 16px;
+      line-height: 1.7;
+      z-index: 1;
     }
 
-    @media(max-width:768px){
-      .back-btn{
-        top:15px;
-        right:15px;
-      }
+    /* Footer */
+    footer {
+      background: var(--dark-elevated);
+      padding: 60px 8% 40px;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      color: #666;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .support-header h2 { font-size: 40px; }
+      .support-header { padding: 100px 8% 60px; }
+      .back-btn { top: 20px; position: relative; display: inline-flex; margin-bottom: 30px; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- MAIN HEADER -->
-<header>
-  <h1>CarRentalPro</h1>
-  <nav>
-    <a href="../../home/home.html">Home</a>
-    <a href="../../book_car/book_car.html">Book a Car</a>
-    <a href="../services.html">Services</a>
-    <a href="../contact.html">Contact</a>
-  </nav>
-</header>
+  <header>
+    <h1>CarRentalPro</h1>
+    <nav>
+      <a href="../../home/home.html">Home</a>
+      <a href="../../book_car/book_car.html">Book a Car</a>
+      <a href="../services.html">Services</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
 
-<!-- SUPPORT HEADER -->
-<section class="support-header">
- <a href="../services.html" class="back-btn">← Back</a>
-
-  <h2>24/7 Customer Support</h2>
-  <p>
-    Our support team is available round the clock to assist you with
-    bookings, vehicle issues, payments, and general rental inquiries.
-  </p>
-</section>
-
-<!-- SUPPORT OPTIONS -->
-<section class="section">
-  <h3>Support Services We Offer</h3>
-
-  <div class="support-grid">
-
-    <!-- CALL SUPPORT (CLICKABLE) -->
-    <a href="call-support.html" class="support-card">
-      <i class="fas fa-phone support-icon"></i>
-      <h4>Call Support</h4>
-      <p>
-        Get immediate assistance for urgent issues such as trip problems,
-        vehicle breakdowns, or booking confirmations.
-      </p>
+  <section class="support-header">
+    <a href="../services.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back</span>
     </a>
-<!-- CALL SUPPORT (CLICKABLE) -->
-   <a href="email-support.html" class="support-card">
-  <i class="fas fa-envelope support-icon"></i>
-  <h4>Email Support</h4>
-  <p>
-    Reach out to us for detailed queries, complaints, or feedback.
-    Our team responds within 24 hours.
-  </p>
-</a>
+    <h2>Support Center</h2>
+    <p>
+      Our dedicated team is ready to assist you 24/7. Whether it's a booking query, 
+      payment issue, or technical support, we're here to help you get back on the road.
+    </p>
+  </section>
 
-    <a href="booking-assistance.html" class="support-card">
-  <i class="fas fa-car-side support-icon"></i>
-  <h4>Booking Assistance</h4>
-  <p>
-    Get help in selecting the right vehicle, rental plans,
-    and understanding booking procedures.
-  </p>
-</a>
+  <section class="section">
+    <h3>Choose a Channel</h3>
 
-    <a href="payment-refund-support.html" class="support-card">
-  <i class="fas fa-credit-card support-icon"></i>
-  <h4>Payment & Refund Support</h4>
-  <p>
-    Assistance related to payments, security deposits,
-    invoices, and refund processing.
-  </p>
-</a>
+    <div class="support-grid">
 
+      <a href="call-support.html" class="support-card">
+        <i class="fas fa-headset support-icon"></i>
+        <h4>Direct Hotline</h4>
+        <p>Immediate voice assistance for emergency roadside help or urgent booking changes.</p>
+      </a>
 
-  <a href="faqs-help-center.html" class="support-card">
-  <i class="fas fa-question-circle support-icon"></i>
-  <h4>FAQs & Help Center</h4>
-  <p>
-    Browse frequently asked questions for quick solutions
-    regarding rentals, cancellations, and policies.
-  </p>
-</a>
+      <a href="email-support.html" class="support-card">
+        <i class="fas fa-paper-plane support-icon"></i>
+        <h4>Digital Support</h4>
+        <p>Send your detailed inquiries or documentation. Average response time under 2 hours.</p>
+      </a>
 
+      <a href="booking-assistance.html" class="support-card">
+        <i class="fas fa-calendar-check support-icon"></i>
+        <h4>Rental Experts</h4>
+        <p>Need help choosing the right luxury vehicle or long-term plan? Talk to our specialists.</p>
+      </a>
 
-  </div>
-</section>
+      <a href="payment-refund-support.html" class="support-card">
+        <i class="fas fa-receipt support-icon"></i>
+        <h4>Billing Hub</h4>
+        <p>Resolve payment discrepancies, track security deposits, or request invoice breakdowns.</p>
+      </a>
 
-<footer>
-  &copy; 2025 CarRentalPro. All Rights Reserved.
-</footer>
+      <a href="faqs-help-center.html" class="support-card">
+        <i class="fas fa-book-open support-icon"></i>
+        <h4>Knowledge Base</h4>
+        <p>Find instant answers in our comprehensive collection of frequently asked questions.</p>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms & Conditions</a>
+      <a href="../contact.html">Support</a>
+    </div>
+    <p class="copyright">&copy; 2025 CarRentalPro. All Rights Reserved.</p>
+  </footer>
 
 </body>
 </html>

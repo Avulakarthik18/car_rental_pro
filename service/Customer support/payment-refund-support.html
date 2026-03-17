@@ -11,250 +11,319 @@
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:'Poppins', sans-serif;
+    :root {
+      --primary: #00c9a7;
+      --secondary: #7f5cff;
+      --accent: #9b7cff;
+      --dark: #0b0a12;
+      --dark-elevated: #151320;
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    body{
-      background:#151320;
-      color:white;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    /* MAIN HEADER */
-    header{
-      background:#1c1830;
-      padding:18px 50px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      border-bottom:1px solid #2a2545;
+    body {
+      background: var(--dark);
+      color: white;
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    header h1{
-      font-size:24px;
-      font-weight:600;
+    /* Header */
+    header {
+      background: rgba(11, 10, 18, 0.8);
+      backdrop-filter: blur(20px);
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--glass-border);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    nav a{
-      color:#ddd;
-      text-decoration:none;
-      margin-left:22px;
-      font-weight:500;
+    header h1 {
+      font-size: 24px;
+      font-weight: 800;
+      background: linear-gradient(to right, white, var(--primary));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    nav a:hover{
-      color:#9b7cff;
+    nav a {
+      color: #aaa;
+      text-decoration: none;
+      margin-left: 30px;
+      font-weight: 500;
+      font-size: 14px;
+      transition: var(--transition);
     }
 
-    /* PAGE HEADER */
-    .page-header{
-      position:relative;
-      text-align:center;
-      padding:80px 20px;
-      background:linear-gradient(135deg,#1c1830,#151320);
+    nav a:hover { color: var(--primary); }
+
+    /* Page Header */
+    .page-header {
+      padding: 120px 8% 60px;
+      text-align: center;
+      background: radial-gradient(circle at top right, rgba(0, 201, 167, 0.05), transparent);
+      position: relative;
     }
 
-    .page-header h2{
-      font-size:38px;
-      margin-bottom:15px;
+    .back-btn {
+      position: absolute;
+      top: 40px;
+      right: 8%;
+      background: var(--glass-bg);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 1px solid var(--glass-border);
+      font-weight: 600;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
     }
 
-    .page-header p{
-      max-width:780px;
-      margin:auto;
-      color:#cfcfcf;
-      font-size:16px;
-      line-height:1.7;
+    .back-btn:hover {
+      background: var(--primary);
+      color: var(--dark);
+      border-color: var(--primary);
+      transform: translateX(-5px);
     }
 
-    /* BACK BUTTON */
-    .back-btn{
-      position:absolute;
-      top:25px;
-      right:30px;
-      background:#1c1830;
-      color:#ddd;
-      padding:7px 18px;
-      border-radius:18px;
-      text-decoration:none;
-      font-size:14px;
-      border:1px solid #2a2545;
-      transition:0.3s;
+    .page-header h2 {
+      font-size: 56px;
+      font-weight: 800;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, white, #888);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .back-btn:hover{
-      background:#9b7cff;
-      color:#151320;
+    .page-header p {
+      color: #888;
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto;
     }
 
-    /* CONTENT */
-    .content{
-      max-width:1000px;
-      margin:60px auto;
-      padding:0 20px;
+    /* Content */
+    .content {
+      max-width: 1400px;
+      margin: 0 auto 100px;
+      padding: 0 8%;
     }
 
-    .support-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
-      gap:30px;
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-bottom: 80px;
     }
 
-    .support-box{
-      background:#1c1830;
-      padding:30px;
-      border-radius:18px;
-      border:1px solid #2a2545;
-      box-shadow:0 18px 40px rgba(0,0,0,0.4);
-      transition:0.3s;
-      text-align:center;
+    .support-box {
+      background: var(--dark-elevated);
+      padding: 60px 40px;
+      border-radius: 40px;
+      border: 1px solid var(--glass-border);
+      text-align: center;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
     }
 
-    .support-box:hover{
-      transform:translateY(-8px);
-      border-color:#9b7cff;
-      box-shadow:0 28px 60px rgba(155,124,255,0.25);
+    .support-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0, 201, 167, 0.05), transparent);
+      opacity: 0;
+      transition: var(--transition);
     }
 
-    .support-box i{
-      font-size:42px;
-      color:#9b7cff;
-      margin-bottom:15px;
+    .support-box:hover {
+      transform: translateY(-12px);
+      border-color: var(--primary);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
     }
 
-    .support-box h4{
-      font-size:20px;
-      margin-bottom:10px;
+    .support-box:hover::before { opacity: 1; }
+
+    .support-box i {
+      font-size: 56px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 30px;
+      display: inline-block;
+      transition: var(--transition);
     }
 
-    .support-box p{
-      color:#cfcfcf;
-      font-size:14.5px;
-      line-height:1.6;
+    .support-box h4 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 15px;
     }
 
-    /* POLICY SECTION */
-    .policy{
-      margin-top:60px;
-      background:#1c1830;
-      padding:35px;
-      border-radius:18px;
-      border:1px solid #2a2545;
-      box-shadow:0 18px 40px rgba(0,0,0,0.4);
+    .support-box p {
+      color: #888;
+      font-size: 16px;
+      line-height: 1.7;
     }
 
-    .policy h3{
-      text-align:center;
-      color:#9b7cff;
-      margin-bottom:20px;
+    /* Policy Section */
+    .policy {
+      background: var(--dark-elevated);
+      padding: 60px 50px;
+      border-radius: 40px;
+      border: 1px solid var(--glass-border);
+      position: relative;
+      overflow: hidden;
     }
 
-    .policy ul{
-      color:#cfcfcf;
-      font-size:15px;
-      line-height:1.8;
-      padding-left:20px;
+    .policy h3 {
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 40px;
+      text-align: center;
     }
 
-    /* FOOTER */
-    footer{
-      background:#1c1830;
-      text-align:center;
-      padding:16px;
-      font-size:14px;
-      color:#aaa;
-      border-top:1px solid #2a2545;
-      margin-top:80px;
+    .policy ul {
+      color: #888;
+      font-size: 18px;
+      list-style: none;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    @media(max-width:768px){
-      .back-btn{
-        top:15px;
-        right:15px;
-      }
+    .policy ul li {
+      margin-bottom: 25px;
+      padding-left: 40px;
+      position: relative;
+    }
+
+    .policy ul li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: 900;
+      font-size: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-elevated);
+      padding: 60px 8% 40px;
+      text-align: center;
+      border-top: 1px solid var(--glass-border);
+      color: #666;
+    }
+
+    footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+
+    @media (max-width: 768px) {
+      .page-header h2 { font-size: 40px; }
+      .page-header { padding: 100px 8% 60px; }
+      .back-btn { top: 20px; position: relative; display: inline-flex; margin-bottom: 30px; }
+      .policy { padding: 40px 25px; }
+      .policy ul li { font-size: 16px; padding-left: 30px; }
     }
   </style>
 </head>
 
 <body>
 
-<!-- MAIN HEADER -->
-<header>
-  <h1>CarRentalPro</h1>
-  <nav>
-    <a href="../home.html">Home</a>
-    <a href="../book_car.html">Book a Car</a>
-    <a href="../services.html">Services</a>
-    <a href="../contact.html">Contact</a>
-  </nav>
-</header>
+  <header>
+    <h1>CarRentalPro</h1>
+    <nav>
+      <a href="../../home/home.html">Home</a>
+      <a href="../../book_car/book_car.html">Book a Car</a>
+      <a href="../services.html">Services</a>
+      <a href="../contact.html">Contact</a>
+    </nav>
+  </header>
 
-<!-- PAGE HEADER -->
-<section class="page-header">
-  <a href="customer-support.html" class="back-btn">← Back</a>
+  <section class="page-header">
+    <a href="customer-support.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back</span>
+    </a>
+    <h2>Billing Support</h2>
+    <p>
+      Our financial concierge team is dedicated to providing transparency in your 
+      rental transactions, deposit management, and refund optimization.
+    </p>
+  </section>
 
-  <h2>Payment & Refund Support</h2>
-  <p>
-    We provide assistance related to payments, security deposits,
-    billing issues, and refund processing to ensure a smooth experience.
-  </p>
-</section>
+  <section class="content">
 
-<!-- CONTENT -->
-<section class="content">
+    <div class="support-grid">
 
-  <div class="support-grid">
+      <div class="support-box">
+        <i class="fas fa-credit-card"></i>
+        <h4>Transaction Resolution</h4>
+        <p>Immediate intervention for authorization holds, failed settlements, or duplicate transaction queries.</p>
+      </div>
 
-    <div class="support-box">
-      <i class="fas fa-credit-card"></i>
-      <h4>Payment Issues</h4>
-      <p>
-        Support for failed payments, duplicate transactions,
-        incorrect charges, and payment confirmation issues.
-      </p>
+      <div class="support-box">
+        <i class="fas fa-file-invoice-dollar"></i>
+        <h4>Ledger & Invoicing</h4>
+        <p>Request comprehensive tax invoices, breakdown of mileage surcharges, or toll recalculations.</p>
+      </div>
+
+      <div class="support-box">
+        <i class="fas fa-shield-alt"></i>
+        <h4>Deposit Management</h4>
+        <p>Real-time status updates on security deposit releases and damage claim deductions.</p>
+      </div>
+
     </div>
 
-    <div class="support-box">
-      <i class="fas fa-file-invoice"></i>
-      <h4>Invoices & Billing</h4>
-      <p>
-        Get invoices for your bookings, clarify billing details,
-        and resolve invoice-related discrepancies.
-      </p>
+    <div class="policy">
+      <h3>Financial Transparency Protocol</h3>
+      <ul>
+        <li>Logistical refunds are triggered instantly upon vehicle inspection approval.</li>
+        <li>Security deposit releases are processed within 72 business hours post-trip.</li>
+        <li>Your bank's internal processing time dictates final credit visibility.</li>
+        <li>Partial credits are issued in accordance with the standard cancellation tier.</li>
+        <li>Verified digital receipts are dispatched for every financial interaction.</li>
+      </ul>
     </div>
 
-    <div class="support-box">
-      <i class="fas fa-wallet"></i>
-      <h4>Security Deposit</h4>
-      <p>
-        Assistance related to security deposit collection,
-        deductions, and release after booking completion.
-      </p>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="../privacy.html">Privacy Policy</a>
+      <a href="../terms.html">Terms & Conditions</a>
+      <a href="../contact.html">Support</a>
     </div>
-
-  </div>
-
-  <!-- POLICY -->
-  <div class="policy">
-    <h3>Refund Policy Overview</h3>
-    <ul>
-      <li>Refunds are processed after cancellation confirmation.</li>
-      <li>Security deposit refunds are initiated within 3–5 business days.</li>
-      <li>Refund timelines may vary based on payment method.</li>
-      <li>Partial refunds may apply as per cancellation policy.</li>
-      <li>Customers are notified once the refund is initiated.</li>
-    </ul>
-  </div>
-
-</section>
-
-<footer>
-  &copy; 2025 CarRentalPro. All Rights Reserved.
-</footer>
+    <p class="copyright">&copy; 2025 CarRentalPro. All Rights Reserved.</p>
+  </footer>
 
 </body>
 </html>
