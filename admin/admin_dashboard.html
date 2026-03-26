@@ -89,6 +89,8 @@
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
+    <link rel="stylesheet" href="../ai_assistant/roadmind.css">
+    <script src="../ai_assistant/roadmind.js" defer></script>
 </head>
 
 <body>
@@ -100,6 +102,16 @@
     <button onclick="window.location.href='admin_approval.html'">
       <i class="fas fa-check-circle"></i>
       <span>Review Pending Cars</span>
+    </button>
+
+    <button onclick="window.location.href='admin_drivers.html'" style="background: linear-gradient(135deg, #7f5cff, #9b7cff); color: white;">
+      <i class="fas fa-id-badge"></i>
+      <span>Driver Applications</span>
+    </button>
+
+    <button onclick="window.location.href='admin_assignments.html'" style="background: rgba(0,250,154,0.1); border: 1px solid rgba(0,250,154,0.3); color: #00fa9a;">
+      <i class="fas fa-user-check"></i>
+      <span>Assign Drivers to Cars</span>
     </button>
 
     <button onclick="window.location.href='live-monitoring.html'" style="background: rgba(127, 92, 255, 0.1); border: 1px solid var(--secondary); color: var(--secondary);">
@@ -118,12 +130,12 @@
 
   if(!user || user.role !== "admin"){
     alert("Access Denied ❌ Admins only");
-    window.location.href = "login.html";
+    window.location.href = "../login/login.html";
   }
 
   function logout(){
     localStorage.removeItem("car_rental_user");
-    window.location.href = "login.html";
+    window.location.href = "../login/login.html";
   }
 </script>
 

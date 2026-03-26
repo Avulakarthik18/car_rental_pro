@@ -6,10 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <!-- design system link should be added here once moved to a central place -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
   <style>
     :root {
@@ -159,6 +156,10 @@
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
+    <link rel="stylesheet" href="../ai_assistant/roadmind.css">
+    <link rel="stylesheet" href="../ai_assistant/terms_modal.css">
+    <script src="../ai_assistant/roadmind.js" defer></script>
+    <script src="../ai_assistant/terms_modal.js" defer></script>
 </head>
 
 <body>
@@ -184,6 +185,13 @@
           <span>Keep me logged in</span>
         </label>
         <a href="forgot_password/forgot_password.html">Forgot password?</a>
+      </div>
+
+      <div class="options" style="margin-bottom: 25px;">
+        <label>
+          <input type="checkbox" required id="termsAgree">
+          <span>I agree to the <a href="terms.html">Terms & Conditions</a></span>
+        </label>
       </div>
 
       <button class="login-btn" type="submit">Login</button>
@@ -213,14 +221,14 @@ document.getElementById("loginForm").addEventListener("submit", async (e)=>{
     });
 
     const text = await res.text();
-let data;
+    let data;
 
-try{
-  data = JSON.parse(text);
-}catch{
-  console.error("Non JSON response:", text);
-  throw new Error("Server returned HTML instead of JSON");
-}
+    try{
+      data = JSON.parse(text);
+    }catch{
+      console.error("Non JSON response:", text);
+      throw new Error("Server returned HTML instead of JSON");
+    }
     statusMsg.style.display = "block";
     statusMsg.innerText = data.message;
 
@@ -235,8 +243,8 @@ try{
 
       setTimeout(()=>{
         if(data.role === "admin"){
-  window.location.href = "../admin/admin_choice.html";
-}else{
+          window.location.href = "../admin/admin_choice.html";
+        }else{
           window.location.href = "../home/home.html";
         }
       }, 900);

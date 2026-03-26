@@ -263,6 +263,8 @@ href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
   </style>
+    <link rel="stylesheet" href="../ai_assistant/roadmind.css">
+    <script src="../ai_assistant/roadmind.js" defer></script>
 </head>
 
 <body>
@@ -321,6 +323,15 @@ href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css
         
         <div id="map" style="height:250px; width:100%; border-radius:12px; margin-top:20px; display:none; background:#2a2545;"></div>
         <div id="distanceInfo" style="margin-top:20px; font-size:14px; color:#aaa; display:none;"></div>
+      </div>
+
+      <!-- Need a Driver option for Rental Only -->
+      <div id="needDriverSection" style="display:none; margin-top:20px; background:rgba(127,92,255,0.1); border:1px solid rgba(127,92,255,0.3); border-radius:12px; padding:15px;">
+        <label style="display:flex; align-items:center; gap:12px; cursor:pointer; font-size:14px;">
+          <input type="checkbox" id="needDriverCheck" style="width:18px; height:18px; accent-color:#7f5cff;" onchange="updateDriverNote()">
+          <span><b>Need a Platform Driver?</b> — Admin will assign an approved driver <span style="color:#7f5cff;">(+₹500/day)</span></span>
+        </label>
+        <p id="driverNote" style="font-size:12px; color:#94a3b8; margin-top:8px; padding-left:30px;">Your booking will be confirmed once a driver is assigned by our team.</p>
       </div>
       
       <div id="priceSummary" class="price-summary">Total Cost: ₹0</div>
@@ -617,9 +628,12 @@ function openModal(carId, carName, price, carImg, driverName, driverMobile) {
     
     if(type === "Rental Only") {
         document.getElementById("driverFields").style.display = "none";
+        document.getElementById("needDriverSection").style.display = "block";
+        document.getElementById("needDriverCheck").checked = false;
         document.getElementById("priceSummary").innerText = `Base Price: ₹${price} / month (calculated later)`;
     } else {
         document.getElementById("driverFields").style.display = "block";
+        document.getElementById("needDriverSection").style.display = "none";
         document.getElementById("priceSummary").innerText = "Enter locations to calculate fare";
         distanceFare = 0;
     }
@@ -631,6 +645,13 @@ function closeModal() {
     modal.style.display = "none";
 }
 
+function updateDriverNote() {
+    const checked = document.getElementById('needDriverCheck').checked;
+    document.getElementById('driverNote').innerText = checked
+        ? 'Your booking will be confirmed once an admin assigns a driver. You will be notified.'
+        : 'Your booking will be confirmed once a driver is assigned by our team.';
+}
+
 function proceedToCheckout() {
     if(type === "With Driver" && distanceFare === 0) {
         alert("Please calculate the route first ❌");
@@ -638,6 +659,7 @@ function proceedToCheckout() {
     }
     
     let finalPrice = (type === "With Driver") ? distanceFare : selectedCarPrice;
+    const needsDriver = type === "Rental Only" && document.getElementById('needDriverCheck')?.checked;
     
     const pendingBooking = {
         carId: selectedCarId,
@@ -646,6 +668,7 @@ function proceedToCheckout() {
         price: finalPrice,
         type: type,
         flowType: 'rent',
+        needsDriver: needsDriver,
         driverName: selectedDriverName,
         driverMobile: selectedDriverMobile,
         pickupLocMap: document.getElementById("pickupLocation")?.value || "",

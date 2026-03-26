@@ -289,6 +289,8 @@
       .form-grid { grid-template-columns: 1fr; }
     }
   </style>
+    <link rel="stylesheet" href="../ai_assistant/roadmind.css">
+    <script src="../ai_assistant/roadmind.js" defer></script>
 </head>
 <body>
 
@@ -796,7 +798,8 @@
           drop_datetime: document.getElementById('dropDate').value,
           protection_plan: document.getElementById('protectionPlan').value,
           driver_name: bookingData.driverName,
-          driver_mobile: bookingData.driverMobile
+          driver_mobile: bookingData.driverMobile,
+          needs_platform_driver: bookingData.needsDriver || false
         });
       }
 

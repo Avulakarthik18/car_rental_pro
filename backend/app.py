@@ -14,6 +14,17 @@ import razorpay
 import json
 import os
 
+import google.generativeai as genai
+import uuid as uuid_lib
+import sys, os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from ai_assistant.rag.retriever import search_knowledge
+
+GEMINI_API_KEY = "AIzaSyDT9cCkLw4RdNmc73F9L0HJJMrMWtuRESM"
+genai.configure(api_key=GEMINI_API_KEY)
+
+
+
 
 
 app = Flask(__name__)
@@ -64,6 +75,21 @@ try:
             )
         """))
         print("✅ Tracking table verified/created")
+
+        # 🔥 CREATE AI CHATS TABLE
+        conn.execute(text('''
+            CREATE TABLE IF NOT EXISTS ai_chats (
+                id SERIAL PRIMARY KEY,
+                email TEXT,
+                role TEXT,
+                session_id TEXT NOT NULL,
+                sender TEXT NOT NULL,
+                message TEXT NOT NULL,
+                created_at TIMESTAMPTZ DEFAULT NOW()
+            )
+        '''))
+        print("✅ AI Chats table verified/created")
+
         
         # 🔥 CREATE PARCELS TABLE
         conn.execute(text("""
@@ -123,6 +149,30 @@ try:
             )
         """))
         print("✅ Buy Requests table verified/created")
+
+        # 🔥 CREATE DRIVERS TABLE
+        conn.execute(text("""
+            CREATE TABLE IF NOT EXISTS drivers (
+                id SERIAL PRIMARY KEY,
+                full_name VARCHAR(255) NOT NULL,
+                dob DATE,
+                gender VARCHAR(50),
+                address TEXT,
+                mobile VARCHAR(20) UNIQUE NOT NULL,
+                email VARCHAR(255) NOT NULL,
+                license_number VARCHAR(100) NOT NULL,
+                license_type VARCHAR(50),
+                license_expiry DATE,
+                vehicle_type VARCHAR(50),
+                vehicle_model VARCHAR(100),
+                account_number VARCHAR(50),
+                ifsc_code VARCHAR(20),
+                upi_id VARCHAR(100),
+                status VARCHAR(50) DEFAULT 'Pending',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        """))
+        print("✅ Drivers table verified/created")
 except Exception as e:
     print("❌ DB Init failed:", e)
 
@@ -204,8 +254,8 @@ def send_booking_email(data):
             </h2>
     """
 
-    # ⭐ ONLY SHOW DRIVER DETAILS IF "WITH DRIVER"
-    if data.get("rental_type") == "With Driver":
+    # ⭐ SHOW DRIVER DETAILS if present (for With Driver OR assigned Platform Driver)
+    if data.get("driver_name") and data.get("driver_mobile"):
         html += f"""
             <hr>
 
@@ -215,7 +265,7 @@ def send_booking_email(data):
             <p><b>Mobile:</b> {data.get("driver_mobile")}</p>
 
             <p style="color:#666;font-size:13px;">
-            Please contact the driver only for trip coordination.
+            Please contact the driver for trip coordination.
             </p>
         """
 
@@ -368,6 +418,178 @@ def send_parcel_receiver_otp(mobile, otp, receiver_name):
     # For now, we simulate and log it.
     print(f"📱 SMS SENT TO {mobile} ({receiver_name}): Your OTP for parcel delivery is {otp}. Please provide this to the driver upon delivery.")
 
+
+# -----------------------------
+# DRIVER REGISTRATION
+# -----------------------------
+@app.route("/register-driver", methods=["POST"])
+def register_driver():
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"success": False, "message": "Invalid request ❌"}), 400
+        
+    try:
+        with engine.begin() as conn:
+            # Check duplicate email or mobile
+            result = conn.execute(
+                text("SELECT id FROM drivers WHERE email=:email OR mobile=:mobile"),
+                {"email": data.get("email"), "mobile": data.get("mobile")}
+            )
+            if result.fetchone():
+                return jsonify({"success": False, "message": "Driver with this email/mobile already exists ❌"}), 400
+                
+            conn.execute(text("""
+                INSERT INTO drivers(
+                    full_name, dob, gender, address, mobile, email,
+                    license_number, license_type, license_expiry,
+                    vehicle_type, vehicle_model,
+                    account_number, ifsc_code, upi_id
+                ) VALUES (
+                    :full_name, :dob, :gender, :address, :mobile, :email,
+                    :license_number, :license_type, :license_expiry,
+                    :vehicle_type, :vehicle_model,
+                    :account_number, :ifsc_code, :upi_id
+                )
+            """), {
+                "full_name": data.get("full_name"),
+                "dob": data.get("dob") if data.get("dob") else None,
+                "gender": data.get("gender"),
+                "address": data.get("address"),
+                "mobile": data.get("mobile"),
+                "email": data.get("email"),
+                "license_number": data.get("license_number"),
+                "license_type": data.get("license_type"),
+                "license_expiry": data.get("license_expiry") if data.get("license_expiry") else None,
+                "vehicle_type": data.get("vehicle_type"),
+                "vehicle_model": data.get("vehicle_model"),
+                "account_number": data.get("account_number"),
+                "ifsc_code": data.get("ifsc_code"),
+                "upi_id": data.get("upi_id")
+            })
+        return jsonify({"success": True, "message": "Driver registration successful! Welcome to the team."})
+    except Exception as e:
+        print("Driver Registration Error:", e)
+        return jsonify({"success": False, "message": "Database error ❌"}), 500
+
+# -----------------------------
+# ADMIN DRIVER MANAGEMENT
+# -----------------------------
+@app.route("/admin/pending-drivers")
+def pending_drivers():
+    with engine.begin() as conn:
+        result = conn.execute(text("""
+            SELECT * FROM drivers
+            WHERE status='Pending'
+        """))
+        drivers = [dict(row) for row in result.mappings().all()]
+    return jsonify({"success": True, "drivers": drivers})
+
+@app.route("/admin/update-driver-status", methods=["POST"])
+def update_driver_status():
+    data = request.get_json()
+    with engine.begin() as conn:
+        conn.execute(text("""
+            UPDATE drivers SET status=:status WHERE id=:driver_id
+        """), {
+            "status": data.get("status"),
+            "driver_id": data.get("driver_id")
+        })
+    return jsonify({"success": True, "message": "Driver status updated! ✅"})
+
+@app.route("/admin/driver-requests", methods=["GET"])
+def get_driver_requests():
+    with engine.begin() as conn:
+        result = conn.execute(text("""
+            SELECT id, car_id, car_name, customer_name, customer_mobile, 
+                   pickup_location, drop_location, pickup_datetime, drop_datetime, booking_status
+            FROM bookings
+            WHERE booking_status='Pending Platform Driver'
+            ORDER BY pickup_datetime ASC
+        """))
+        requests = [dict(row) for row in result.mappings().all()]
+        for req in requests:
+            # Convert datetime to string for JSON serialization
+            req['pickup_datetime'] = str(req['pickup_datetime'])
+            req['drop_datetime'] = str(req['drop_datetime'])
+            
+    return jsonify({"success": True, "requests": requests})
+
+@app.route("/admin/available-drivers", methods=["POST"])
+def check_available_drivers():
+    data = request.get_json()
+    pickup = data.get("pickup_datetime")
+    drop = data.get("drop_datetime")
+    
+    if not pickup or not drop:
+        return jsonify({"success": False, "message": "Missing dates ❌"}), 400
+
+    with engine.begin() as conn:
+        # Find approved drivers who do NOT have an overlapping Confirmed/Ongoing booking where they are the driver.
+        # Note: We track assignments by matching the driver's mobile (which is unique) in the bookings table.
+        result = conn.execute(text("""
+            SELECT * FROM drivers 
+            WHERE status='Approved'
+            AND mobile NOT IN (
+                SELECT driver_mobile FROM bookings 
+                WHERE driver_mobile IS NOT NULL
+                AND booking_status IN ('Confirmed', 'Ongoing')
+                AND pickup_datetime < :drop
+                AND drop_datetime > :pickup
+            )
+        """), {
+            "pickup": pickup,
+            "drop": drop
+        })
+        available = [dict(row) for row in result.mappings().all()]
+    return jsonify({"success": True, "drivers": available})
+
+@app.route("/admin/assign-driver", methods=["POST"])
+def assign_driver():
+    data = request.get_json()
+    booking_id = data.get("booking_id")
+    driver_id = data.get("driver_id")
+
+    if not booking_id or not driver_id:
+        return jsonify({"success": False, "message": "Missing fields ❌"}), 400
+
+    try:
+        with engine.begin() as conn:
+            driver = conn.execute(text("SELECT full_name, mobile FROM drivers WHERE id=:driver_id AND status='Approved'"), 
+                                  {"driver_id": driver_id}).mappings().first()
+            if not driver:
+                return jsonify({"success": False, "message": "Driver not approved or not found ❌"}), 400
+
+            # Assign to booking
+            conn.execute(text("""
+                UPDATE bookings 
+                SET driver_name=:driver_name,
+                    driver_mobile=:driver_mobile,
+                    booking_status='Confirmed'
+                WHERE id=:booking_id AND booking_status='Pending Platform Driver'
+            """), {
+                "driver_name": driver["full_name"],
+                "driver_mobile": driver["mobile"],
+                "booking_id": booking_id
+            })
+
+            # Fetch updated booking details for email
+            booking_res = conn.execute(text("SELECT * FROM bookings WHERE id=:booking_id"), {"booking_id": booking_id})
+            booking = booking_res.mappings().first()
+            if booking:
+                # Send confirmation email via helper
+                # Convert row to dict for send_booking_email
+                booking_dict = dict(booking)
+                # Ensure datetime objects are converted to strings for the email template if needed, 
+                # but send_booking_email just uses get() so it should be fine.
+                try:
+                    send_booking_email(booking_dict)
+                except Exception as e:
+                    print("Admin Assignment Email Error:", e)
+            
+        return jsonify({"success": True, "message": "Driver successfully assigned and confirmation email sent! ✅"})
+    except Exception as e:
+        print("ASSIGN DRIVER ERROR:", e)
+        return jsonify({"success": False, "message": "Database error ❌"}), 500
 
 # -----------------------------
 # SIGNUP (USER ONLY)
@@ -1055,14 +1277,15 @@ def book_car():
                 "driver_mobile": data.get("driver_mobile"),
                 "passenger_count": int(data.get("passenger_count") or 0),
                 "total_cost": int(data.get("total_cost") or 0),
-                "booking_status": 'Confirmed' if rental_type == 'Rental Only' else 'Pending Driver'
+                "booking_status": 'Pending Platform Driver' if (rental_type == 'Rental Only' and data.get("needs_platform_driver")) else ('Confirmed' if rental_type == 'Rental Only' else 'Pending Driver')
             })
 
             booking_id = result.fetchone()[0]
 
-        # 🔥 Send email after commit
+        # 🔥 Send email after commit (Only if not waiting for Admin to assign a driver)
         try:
-            send_booking_email(data)
+            if not (rental_type == 'Rental Only' and data.get("needs_platform_driver")):
+                send_booking_email(data)
         except:
             pass
 
@@ -2068,5 +2291,481 @@ def get_parcel_tracking_user(email):
 # -----------------------------
 # RUN SERVER
 # -----------------------------
+
+# --- ROADMIND AI INTEGRATION ---
+def get_live_car_listings(filters: dict) -> str:
+    """
+    Search approved car listings from the live database.
+    filters: { fuel, listing_type, max_price, location }
+    Returns formatted string of matching cars.
+    NOTE: Requires `engine` to be already defined in your app.py.
+    """
+    try:
+        conditions = ["status='Approved'"]
+        params     = {}
+
+        if filters.get("fuel"):
+            conditions.append("LOWER(fuel)=LOWER(:fuel)")
+            params["fuel"] = filters["fuel"]
+
+        if filters.get("listing_type"):
+            conditions.append("LOWER(listing_type)=LOWER(:listing_type)")
+            params["listing_type"] = filters["listing_type"]
+
+        if filters.get("max_price"):
+            conditions.append("price_month <= :max_price")
+            params["max_price"] = filters["max_price"]
+
+        if filters.get("location"):
+            conditions.append("LOWER(location) LIKE LOWER(:location)")
+            params["location"] = f"%{filters['location']}%"
+
+        where_clause = " AND ".join(conditions) if conditions else "1=1"
+
+        with engine.begin() as conn:
+            result = conn.execute(
+                text(f"""
+                    SELECT company, model, year, fuel, transmission,
+                           seats, location, price_month, listing_type
+                    FROM cars
+                    WHERE {where_clause}
+                    ORDER BY price_month ASC
+                    LIMIT 5
+                """),
+                params
+            )
+            cars = [dict(row) for row in result.mappings().all()]
+
+        if not cars:
+            return "No cars found matching those filters right now."
+
+        lines = ["Here are the available cars:\n"]
+        for i, car in enumerate(cars, 1):
+            if car['listing_type'] == 'With Driver':
+                price_str = "₹15/km"
+            else:
+                daily_price = (car['price_month'] // 30) if car['price_month'] else 0
+                price_str = f"₹{daily_price:,}/day"
+            lines.append(
+                f"{i}. {car['company']} {car['model']} ({car['year']}) — "
+                f"{car['fuel']}, {car['transmission']}, {car['seats']} seats | "
+                f"{price_str} | {car['listing_type']} | "
+                f"📍 {car['location']}"
+            )
+        return "\n".join(lines)
+
+    except Exception as e:
+        print("Live car search error:", e)
+        return ""
+
+
+def get_user_booking_info(email: str) -> str:
+    """Get booking details for a logged-in user.
+    NOTE: Requires `engine` to be already defined in your app.py."""
+    try:
+        with engine.begin() as conn:
+            result = conn.execute(
+                text("""
+                    SELECT car_name, pickup_location, drop_location,
+                           pickup_datetime, drop_datetime,
+                           booking_status, total_cost, rental_type
+                    FROM bookings
+                    WHERE LOWER(customer_email) = LOWER(:email)
+                    ORDER BY pickup_datetime DESC
+                    LIMIT 3
+                """),
+                {"email": email}
+            )
+            bookings = [dict(row) for row in result.mappings().all()]
+
+        if not bookings:
+            return "You don't have any bookings yet."
+
+        lines = ["Your recent bookings:\n"]
+        for b in bookings:
+            lines.append(
+                f"• {b['car_name']} | {b['booking_status']} | "
+                f"{b['rental_type']} | ₹{b['total_cost']:,} | "
+                f"Pickup: {b['pickup_datetime']} → Drop: {b['drop_datetime']}"
+            )
+        return "\n".join(lines)
+
+    except Exception as e:
+        print("User booking info error:", e)
+        return ""
+
+
+def get_user_listing_status(email: str) -> str:
+    """Get car listing status for a logged-in owner.
+    NOTE: Requires `engine` to be already defined in your app.py."""
+    try:
+        with engine.begin() as conn:
+            result = conn.execute(
+                text("""
+                    SELECT company, model, year, listing_type,
+                           status, price_month, created_at
+                    FROM cars
+                    WHERE LOWER(owner_email) = LOWER(:email)
+                    ORDER BY created_at DESC
+                    LIMIT 5
+                """),
+                {"email": email}
+            )
+            listings = [dict(row) for row in result.mappings().all()]
+
+        if not listings:
+            return "You haven't listed any cars yet."
+
+        lines = ["Your car listings:\n"]
+        for l in listings:
+            if l['listing_type'] == 'With Driver':
+                price_str = "₹15/km"
+            else:
+                daily_price = (l['price_month'] // 30) if l['price_month'] else 0
+                price_str = f"₹{daily_price:,}/day"
+            lines.append(
+                f"• {l['company']} {l['model']} ({l['year']}) — "
+                f"{l['listing_type']} | Status: {l['status']} | "
+                f"{price_str}"
+            )
+        return "\n".join(lines)
+
+    except Exception as e:
+        print("User listing status error:", e)
+        return ""
+
+
+def get_sell_listing_status(email: str) -> str:
+    """Get sell listing status for a user.
+    NOTE: Requires `engine` to be already defined in your app.py."""
+    try:
+        with engine.begin() as conn:
+            result = conn.execute(
+                text("""
+                    SELECT company, model, year, selling_price,
+                           status, created_at
+                    FROM selling
+                    WHERE LOWER(owner_email) = LOWER(:email)
+                    ORDER BY created_at DESC
+                    LIMIT 5
+                """),
+                {"email": email}
+            )
+            listings = [dict(row) for row in result.mappings().all()]
+
+        if not listings:
+            return "You haven't listed any cars for sale yet."
+
+        lines = ["Your sell listings:\n"]
+        for l in listings:
+            lines.append(
+                f"• {l['company']} {l['model']} ({l['year']}) — "
+                f"₹{l['selling_price']:,} | Status: {l['status']}"
+            )
+        return "\n".join(lines)
+
+    except Exception as e:
+        print("Sell listing status error:", e)
+        return ""
+
+
+def classify_question(question: str, role: str) -> str:
+    """
+    Use Gemini to classify the user's question into one of:
+    car_search | my_bookings | my_listings | my_sell_listings |
+    platform_policy | car_problem | general | unrelated
+    """
+    try:
+        model = genai.GenerativeModel("gemini-flash-latest")
+        prompt = f"""
+Classify this question into EXACTLY one of these categories.
+Reply with ONLY the category name, nothing else.
+
+Categories:
+- car_search: user wants to find/browse available cars to rent or buy
+- my_bookings: user asking about their own bookings, booking status, booking dates
+- my_listings: user asking about their own rental car listings and approval status
+- my_sell_listings: user asking about their own sell listings and approval status
+- platform_policy: question about cancellation, refund, insurance, delivery,
+                   how the platform works, pricing
+- car_problem: question about a car issue, noise, warning light, breakdown,
+               maintenance, repair — anything mechanical or technical
+- admin_question: admin asking about approval, rejection, car condition decisions
+- general: greeting, thanks, casual chat
+- unrelated: completely unrelated to cars or this platform
+
+Role: {role}
+Question: {question}
+"""
+        response = model.generate_content(prompt)
+        category = response.text.strip().lower()
+
+        valid = ["car_search", "my_bookings", "my_listings", "my_sell_listings",
+                 "platform_policy", "car_problem", "admin_question",
+                 "general", "unrelated"]
+
+        return category if category in valid else "general"
+
+    except:
+        return "general"
+
+
+def extract_car_filters(question: str) -> dict:
+    """
+    Use Gemini to extract search filters from a natural language question.
+    Returns dict with keys: fuel, listing_type, max_price, location
+    """
+    try:
+        model = genai.GenerativeModel("gemini-flash-latest")
+        prompt = f"""
+Extract car search filters from this question.
+Reply ONLY with a JSON object. Use null for fields not mentioned.
+
+Fields to extract:
+- fuel: "Petrol" | "Diesel" | "Electric" | "CNG" | null
+- listing_type: "Rental Only" | "With Driver" | null
+- max_price: number (per day in INR) | null
+- location: city name string | null
+
+Question: {question}
+
+Reply with JSON only, example: {{"fuel": "Diesel", "listing_type": null, "max_price": 2000, "location": "Hyderabad"}}
+"""
+        response = model.generate_content(prompt)
+        import json, re
+        json_str = re.search(r'\{.*\}', response.text, re.DOTALL)
+        if json_str:
+            return json.loads(json_str.group())
+        return {}
+
+    except:
+        return {}
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# SECTION C: FLASK ROUTES
+# Paste these routes in app.py BEFORE your `app.run()` at the bottom.
+# ──────────────────────────────────────────────────────────────────────────────
+
+from flask import Flask   # just for reference — this is already your app object
+
+
+# ── You must also create the ai_chats table in Supabase/PostgreSQL once:
+# ──   CREATE TABLE IF NOT EXISTS ai_chats (
+# ──       id           SERIAL PRIMARY KEY,
+# ──       email        TEXT,
+# ──       role         TEXT,
+# ──       session_id   TEXT NOT NULL,
+# ──       sender       TEXT NOT NULL,  -- 'user' or 'ai'
+# ──       message      TEXT NOT NULL,
+# ──       created_at   TIMESTAMPTZ DEFAULT NOW()
+# ──   );
+
+
+# NOTE: Replace `app` below with your actual Flask app variable name if different.
+
+
+def register_roadmind_routes(app, engine):
+    """
+    Call this function in your app.py AFTER defining app and engine:
+        register_roadmind_routes(app, engine)
+    """
+
+    @app.route("/ai-chat", methods=["POST"])
+    def ai_chat():
+
+        data = request.get_json(silent=True)
+        if not data:
+            return jsonify({"success": False}), 400
+
+        user_message = data.get("message", "").strip()
+        user_role    = data.get("role", "guest")
+        user_name    = data.get("userName", "there")
+        email        = data.get("email", None)
+        session_id   = data.get("sessionId") or str(uuid_lib.uuid4())
+        history      = data.get("history", [])   # [{role, content}, ...]
+
+        if not user_message:
+            return jsonify({"success": False, "message": "Empty"}), 400
+
+        # ── LAYER 1: Live database context ────────────────────────────
+        db_context    = ""
+        question_type = classify_question(user_message, user_role)
+
+        if question_type == "car_search":
+            filters    = extract_car_filters(user_message)
+            db_context = get_live_car_listings(filters)
+
+        elif question_type == "my_bookings" and email:
+            db_context = get_user_booking_info(email)
+
+        elif question_type == "my_listings" and email:
+            db_context = get_user_listing_status(email)
+
+        elif question_type == "my_sell_listings" and email:
+            db_context = get_sell_listing_status(email)
+
+        # ── LAYER 2: Knowledge base RAG ──────────────────────────────
+        kb_context = ""
+        if question_type in ["platform_policy", "admin_question"] or not db_context:
+            kb_context = search_knowledge(user_message, top_k=4)
+
+        # ── Combine context ──────────────────────────────────────────
+        context_parts = []
+        if db_context:
+            context_parts.append(f"LIVE PLATFORM DATA:\n{db_context}")
+        if kb_context:
+            context_parts.append(f"PLATFORM KNOWLEDGE:\n{kb_context}")
+        combined_context = "\n\n".join(context_parts)
+
+        # ── LAYER 3: System prompt + Gemini ─────────────────────────
+        system_prompt = f"""
+You are RoadMind — a friendly car expert and assistant built into CarRentalPro,
+an Indian car rental and buy/sell platform based in Hyderabad.
+You are talking to {user_name}, who is a {user_role}.
+
+YOUR PERSONALITY — THIS IS CRITICAL:
+- Talk exactly like a knowledgeable friend texting someone
+- Warm, casual, direct. Never stiff or formal.
+- Use {user_name}'s name occasionally when it feels natural
+- Short punchy replies for simple things. Detailed when genuinely needed.
+- Totally fine to say: "honestly", "so basically", "yeah", "good call"
+- NEVER say: "As an AI", "I understand your query", "Certainly!", "Of course!"
+- NEVER start with "Great question!" or "That's a wonderful question!"
+- If someone is stressed or in emergency — calm and direct first, details after
+- Use emojis very occasionally — feels natural when used, not forced
+- Remember EVERYTHING said earlier in this conversation
+
+YOUR EXPERTISE:
+- All car problems: strange noises, warning lights, breakdowns, overheating,
+  flat tyres, dead battery, engine issues — anything mechanical
+- Indian cars specifically: Maruti, Hyundai, Tata, Honda, Toyota, Mahindra,
+  Kia, MG, Skoda, Volkswagen, Renault — you know their common issues well
+- Maintenance: service intervals, what to check, rough INR cost estimates
+- Road emergencies: exact steps, safety first, what's urgent vs can wait
+- CarRentalPro platform: everything about how it works (use provided context)
+- Admin decisions: what to approve, reject, flag — use admin guide context
+- With Driver Pricing: NEVER quote a per-day price. The fare is roughly ₹15/km. If the user asks for the price, ask them for their exact pickup and drop locations to give an estimate, and remind them the exact price is generated on the booking map.
+
+ROLE-SPECIFIC BEHAVIOUR:
+- user (renter/buyer): focus on finding cars, booking help, car problems
+- owner: focus on listing advice, approval status, how to get approved
+- admin: focus on approval decisions, red flags, platform management
+- guest: helpful but remind them to log in for personalised answers
+
+BOUNDARIES:
+- If asked something completely unrelated to cars or this platform:
+  "Ha honestly that's outside my zone — I'm pretty much only good with
+   cars and this platform 😅 Anything car-related?"
+- For medical emergencies in accidents: "Call 112 immediately first"
+- Never give advice that could endanger someone
+"""
+
+        # ── Build Gemini conversation ─────────────────────────────────
+        try:
+            model = genai.GenerativeModel(
+                model_name="gemini-flash-latest",
+                system_instruction=system_prompt
+            )
+
+            # Build message history for Gemini (exclude the latest message)
+            gemini_history = []
+            for msg in history[:-1]:
+                gemini_history.append({
+                    "role": "user" if msg["role"] == "user" else "model",
+                    "parts": [msg["content"]]
+                })
+
+            chat = model.start_chat(history=gemini_history)
+
+            # Inject context into the user message if we have it
+            if combined_context:
+                augmented_message = (
+                    f"{combined_context}\n\n"
+                    f"---\n"
+                    f"User's question: {user_message}"
+                )
+            else:
+                augmented_message = user_message
+
+            response = chat.send_message(augmented_message)
+            ai_reply = response.text
+
+            # ── Save to database ──────────────────────────────────────
+            try:
+                with engine.begin() as conn:
+                    conn.execute(text("""
+                        INSERT INTO ai_chats
+                            (email, role, session_id, sender, message)
+                        VALUES (:email, :role, :session_id, 'user', :message)
+                    """), {
+                        "email": email, "role": user_role,
+                        "session_id": session_id, "message": user_message
+                    })
+                    conn.execute(text("""
+                        INSERT INTO ai_chats
+                            (email, role, session_id, sender, message)
+                        VALUES (:email, :role, :session_id, 'ai', :message)
+                    """), {
+                        "email": email, "role": user_role,
+                        "session_id": session_id, "message": ai_reply
+                    })
+            except Exception as db_err:
+                print("AI chat DB save error:", db_err)
+                # Non-blocking — still return the response
+
+            return jsonify({
+                "success": True,
+                "reply": ai_reply,
+                "sessionId": session_id
+            })
+
+        except Exception as e:
+            print("RoadMind Gemini error:", e)
+            return jsonify({
+                "success": True,
+                "reply": "Hmm something went wrong on my end — try again in a sec 🔄"
+            })
+
+
+    @app.route("/ai-history/<email>")
+    def ai_history(email):
+        """Return past chat sessions grouped for history panel"""
+        try:
+            with engine.begin() as conn:
+                result = conn.execute(text("""
+                    SELECT
+                        session_id,
+                        MIN(created_at)                                    AS started_at,
+                        MIN(CASE WHEN sender='user' THEN message END)      AS preview,
+                        COUNT(*)                                           AS message_count
+                    FROM ai_chats
+                    WHERE LOWER(email) = LOWER(:email)
+                    GROUP BY session_id
+                    ORDER BY started_at DESC
+                    LIMIT 20
+                """), {"email": email})
+                sessions = [dict(row) for row in result.mappings().all()]
+
+            return jsonify({"success": True, "sessions": sessions})
+
+        except Exception as e:
+            print("AI history error:", e)
+            return jsonify({"success": False, "sessions": []})
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# HOW TO CALL THIS IN YOUR APP.PY:
+#
+#   # After defining `app` and `engine`:
+#   from roadmind_backend_patch import register_roadmind_routes
+#   register_roadmind_routes(app, engine)
+#
+# OR you can just directly copy-paste the two route functions above (@app.route...)
+# into your app.py without using register_roadmind_routes().
+# ──────────────────────────────────────────────────────────────────────────────
+
+register_roadmind_routes(app, engine)
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=3000, debug=True)

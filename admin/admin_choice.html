@@ -120,6 +120,8 @@
 
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   </style>
+    <link rel="stylesheet" href="../ai_assistant/roadmind.css">
+    <script src="../ai_assistant/roadmind.js" defer></script>
 </head>
 
 <body>
@@ -145,6 +147,26 @@
         <div class="card-content">
           <div class="title">Sell / Buy Queue</div>
           <div class="desc">Process marketplace listings and ownership transfers.</div>
+        </div>
+        <i class="fas fa-chevron-right" style="color: #444"></i>
+      </div>
+
+      <!-- Driver Applications -->
+      <div class="card" onclick="window.location.href='admin_drivers.html'" style="border-color: rgba(127,92,255,0.2);">
+        <div class="icon-box" style="background: rgba(127,92,255,0.1); color: #7f5cff;"><i class="fas fa-id-badge"></i></div>
+        <div class="card-content">
+          <div class="title">Driver Applications</div>
+          <div class="desc">Review, approve or reject driver registration applications.</div>
+        </div>
+        <i class="fas fa-chevron-right" style="color: #444"></i>
+      </div>
+
+      <!-- Assign Drivers -->
+      <div class="card" onclick="window.location.href='admin_assignments.html'" style="border-color: rgba(0,201,167,0.2);">
+        <div class="icon-box" style="background: rgba(0,201,167,0.1); color: #00c9a7;"><i class="fas fa-user-check"></i></div>
+        <div class="card-content">
+          <div class="title">Assign Drivers to Bookings</div>
+          <div class="desc">Assign approved drivers to car bookings that requested a platform driver.</div>
         </div>
         <i class="fas fa-chevron-right" style="color: #444"></i>
       </div>
